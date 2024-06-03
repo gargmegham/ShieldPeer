@@ -8,7 +8,7 @@ import config from "@/config";
 // If there's no config.mailgun.supportEmail, the link won't be displayed.
 const Footer = () => {
   return (
-    <footer className="border-t border-base-content/10 bg-neutral-900">
+    <footer className="bg-neutral-900">
       <div className="max-w-7xl mx-auto px-8 py-24">
         <div className=" flex lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
