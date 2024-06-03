@@ -22,7 +22,7 @@ export default function Hero() {
           Optimized Trading
           <br />
           <span className="text-3xl md:text-6xl">
-            Maximized Earnings with ShieldPeer
+            Maximize Earnings with ShieldPeer
           </span>
         </h1>
         <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">

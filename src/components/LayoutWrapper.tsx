@@ -65,7 +65,7 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
       {/* Show a progress bar at the top when navigating between pages */}
       <NextTopLoader color={config.colors.main} showSpinner={false} />
       {/* Content inside app/page.js files  */}
-      <SessionProvider session={null}>{children}</SessionProvider>
+      <SessionProvider>{children}</SessionProvider>
       {/* Show Success/Error messages anywhere from the app with toast() */}
       <Toaster
         toastOptions={{
