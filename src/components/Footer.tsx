@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import config from "@/config";
+import config from "@/utils/config";
 
 // The support link is connected to the config.js file.
 // If there's no config.mailgun.supportEmail, the link won't be displayed.

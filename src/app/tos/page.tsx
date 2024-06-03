@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getSEOTags } from "@/libs/seo";
-import config from "@/config";
+import config from "@/utils/config";
 
 export const metadata = getSEOTags({
   title: `Terms and Conditions | ${config.appName}`,

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import config from "@/config";
+import config from "@/utils/config";
 
 // Prefills data with default title/description/OG, etc.. and you can cusotmize it for each page.
 // Added in the root layout.js so you don't have to add it to every pages
@@ -27,7 +27,7 @@ export const getSEOTags = ({
     metadataBase: new URL(
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/"
-        : `https://${config.domainName}/`,
+        : `https://${config.domainName}/`
     ),
     openGraph: {
       title: openGraph?.title || config.appName,

@@ -1,15 +1,16 @@
 "use client";
 
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
-  return (
-    <main className="">
-      <Navbar />
-      <Hero />
-      <Footer />
-    </main>
-  );
+export default function App() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (!session) {
+    // Redirect to the home page if the user is not authenticated
+    router.push("/home");
+  }
+
+  return <></>;
 }

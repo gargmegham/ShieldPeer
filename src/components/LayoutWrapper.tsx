@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { Crisp } from "crisp-sdk-web";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 import { Tooltip } from "react-tooltip";
-import config from "@/config";
+import config from "@/utils/config";
 
 // Crisp customer chat support:
 // This component is separated from LayoutWrapper because it needs to be wrapped with <SessionProvider> to use useSession() hook
@@ -64,7 +65,7 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
       {/* Show a progress bar at the top when navigating between pages */}
       <NextTopLoader color={config.colors.main} showSpinner={false} />
       {/* Content inside app/page.js files  */}
-      {children}
+      <SessionProvider session={null}>{children}</SessionProvider>
       {/* Show Success/Error messages anywhere from the app with toast() */}
       <Toaster
         toastOptions={{

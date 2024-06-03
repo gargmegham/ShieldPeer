@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { redirect } from "next/navigation";
-import config from "@/config";
+import config from "@/utils/config";
 
 // use this to interact with our own API (/app/api folder) from the front-end side
 const apiClient = axios.create({
@@ -40,7 +40,7 @@ apiClient.interceptors.response.use(
       toast.error("something went wrong...");
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 export default apiClient;

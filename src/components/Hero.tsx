@@ -52,7 +52,23 @@ export default function Hero() {
             className="w-20 h-20"
           />
         </p>
-        <p className="mt-4 flex justify-center space-x-2"></p>
+        <p className="mt-4 flex justify-center space-x-2">
+          <a
+            href="https://calendly.com/megham-garg/session"
+            target="_blank"
+            rel="noreferrer"
+            className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-gray-950 flex items-center justify-center"
+          >
+            <span>Schedule Demo</span>
+          </a>
+          <button
+            onClick={() => {}}
+            className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-neutral-900"
+          >
+            <span>Get Started</span>
+            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
+          </button>
+        </p>
       </div>
     </section>
   );
