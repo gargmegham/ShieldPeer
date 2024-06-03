@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/utils/supabase";
 
 export const config = {
   matcher: [
@@ -9,19 +9,16 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - logos (logo files)
+     * - .(svg|png|jpg|jpeg|gif|webp) (image files)
      */
-    "/((?!_next/static|_next/image|favicon.ico|logo.svg|logo.jpg|logo.png).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const requestPath = request.nextUrl.pathname;
-  const supabase = createMiddlewareClient({
-    req: request,
-    res: response,
-  });
+  const supabase = createClient();
   const { data: session } = await supabase.auth.getSession();
   if (
     session?.session === null &&
