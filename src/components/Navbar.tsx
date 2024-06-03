@@ -2,10 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
+import config from "@/config";
+import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/utils/cn";
-import { AiOutlineHome } from "react-icons/ai";
-import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { MdOutlinePriceChange, MdOutlineSupport } from "react-icons/md";
 
 const Navbar = () => {
@@ -26,25 +27,29 @@ const Navbar = () => {
         }}
         className="flex max-w-fit fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-2 pl-8 py-2  items-center justify-center space-x-4"
       >
-        <button
-          onClick={() => {
-            router.push("/");
-          }}
-          className={cn(
-            "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
-          )}
+        <Link
+          href="/#"
+          aria-current="page"
+          className="flex gap-2 justify-center md:justify-start items-center"
         >
-          <span className="block sm:hidden">
-            <AiOutlineHome className="size-4 text-neutral-500 dark:text-white" />
-          </span>
-          <span className="hidden sm:block text-sm">Home</span>
-        </button>
+          <Image
+            src="/logo.png"
+            alt={`${config.appName} logo`}
+            priority={true}
+            className="w-6 h-6"
+            width={24}
+            height={24}
+          />
+          <strong className="font-extrabold tracking-tight text-base md:text-lg">
+            {config.appName}
+          </strong>
+        </Link>
         <button
           onClick={() => {
             router.push("/#pricing");
           }}
           className={cn(
-            "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+            "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500",
           )}
         >
           <span className="block sm:hidden">
@@ -55,7 +60,7 @@ const Navbar = () => {
         <a
           href="mailto:business@meghamgarg.com"
           className={cn(
-            "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+            "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500",
           )}
         >
           <span className="block sm:hidden">

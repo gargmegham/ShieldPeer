@@ -40,7 +40,7 @@ apiClient.interceptors.response.use(
       toast.error("something went wrong...");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default apiClient;

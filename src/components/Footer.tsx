@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import config from "@/config";
@@ -6,7 +8,7 @@ import config from "@/config";
 // If there's no config.mailgun.supportEmail, the link won't be displayed.
 const Footer = () => {
   return (
-    <footer className="bg-grid-small-white/[0.4] bg-base-200 border-t border-base-content/10">
+    <footer className="border-t border-base-content/10 bg-neutral-900">
       <div className="max-w-7xl mx-auto px-8 py-24">
         <div className=" flex lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
@@ -27,7 +29,6 @@ const Footer = () => {
                 {config.appName}
               </strong>
             </Link>
-
             <p className="mt-3 text-sm text-base-content/80">
               {config.appDescription}
             </p>
