@@ -12,13 +12,13 @@ const Pricing = () => {
           <h2 className="font-bold text-3xl lg:text-5xl tracking-tight">
             Start selling now at lightning fast speed!
           </h2>
-          <h3 className="mt-2 text-sm font-extrabold text-servcy-cream md:text-lg flex justify-center items-center">
+          <h3 className="mt-2 text-xs font-extrabold text-servcy-cream md:text-lg flex justify-center items-center">
             <FaGift
               name="material-symbols:featured-seasonal-and-gifts-rounded"
               className="text-green-500"
             />
             <span className="ml-1 mr-2 text-green-500">100% off</span>
-            for the first 10 customers (8 left)
+            for the first 10 customers (3 left)
           </h3>
         </div>
         <div className="relative flex justify-center flex-col lg:flex-row items-center lg:items-stretch gap-8">
