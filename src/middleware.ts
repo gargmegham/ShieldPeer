@@ -24,7 +24,9 @@ export async function middleware(request: NextRequest) {
     session?.session === null &&
     !requestPath.startsWith("/home") &&
     !requestPath.startsWith("/auth") &&
-    !requestPath.startsWith("/api/auth")
+    !requestPath.startsWith("/api/auth") &&
+    !requestPath.startsWith("/tos") &&
+    !requestPath.startsWith("/privacy-policy")
   ) {
     // Redirect to /home if not logged in and not on /home or /auth
     const requestUrl = new URL(request.url);

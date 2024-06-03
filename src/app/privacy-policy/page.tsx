@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
       <div className="max-w-xl mx-auto p-5">
         <div className="flex justify-end">
           <Link
-            href="/"
+            href="/home"
             className="flex relative bg-black border text-sm font-medium border-white/[0.2] text-white px-4 py-2 rounded-full"
           >
             <svg
