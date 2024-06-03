@@ -68,13 +68,13 @@ const Navbar = () => {
           </span>
           <span className="hidden sm:block text-sm">Support</span>
         </a>
-        <button
-          onClick={() => {}}
+        <Link
+          href="/auth"
           className="bg-neutral-900 border text-sm font-medium relative border-white/[0.2] text-white px-4 py-2 rounded-full"
         >
           <span>Get Started</span>
           <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
-        </button>
+        </Link>
       </motion.div>
     </AnimatePresence>
   );

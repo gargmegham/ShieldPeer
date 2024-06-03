@@ -1,7 +1,9 @@
 import React from "react";
 import Spotlight from "@/components/Spotlight";
+import TestimonialsAvatars from "@/components/Landing/TestimonialsAvatars";
 import integrate from "@/assets/icons/integrate.svg";
 import priceEmpire from "@/assets/logo/price-empire.svg";
+import Link from "next/link";
 import waxpeer from "@/assets/logo/waxpeer.svg";
 import Image from "next/image";
 
@@ -52,7 +54,7 @@ export default function Hero() {
             className="w-20 h-20"
           />
         </p>
-        <p className="mt-4 flex justify-center space-x-2">
+        <p className="my-4 flex justify-center space-x-2">
           <a
             href="https://calendly.com/megham-garg/session"
             target="_blank"
@@ -61,14 +63,15 @@ export default function Hero() {
           >
             <span>Schedule Demo</span>
           </a>
-          <button
-            onClick={() => {}}
-            className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-neutral-900"
+          <Link
+            href="/auth"
+            className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-neutral-900 flex items-center justify-center"
           >
             <span>Get Started</span>
             <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
-          </button>
+          </Link>
         </p>
+        <TestimonialsAvatars />
       </div>
     </section>
   );

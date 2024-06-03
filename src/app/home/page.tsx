@@ -1,10 +1,10 @@
 "use client";
 
-import Footer from "@/components/Footer";
+import Footer from "@/components/Landing/Footer";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
+import Navbar from "@/components/Landing/Navbar";
+import Hero from "@/components/Landing/Hero";
 
 export default function Home() {
   const { data: session } = useSession();
