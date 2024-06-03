@@ -1,7 +1,5 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from "../../../../libs/prismaClient";
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -10,7 +8,6 @@ const authOptions: NextAuthOptions = {
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
   ],
-  adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
   },
@@ -29,9 +26,7 @@ const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/auth/signin",
-    error: "/auth/error",
-    signOut: "/auth/signout",
+    signIn: "/auth",
   },
 };
 
