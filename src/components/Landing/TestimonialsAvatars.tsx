@@ -31,18 +31,19 @@ const avatars: {
 
 const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
   return (
-    <p className="flex justify-center space-x-2">
-      <div className="-space-x-4 justy-start flex">
+    <div className="flex justify-center space-x-2">
+      <div className="-space-x-5 justy-start flex overflow-hidden">
         {avatars.map((image, i) => (
-          <Image
-            key={i}
-            src={image.src}
-            alt={image.alt}
-            className="rounded-full w-10 h-10 border-2 border-neutral-600/60 bg-cover bg-no-repeat bg-neutral-600"
-            priority={priority}
-            width={50}
-            height={50}
-          />
+          <div className="w-12 h-12" key={i}>
+            <Image
+              src={image.src}
+              alt={image.alt}
+              priority={priority}
+              className="w-[100%] h-[100%] object-cover rounded-full border-4 border-neutral-800"
+              width={50}
+              height={50}
+            />
+          </div>
         ))}
       </div>
       {/* RATING */}
@@ -69,7 +70,7 @@ const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
           love {config.appName}
         </div>
       </div>
-    </p>
+    </div>
   );
 };
 
