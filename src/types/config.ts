@@ -30,11 +30,6 @@ export interface ConfigProps {
     id?: string;
     onlyShowOnRoutes?: string[];
   };
-  aws?: {
-    bucket?: string;
-    bucketUrl?: string;
-    cdn?: string;
-  };
   mailgun: {
     subdomain: string;
     fromNoReply: string;

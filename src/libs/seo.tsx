@@ -84,17 +84,17 @@ export const renderSchemaTags = () => {
             "@type": "Person",
             name: "Megham Garg",
           },
-          datePublished: "2023-08-01",
+          datePublished: "2024-05-03",
           applicationCategory: "BusinessApplication",
           aggregateRating: {
             "@type": "AggregateRating",
-            ratingValue: "4.8",
+            ratingValue: "4.9",
             ratingCount: "12",
           },
           offers: [
             {
               "@type": "Offer",
-              price: "9.00",
+              price: "0",
               priceCurrency: "USD",
             },
           ],
