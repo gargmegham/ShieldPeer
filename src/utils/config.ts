@@ -1,4 +1,3 @@
-import themes from "daisyui/src/theming/themes";
 import { ConfigProps } from "@/types/config";
 
 const config = {
