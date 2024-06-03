@@ -5,14 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import config from "@/utils/config";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useSession } from "next-auth/react";
 import { Provider } from "@supabase/supabase-js";
-import { useRouter } from "next/navigation";
 
 export default function Auth() {
   const supabase = createClientComponentClient();
-  const { data: session } = useSession();
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const handleSignup = async (
     e: any,
@@ -38,11 +34,6 @@ export default function Auth() {
       setIsLoading(false);
     }
   };
-
-  if (session) {
-    // Redirect to the app dashboard if the user is authenticated
-    router.push("/");
-  }
 
   return (
     <main
