@@ -14,7 +14,13 @@ import type { PriceRange } from "@/types/database";
 import { Button } from "@/components/ui/button";
 import { AddPriceRangeDialog } from "./AddPriceRangeDialog";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 /**
  * @description PriceRanges are used for granular control over the listing parameters.
@@ -35,6 +41,9 @@ export default function PriceRanges() {
     <Card className="relative">
       <CardHeader>
         <CardTitle>Price Ranges</CardTitle>
+        <CardDescription>
+          In case of conflict, first price range will be used.
+        </CardDescription>
       </CardHeader>
       <AddPriceRangeDialog
         open={open}
