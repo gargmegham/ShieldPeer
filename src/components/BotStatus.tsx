@@ -13,6 +13,7 @@ import {
   FormField,
   FormItem,
 } from "@/components/ui/form";
+import toast from "react-hot-toast";
 import type { Setting } from "@/types/database";
 
 const FormSchema = z.object({
@@ -32,9 +33,12 @@ export default function BotStatus({ setting }: { setting: Setting }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).finally(() => {
-      setSaving(false);
-    });
+    })
+      .then(() => toast.success("Bot status updated successfully."))
+      .catch(() => toast.error("Failed to update bot status."))
+      .finally(() => {
+        setSaving(false);
+      });
   }
   useEffect(() => {
     form.reset(setting);

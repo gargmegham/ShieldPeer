@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import toast from "react-hot-toast";
 import {
   Form,
   FormControl,
@@ -58,8 +59,12 @@ export default function UndercutParameters({ setting }: { setting: Setting }) {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => {
+      .then(() => {
         setIsEditing(false);
+        toast.success("Undercut parameters updated successfully.");
+      })
+      .catch(() => {
+        toast.error("Failed to update undercut parameters.");
       })
       .finally(() => {
         setSaving(false);

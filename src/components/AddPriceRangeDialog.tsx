@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -39,10 +39,19 @@ const FormSchema = z.object({
 });
 
 export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
+  const [saving, setSaving] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
-  function onSubmit(data: z.infer<typeof FormSchema>) {}
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    fetch("/api/price-ranges", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then(() => {
+      setSaving(false);
+      form.reset();
+    });
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -194,7 +203,9 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                 </FormItem>
               )}
             />
-            <Button type="submit">Save</Button>
+            <Button type="submit" disabled={saving}>
+              Save
+            </Button>
           </form>
         </Form>
       </DialogContent>

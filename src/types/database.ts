@@ -10,3 +10,14 @@ export interface Setting {
   price_empire_key?: string;
   waxpeer_key?: string;
 }
+
+export interface PriceRange {
+  id: string;
+  source_price_min: number;
+  source_price_max: number;
+  listing_price_min: number;
+  listing_price_max: number;
+  listing_price_if_no_one_to_undercut: number;
+  when_no_one_to_undercut_list_at: string;
+  always_undercut_by_percentage_if_listing_price_is_greater_than: number;
+}

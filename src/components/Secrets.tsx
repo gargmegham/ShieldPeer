@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 import {
   Form,
@@ -48,6 +49,10 @@ export default function Secrets({ setting }: { setting: Setting }) {
     })
       .then((res) => {
         setIsEditing(false);
+        toast.success("API keys updated successfully.");
+      })
+      .catch(() => {
+        toast.error("Failed to update API keys.");
       })
       .finally(() => {
         setSaving(false);

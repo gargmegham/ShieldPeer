@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import { Tooltip } from "react-tooltip";
 import config from "@/utils/config";
+import { color } from "framer-motion";
 
 // Crisp customer chat support:
 // This component is separated from LayoutWrapper because it needs to be wrapped with <SessionProvider> to use useSession() hook
@@ -70,6 +71,19 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
       <Toaster
         toastOptions={{
           duration: 3000,
+          style: {
+            background: "#333",
+            color: "#fff",
+          },
+          position: "bottom-right",
+          success: {
+            icon: "🎉",
+            duration: 3000,
+          },
+          error: {
+            icon: "🚧",
+            duration: 3000,
+          },
         }}
       />
       {/* Show tooltips if any JSX elements has these 2 attributes: data-tooltip-id="tooltip" data-tooltip-content="" */}
