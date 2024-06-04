@@ -3,7 +3,7 @@ import { ConfigProps } from "@/types/config";
 const config = {
   appName: "ShieldPeer",
   appDescription:
-    "A secure, user-configurable bot for automated and optimized CS:GO skin trading on Waxpeer.",
+    "A secure, user-configurable bot for automated and optimized steam asset trading on marketplaces like Waxpeer.",
   domainName: "www.shieldpeer.in",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
