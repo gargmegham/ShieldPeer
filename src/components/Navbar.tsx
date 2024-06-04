@@ -25,14 +25,14 @@ const Navbar = ({
   ctaLabel = "Get Started",
   ctaLink = "/auth",
 }: {
-  logoLink: string;
-  items: {
+  logoLink?: string;
+  items?: {
     label: string;
     link: string;
     icon: React.ElementType;
   }[];
-  ctaLabel: string;
-  ctaLink: string;
+  ctaLabel?: string;
+  ctaLink?: string;
 }) => {
   const router = useRouter();
   return (
