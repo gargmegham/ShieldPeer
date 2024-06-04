@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/Landing/Footer";
-import Navbar from "@/components/Landing/Navbar";
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Landing/Hero";
 import Problem from "@/components/Landing/Problem";
 import Pricing from "@/components/Landing/Pricing";
