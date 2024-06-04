@@ -1,5 +1,5 @@
 import React from "react";
-import Spotlight from "@/components/Spotlight";
+import Spotlight from "@/components/ui/spotlight";
 import TestimonialsAvatars from "@/components/Landing/TestimonialsAvatars";
 import integrate from "@/assets/icons/integrate.svg";
 import priceEmpire from "@/assets/logo/price-empire.svg";
