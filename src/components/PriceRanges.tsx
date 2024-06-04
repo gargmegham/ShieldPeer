@@ -3,7 +3,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -13,48 +12,33 @@ import { AddPriceRangeDialog } from "./AddPriceRangeDialog";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const invoices = [
+const priceRanges = [
   {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
+    source_price_min: 0,
+    source_price_max: 100,
+    listing_price_min: 0,
+    listing_price_max: 100,
+    listing_price_if_no_one_to_undercut: 0,
+    when_no_one_to_undercut_list_at: "listing_price_max",
+    always_undercut_by_percentage_if_listing_price_is_greater_than: 0,
   },
   {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
+    source_price_min: 101,
+    source_price_max: 200,
+    listing_price_min: 101,
+    listing_price_max: 200,
+    listing_price_if_no_one_to_undercut: 101,
+    when_no_one_to_undercut_list_at: "listing_price_max",
+    always_undercut_by_percentage_if_listing_price_is_greater_than: 0,
   },
   {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
+    source_price_min: 201,
+    source_price_max: 300,
+    listing_price_min: 201,
+    listing_price_max: 300,
+    listing_price_if_no_one_to_undercut: 201,
+    when_no_one_to_undercut_list_at: "listing_price_if_no_one_to_undercut",
+    always_undercut_by_percentage_if_listing_price_is_greater_than: 0,
   },
 ];
 
@@ -78,30 +62,49 @@ export default function PriceRanges() {
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Invoice</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Method</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Source Price Min.</TableHead>
+              <TableHead>Source Price Max.</TableHead>
+              <TableHead>Listing Price Min.</TableHead>
+              <TableHead>Listing Price Max.</TableHead>
+              <TableHead>Listing Price If No One To Undercut</TableHead>
+              <TableHead className="w-">
+                When No One To Undercut List At
+              </TableHead>
+              <TableHead>Undercut By Percentage Threshold</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {invoices.map((invoice) => (
-              <TableRow key={invoice.invoice}>
-                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                <TableCell>{invoice.paymentStatus}</TableCell>
-                <TableCell>{invoice.paymentMethod}</TableCell>
-                <TableCell className="text-right">
-                  {invoice.totalAmount}
+            {priceRanges.map((priceRange, index) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium">
+                  {priceRange.source_price_min}
+                </TableCell>
+                <TableCell className="font-medium">
+                  {priceRange.source_price_max}
+                </TableCell>
+                <TableCell className="font-medium">
+                  {priceRange.listing_price_min}%
+                </TableCell>
+                <TableCell className="font-medium">
+                  {priceRange.listing_price_max}%
+                </TableCell>
+                <TableCell className="font-medium">
+                  {priceRange.listing_price_if_no_one_to_undercut}%
+                </TableCell>
+                <TableCell className="font-medium">
+                  {priceRange.when_no_one_to_undercut_list_at
+                    .split("_")
+                    .join(" ")}
+                </TableCell>
+                <TableCell className="font-medium">
+                  {
+                    priceRange.always_undercut_by_percentage_if_listing_price_is_greater_than
+                  }
+                  %
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,500.00</TableCell>
-            </TableRow>
-          </TableFooter>
         </Table>
       </CardContent>
     </Card>
