@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSEOTags } from "@/libs/seo";
+import { getSEOTags } from "@/utils/seo";
 import config from "@/utils/config";
 
 export const metadata = getSEOTags({
