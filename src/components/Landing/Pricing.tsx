@@ -5,7 +5,10 @@ import Link from "next/link";
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="bg-grid-white/[0.1]">
+    <section
+      id="pricing"
+      className="bg-grid-white/[0.1] bg-black text-neutral-50"
+    >
       <div className="py-24 px-8 max-w-5xl mx-auto">
         <div className="flex flex-col text-center w-full mb-12">
           <p className="font-medium text-amber-500 mb-8">Pricing</p>
@@ -42,18 +45,16 @@ const Pricing = () => {
               <div className="flex gap-2">
                 <div className="flex flex-col justify-end mb-[4px] text-lg">
                   <p className="relative">
-                    <span className="absolute bg-base-content h-[1.5px] inset-x-0 top-[53%]"></span>
+                    <span className="absolute h-[1.5px] inset-x-0 top-[53%]"></span>
                     <span className="text-zinc-400 line-through">$490</span>
                   </p>
                 </div>
                 <p className="text-5xl font-extrabold">$0</p>
                 <div className="flex flex-col justify-end mb-[4px]">
-                  <p className="text-xs text-base-content/60 uppercase font-semibold">
-                    USD/year
-                  </p>
+                  <p className="text-xs uppercase font-semibold">USD/year</p>
                 </div>
               </div>
-              <ul className="space-y-2.5 leading-relaxed text-base flex-1">
+              <ul className="space-y-2.5 leading-relaxed flex-1">
                 <li className="flex items-center gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

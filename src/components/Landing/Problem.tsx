@@ -46,7 +46,7 @@ const Step = ({ emoji, text }: { emoji: string; text: string }) => {
 // - Features: "ShieldPeer is safe, fast and running continously to get you the best price for your skins."
 const Problem = () => {
   return (
-    <section className="bg-neutral text-neutral-content">
+    <section className="bg-black text-neutral-50">
       <div className="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
         <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8">
           80% of assets are sold by

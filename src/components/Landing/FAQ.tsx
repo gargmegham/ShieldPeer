@@ -58,7 +58,7 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
   return (
     <li>
       <button
-        className="relative flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10"
+        className="relative flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-neutral-100/50"
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
@@ -66,7 +66,7 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
         aria-expanded={isOpen}
       >
         <span
-          className={`flex-1 text-base-content ${isOpen ? "text-primary" : ""}`}
+          className={`flex-1 text-neutral-100 ${isOpen ? "text-primary" : ""}`}
         >
           {item?.question}
         </span>
@@ -113,11 +113,11 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
 
 const FAQ = () => {
   return (
-    <section id="faq">
+    <section id="faq" className="bg-black text-neutral-50">
       <div className="py-24 px-8 max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
         <div className="flex flex-col text-left basis-1/2">
           <p className="inline-block font-semibold text-amber-500 mb-4">FAQ</p>
-          <p className="sm:text-4xl text-3xl font-extrabold text-base-content">
+          <p className="sm:text-4xl text-3xl font-extrabold text-neutral-50">
             Frequently Asked Questions
           </p>
         </div>

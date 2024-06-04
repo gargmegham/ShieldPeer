@@ -54,7 +54,7 @@ const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="w-5 h-5 text-yellow-500"
+              className="w-5 h-5 text-amber-500"
               key={i}
             >
               <path
@@ -65,8 +65,8 @@ const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
             </svg>
           ))}
         </div>
-        <div className="text-xs text-base-content/80">
-          <span className="font-semibold text-base-content">Gamers </span>
+        <div className="text-xs text-neutral-50">
+          <span className="font-semibold">Gamers </span>
           love {config.appName}
         </div>
       </div>
