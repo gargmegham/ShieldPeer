@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import React from "react";
 import config from "@/utils/config";
 import Link from "next/link";
@@ -34,7 +33,6 @@ const Navbar = ({
   ctaLabel?: string;
   ctaLink?: string;
 }) => {
-  const router = useRouter();
   return (
     <AnimatePresence mode="wait">
       <motion.div
