@@ -71,11 +71,11 @@ export default function Secrets({ setting }: { setting: Setting }) {
       </CardHeader>
       <Button
         disabled={isEditing}
-        size={"icon"}
+        size={"xs"}
         className="absolute top-4 right-4"
         onClick={() => setIsEditing((prev) => !prev)}
       >
-        <AiOutlineEdit className="size-7" />
+        <AiOutlineEdit className="size-4" />
       </Button>
       <CardContent>
         <Form {...form}>

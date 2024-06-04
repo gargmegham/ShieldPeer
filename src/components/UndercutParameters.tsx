@@ -85,11 +85,11 @@ export default function UndercutParameters({ setting }: { setting: Setting }) {
       </CardHeader>
       <Button
         disabled={isEditing}
-        size={"icon"}
+        size={"xs"}
         className="absolute top-4 right-4"
         onClick={() => setIsEditing((prev) => !prev)}
       >
-        <AiOutlineEdit className="size-7" />
+        <AiOutlineEdit className="size-4" />
       </Button>
       <CardContent>
         <Form {...form}>
@@ -97,7 +97,7 @@ export default function UndercutParameters({ setting }: { setting: Setting }) {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-6"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="price_empire_source"

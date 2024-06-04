@@ -89,7 +89,7 @@ export default function PriceRanges() {
           <TableCaption>
             You can set parameters for different price ranges separately.
           </TableCaption>
-          <TableHeader>
+          <TableHeader className="text-xs">
             <TableRow>
               <TableHead>Source Price Min.</TableHead>
               <TableHead>Source Price Max.</TableHead>
