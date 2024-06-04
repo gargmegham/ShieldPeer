@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 import {
   Form,
@@ -22,25 +23,46 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import type { Setting } from "@/types/database";
 
 const FormSchema = z.object({
   price_empire_key: z.string().min(5),
   waxpeer_key: z.string().min(5),
 });
 
-export default function Secrets() {
+export default function Secrets({ setting }: { setting: Setting }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     disabled: !isEditing,
-    defaultValues: {
-      price_empire_key: "",
-      waxpeer_key: "",
-    },
   });
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    setIsEditing(false);
+    setSaving(true);
+    fetch("/api/settings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        setIsEditing(false);
+        toast.success("API keys updated successfully.");
+      })
+      .catch(() => {
+        toast.error("Failed to update API keys.");
+      })
+      .finally(() => {
+        setSaving(false);
+      });
   }
+
+  useEffect(() => {
+    form.reset(setting);
+  }, [setting]);
+
   return (
     <Card className="w-full relative">
       <CardHeader>
@@ -87,7 +109,7 @@ export default function Secrets() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={!isEditing}>
+            <Button type="submit" disabled={!isEditing || saving}>
               Save
             </Button>
           </form>

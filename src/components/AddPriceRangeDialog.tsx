@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { z } from "zod";
+import toast from "react-hot-toast";
 
 const FormSchema = z.object({
   source_price_min: z.number(),
@@ -31,21 +32,50 @@ const FormSchema = z.object({
   listing_price_min: z.number(),
   listing_price_max: z.number(),
   listing_price_if_no_one_to_undercut: z.number(),
-  when_no_one_to_undercut_list_at: z.enum([
-    "listing_price_max",
-    "listing_price_if_no_one_to_undercut",
-  ]),
+  when_no_one_to_undercut_list_at: z.string(),
   always_undercut_by_percentage_if_listing_price_is_greater_than: z.number(),
 });
 
-export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
+export function AddPriceRangeDialog({
+  open,
+  setOpen,
+  refreshTable,
+}: {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  refreshTable?: () => void;
+}) {
+  const [saving, setSaving] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
-  function onSubmit(data: z.infer<typeof FormSchema>) {}
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    if (data.source_price_min >= data.source_price_max) {
+      toast.error("Source price min must be less than source price max");
+      return;
+    }
+    if (data.listing_price_min >= data.listing_price_max) {
+      toast.error("Listing price min must be less than listing price max");
+      return;
+    }
+    fetch("/api/price-ranges", {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+      .then(() => {
+        toast.success("Price range added successfully");
+        form.reset();
+      })
+      .catch(() => {
+        toast.error("Failed to add price range");
+      })
+      .finally(() => {
+        setOpen(false);
+        setSaving(false);
+      });
+  }
   return (
-    <Dialog>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="w-[80%] max-h-[90vh] overflow-y-scroll">
         <Form {...form}>
           <form
@@ -63,7 +93,16 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                       The source price of item must be greater than this value.
                     </FormDescription>
                     <FormControl>
-                      <Input placeholder="1" {...field} />
+                      <Input
+                        placeholder="1"
+                        {...field}
+                        onChange={(e) => {
+                          form.setValue(
+                            "source_price_min",
+                            Number(e.target.value)
+                          );
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -79,7 +118,16 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                       The source price of item must be less than this value.
                     </FormDescription>
                     <FormControl>
-                      <Input placeholder="10" {...field} />
+                      <Input
+                        placeholder="10"
+                        {...field}
+                        onChange={(e) => {
+                          form.setValue(
+                            "source_price_max",
+                            Number(e.target.value)
+                          );
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -97,7 +145,16 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                       Minimum price you want to list the item for.
                     </FormDescription>
                     <FormControl>
-                      <Input placeholder="110%" {...field} />
+                      <Input
+                        placeholder="110%"
+                        {...field}
+                        onChange={(e) => {
+                          form.setValue(
+                            "listing_price_min",
+                            Number(e.target.value)
+                          );
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -113,7 +170,16 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                       Maximum price you want to list the item for.
                     </FormDescription>
                     <FormControl>
-                      <Input placeholder="130%" {...field} />
+                      <Input
+                        placeholder="130%"
+                        {...field}
+                        onChange={(e) => {
+                          form.setValue(
+                            "listing_price_max",
+                            Number(e.target.value)
+                          );
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -132,7 +198,15 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                       price or at a specific percentage specified at (6) below.
                     </FormDescription>
                     <FormControl>
-                      <Select {...field}>
+                      <Select
+                        {...field}
+                        onValueChange={(value) => {
+                          form.setValue(
+                            "when_no_one_to_undercut_list_at",
+                            value
+                          );
+                        }}
+                      >
                         <SelectTrigger className="">
                           <SelectValue placeholder="Select an option" />
                         </SelectTrigger>
@@ -166,7 +240,16 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                       price.
                     </FormDescription>
                     <FormControl>
-                      <Input placeholder="130%" {...field} />
+                      <Input
+                        placeholder="130%"
+                        {...field}
+                        onChange={(e) => {
+                          form.setValue(
+                            "listing_price_if_no_one_to_undercut",
+                            Number(e.target.value)
+                          );
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -188,13 +271,24 @@ export function AddPriceRangeDialog({ trigger }: { trigger: ReactNode }) {
                     selected to undercut by price in general settings.
                   </FormDescription>
                   <FormControl>
-                    <Input placeholder="130%" {...field} />
+                    <Input
+                      placeholder="130%"
+                      {...field}
+                      onChange={(e) => {
+                        form.setValue(
+                          "always_undercut_by_percentage_if_listing_price_is_greater_than",
+                          Number(e.target.value)
+                        );
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Save</Button>
+            <Button type="submit" disabled={saving}>
+              Save
+            </Button>
           </form>
         </Form>
       </DialogContent>
