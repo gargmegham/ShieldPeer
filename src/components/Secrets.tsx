@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -60,7 +59,7 @@ export default function Secrets() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-2/3 space-y-6"
+            className="w-full space-y-6"
           >
             <FormField
               control={form.control}
@@ -94,7 +93,6 @@ export default function Secrets() {
           </form>
         </Form>
       </CardContent>
-      <CardFooter></CardFooter>
     </Card>
   );
 }
