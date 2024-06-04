@@ -21,7 +21,7 @@ export default function Settings() {
   }, []);
   return (
     <main
-      className="py-[16vh] relative bg-black px-20 bg-grid-small-white/[0.3] min-h-screen space-y-4"
+      className="py-[16vh] relative bg-black px-8 md:px-20 bg-grid-small-white/[0.3] min-h-screen space-y-4"
       id="dashboard"
     >
       <Navbar
