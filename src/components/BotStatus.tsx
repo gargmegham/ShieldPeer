@@ -29,7 +29,7 @@ export default function BotStatus() {
   function onSubmit(data: z.infer<typeof FormSchema>) {}
 
   return (
-    <Card className="max-w-xl relative">
+    <Card className="w-full relative">
       <CardHeader>
         <CardTitle>Manage Bot Status</CardTitle>
       </CardHeader>

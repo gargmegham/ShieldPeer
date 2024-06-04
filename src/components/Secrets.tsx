@@ -42,7 +42,7 @@ export default function Secrets() {
     setIsEditing(false);
   }
   return (
-    <Card className="max-w-xl relative">
+    <Card className="w-full relative">
       <CardHeader>
         <CardTitle>API Keys</CardTitle>
         <CardDescription>Manage your API keys and secrets.</CardDescription>

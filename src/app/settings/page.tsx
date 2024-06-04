@@ -4,13 +4,14 @@ import React from "react";
 import Navbar from "@/components/ui/navbar";
 import { MdOutlineInventory, MdOutlineDocumentScanner } from "react-icons/md";
 import Secrets from "@/components/Secrets";
+import PriceRanges from "@/components/PriceRanges";
 import BotStatus from "@/components/BotStatus";
 import UndercutParameters from "@/components/UndercutParameters";
 
 export default function Settings() {
   return (
     <main
-      className="py-[16vh] relative px-20 bg-grid-small-white/[0.3] min-h-screen"
+      className="py-[16vh] relative bg-black px-20 bg-grid-small-white/[0.3] min-h-screen space-y-4"
       id="dashboard"
     >
       <Navbar
@@ -29,6 +30,7 @@ export default function Settings() {
         </div>
         <UndercutParameters />
       </div>
+      <PriceRanges />
     </main>
   );
 }

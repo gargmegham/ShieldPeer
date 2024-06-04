@@ -29,7 +29,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -57,7 +56,7 @@ export default function UndercutParameters() {
     setIsEditing(false);
   }
   return (
-    <Card className="max-w-xl relative">
+    <Card className="w-full relative">
       <CardHeader>
         <CardTitle>Undercut Parameters</CardTitle>
         <CardDescription>
