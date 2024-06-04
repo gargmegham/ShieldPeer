@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -32,29 +32,44 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Setting } from "@/types/database";
 
 const FormSchema = z.object({
-  price_empire_source: z.enum(sources as any),
+  price_empire_source: z.string(),
   undercut_by_price: z.number(),
   undercut_by_percentage: z.number(),
-  undercut_by: z.enum(["price", "percentage"]),
+  undercut_by: z.string(),
 });
 
-export default function UndercutParameters() {
+export default function UndercutParameters({ setting }: { setting: Setting }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     disabled: !isEditing,
-    defaultValues: {
-      price_empire_source: "buff",
-      undercut_by_price: 0.01,
-      undercut_by_percentage: 1,
-      undercut_by: "price",
-    },
   });
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    setIsEditing(false);
+    setSaving(true);
+    fetch("/api/settings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        setIsEditing(false);
+      })
+      .finally(() => {
+        setSaving(false);
+      });
   }
+
+  useEffect(() => {
+    form.reset(setting);
+  }, [setting]);
+
   return (
     <Card className="w-full relative">
       <CardHeader>
@@ -85,7 +100,12 @@ export default function UndercutParameters() {
                   <FormItem>
                     <FormLabel>PriceEmpire Source</FormLabel>
                     <FormControl>
-                      <Select {...field}>
+                      <Select
+                        {...field}
+                        onValueChange={(value) => {
+                          form.setValue("price_empire_source", value);
+                        }}
+                      >
                         <SelectTrigger className="w-[180px]">
                           <SelectValue placeholder="Select a source" />
                         </SelectTrigger>
@@ -111,7 +131,12 @@ export default function UndercutParameters() {
                   <FormItem>
                     <FormLabel>Undercut By</FormLabel>
                     <FormControl>
-                      <Select {...field}>
+                      <Select
+                        {...field}
+                        onValueChange={(value) => {
+                          form.setValue("undercut_by", value);
+                        }}
+                      >
                         <SelectTrigger className="w-[180px]">
                           <SelectValue placeholder="Select a source" />
                         </SelectTrigger>
@@ -141,7 +166,18 @@ export default function UndercutParameters() {
                     undercut by price is selected above.
                   </FormDescription>
                   <FormControl>
-                    <Input placeholder="0.01" {...field} />
+                    <Input
+                      {...field}
+                      placeholder="0.01"
+                      type="number"
+                      step="0.01"
+                      onChange={(e) => {
+                        form.setValue(
+                          "undercut_by_price",
+                          Number(e.target.value)
+                        );
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -158,13 +194,24 @@ export default function UndercutParameters() {
                     undercut by percentage is selected above.
                   </FormDescription>
                   <FormControl>
-                    <Input placeholder="1" {...field} />
+                    <Input
+                      {...field}
+                      placeholder="1"
+                      type="number"
+                      step="0.01"
+                      onChange={(e) => {
+                        form.setValue(
+                          "undercut_by_percentage",
+                          Number(e.target.value)
+                        );
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={!isEditing}>
+            <Button type="submit" disabled={!isEditing || saving}>
               Save
             </Button>
           </form>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -13,21 +13,32 @@ import {
   FormField,
   FormItem,
 } from "@/components/ui/form";
+import type { Setting } from "@/types/database";
 
 const FormSchema = z.object({
-  security_emails: z.boolean(),
+  is_paused: z.boolean(),
 });
 
-export default function BotStatus() {
+export default function BotStatus({ setting }: { setting: Setting }) {
+  const [saving, setSaving] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      security_emails: true,
-    },
   });
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {}
-
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    setSaving(true);
+    fetch("/api/settings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).finally(() => {
+      setSaving(false);
+    });
+  }
+  useEffect(() => {
+    form.reset(setting);
+  }, [setting]);
   return (
     <Card className="w-full relative">
       <CardHeader>
@@ -36,13 +47,13 @@ export default function BotStatus() {
       <CardContent>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={(e) => e.preventDefault()}
             className="w-full space-y-6"
           >
             <div className="space-y-4">
               <FormField
                 control={form.control}
-                name="security_emails"
+                name="is_paused"
                 render={({ field }) => (
                   <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                     <div className="space-y-0.5">
@@ -52,8 +63,12 @@ export default function BotStatus() {
                     </div>
                     <FormControl>
                       <Switch
+                        disabled={saving}
                         checked={field.value}
-                        onCheckedChange={field.onChange}
+                        onCheckedChange={(e) => {
+                          field.onChange(e);
+                          form.handleSubmit(onSubmit)();
+                        }}
                       />
                     </FormControl>
                   </FormItem>
