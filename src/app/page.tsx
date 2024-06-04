@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/ui/navbar";
 import { MdOutlineInventory, MdOutlineDocumentScanner } from "react-icons/md";
 
 export default function Dashboard() {
