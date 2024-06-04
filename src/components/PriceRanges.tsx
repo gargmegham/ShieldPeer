@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import type { PriceRange } from "@/types/database";
 import { Button } from "@/components/ui/button";
-import { AddPriceRangeDialog } from "./AddPriceRangeDialog";
+import AddEditPriceRangeDialog from "./AddEditPriceRangeDialog";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import {
   Card,
@@ -21,6 +21,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { DeletionConfirmationDialog } from "./DeletionConfirmationDialog";
 
 /**
  * @description PriceRanges are used for granular control over the listing parameters.
@@ -28,6 +29,9 @@ import {
 export default function PriceRanges() {
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
   const [open, setOpen] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [selectedPriceRange, setSelectedPriceRange] =
+    useState<PriceRange | null>(null);
   const fetchPriceRanges = () => {
     fetch("/api/price-ranges")
       .then((res) => res.json())
@@ -36,6 +40,18 @@ export default function PriceRanges() {
         setPriceRanges(data);
       });
   };
+  const deletePriceRange = () => {
+    if (!selectedPriceRange) return;
+    fetch(`/api/price-ranges?id=${selectedPriceRange.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      fetchPriceRanges();
+      setOpenDeleteDialog(false);
+    });
+  };
+  useEffect(() => {
+    if (!open) setSelectedPriceRange(null);
+  }, [open]);
   useEffect(fetchPriceRanges, []);
   return (
     <Card className="relative">
@@ -45,11 +61,22 @@ export default function PriceRanges() {
           In case of conflict, first price range will be used.
         </CardDescription>
       </CardHeader>
-      <AddPriceRangeDialog
-        open={open}
-        setOpen={setOpen}
-        refreshTable={fetchPriceRanges}
+      <DeletionConfirmationDialog
+        open={openDeleteDialog}
+        setOpen={setOpenDeleteDialog}
+        title="Delete Price Range"
+        description="Are you sure you want to delete this price range?"
+        confirm={deletePriceRange}
+        buttonText="Delete"
       />
+      {open && (
+        <AddEditPriceRangeDialog
+          open={open}
+          setOpen={setOpen}
+          selectedPriceRange={selectedPriceRange}
+          refreshTable={fetchPriceRanges}
+        />
+      )}
       <Button
         size={"xs"}
         className="absolute top-4 right-4"
@@ -73,6 +100,7 @@ export default function PriceRanges() {
                 When No One To Undercut List At
               </TableHead>
               <TableHead>Undercut By Percentage Threshold</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -104,22 +132,46 @@ export default function PriceRanges() {
                   }
                   %
                 </TableCell>
+                <TableCell className="flex space-x-1">
+                  <Button
+                    size={"xs"}
+                    className="text-xs"
+                    variant="outline"
+                    onClick={() => {
+                      setSelectedPriceRange(priceRange);
+                      setOpen(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size={"xs"}
+                    className="text-xs"
+                    variant="destructive"
+                    onClick={() => {
+                      setSelectedPriceRange(priceRange);
+                      setOpenDeleteDialog(true);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
             {priceRanges.length === 0 && (
               <>
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center">
+                  <TableCell colSpan={8} className="text-center">
                     -
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center">
+                  <TableCell colSpan={8} className="text-center">
                     No price ranges found.
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center">
+                  <TableCell colSpan={8} className="text-center">
                     -
                   </TableCell>
                 </TableRow>

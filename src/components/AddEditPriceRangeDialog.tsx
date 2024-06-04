@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/select";
 import { z } from "zod";
 import toast from "react-hot-toast";
+import { PriceRange } from "@/types/database";
 
 const FormSchema = z.object({
   source_price_min: z.number(),
@@ -36,14 +37,16 @@ const FormSchema = z.object({
   always_undercut_by_percentage_if_listing_price_is_greater_than: z.number(),
 });
 
-export function AddPriceRangeDialog({
+export default function AddEditPriceRangeDialog({
   open,
   setOpen,
   refreshTable,
+  selectedPriceRange,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
   refreshTable?: () => void;
+  selectedPriceRange: PriceRange | null;
 }) {
   const [saving, setSaving] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -58,24 +61,38 @@ export function AddPriceRangeDialog({
       toast.error("Listing price min must be less than listing price max");
       return;
     }
+    const method = selectedPriceRange?.id ? "PUT" : "POST";
+    const payload = selectedPriceRange?.id
+      ? { ...selectedPriceRange, ...data }
+      : data;
     fetch("/api/price-ranges", {
-      method: "POST",
-      body: JSON.stringify(data),
+      method,
+      body: JSON.stringify(payload),
     })
       .then(() => {
         toast.success("Price range added successfully");
+        refreshTable?.();
         form.reset();
+        setOpen(false);
       })
       .catch(() => {
         toast.error("Failed to add price range");
       })
       .finally(() => {
-        setOpen(false);
         setSaving(false);
       });
   }
+  useEffect(() => {
+    if (selectedPriceRange) form.reset(selectedPriceRange);
+  }, [selectedPriceRange]);
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(val) => {
+        form.reset();
+        setOpen(val);
+      }}
+    >
       <DialogContent className="w-[80%] max-h-[90vh] overflow-y-scroll">
         <Form {...form}>
           <form

@@ -36,3 +36,23 @@ export async function PUT(request: NextRequest) {
     { status: 200 }
   );
 }
+
+// delete price range
+export async function DELETE(request: NextRequest) {
+  const supabase = createClient();
+  const { searchParams } = new URL(request.url);
+  if (!searchParams.has("id")) {
+    return NextResponse.json(
+      { message: "Please provide an ID." },
+      { status: 400 }
+    );
+  }
+  await supabase
+    .from("PriceRange")
+    .delete()
+    .match({ id: searchParams.get("id") });
+  return NextResponse.json(
+    { message: "Successfully deleted price range." },
+    { status: 200 }
+  );
+}
