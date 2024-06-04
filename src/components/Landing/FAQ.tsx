@@ -14,7 +14,7 @@ interface FAQItemProps {
 const faqList: FAQItemProps[] = [
   {
     question:
-      "How does the ShieldPeer bot determine the best selling price for my CS:GO skins?",
+      "How does the ShieldPeer bot determine the best selling price for my steam assets?",
     answer: (
       <div className="space-y-2 leading-relaxed">
         ShieldPeer uses user-defined settings, the bot identifies the optimal
@@ -25,7 +25,8 @@ const faqList: FAQItemProps[] = [
     ),
   },
   {
-    question: "What makes ShieldPeer a secure platform for CS:GO skin trading?",
+    question:
+      "What makes ShieldPeer a secure platform for steam asset trading?",
     answer: (
       <div className="space-y-2 leading-relaxed">
         At ShieldPeer, we prioritize the security of our users. We leverage the
@@ -38,7 +39,7 @@ const faqList: FAQItemProps[] = [
   },
   {
     question:
-      "How can ShieldPeer help me maximize my CS:GO skin trading earnings?",
+      "How can ShieldPeer help me maximize my steam asset trading earnings?",
     answer: (
       <div className="space-y-2 leading-relaxed">
         ShieldPeer was designed with the main goal to make your trading more
