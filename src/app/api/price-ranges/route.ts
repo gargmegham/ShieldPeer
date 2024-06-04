@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   const payload = await request.json();
   const { data: user } = await supabase.auth.getUser();
   if (user?.user?.id) {
-    await supabase.from("Settings").insert(payload);
+    await supabase.from("PriceRange").insert(payload);
   }
   return NextResponse.json(
     { message: "Successfully added price range." },

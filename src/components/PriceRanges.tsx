@@ -21,26 +21,33 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
  */
 export default function PriceRanges() {
   const [priceRanges, setPriceRanges] = useState<PriceRange[]>([]);
-  useEffect(() => {
+  const [open, setOpen] = useState(false);
+  const fetchPriceRanges = () => {
     fetch("/api/price-ranges")
       .then((res) => res.json())
       .then((data) => {
         if (!data) return;
         setPriceRanges(data);
       });
-  }, []);
+  };
+  useEffect(fetchPriceRanges, []);
   return (
     <Card className="relative">
       <CardHeader>
         <CardTitle>Price Ranges</CardTitle>
       </CardHeader>
       <AddPriceRangeDialog
-        trigger={
-          <Button size={"xs"} className="absolute top-4 right-4">
-            <AiOutlinePlusCircle className="size-4" />
-          </Button>
-        }
+        open={open}
+        setOpen={setOpen}
+        refreshTable={fetchPriceRanges}
       />
+      <Button
+        size={"xs"}
+        className="absolute top-4 right-4"
+        onClick={() => setOpen(true)}
+      >
+        <AiOutlinePlusCircle className="size-4" />
+      </Button>
       <CardContent>
         <Table>
           <TableCaption>
