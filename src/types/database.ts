@@ -36,7 +36,9 @@ export interface Item {
     is_active: boolean
     price_updated_at: string
     condition_updated_at: string
-    meta_data: object
+    meta_data: {
+        image: string
+    }
 }
 
 export interface ItemSetting {
@@ -71,6 +73,8 @@ export interface Log {
     created_at: string
     type: "success" | "failure" | "caution"
     message: string
+    item_name: Item["name"]
+    item_image: Item["meta_data"]["image"]
     meta_data?: {
         listing_id?: Listing["id"]
         error?: string
