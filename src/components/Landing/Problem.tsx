@@ -1,39 +1,39 @@
-"use client";
+"use client"
 
-import config from "@/utils/config";
+import config from "@/utils/config"
 
 const Arrow = ({ extraStyle }: { extraStyle: string }) => {
-  return (
-    <svg
-      className={`shrink-0 w-12 fill-white opacity-70 ${extraStyle}`}
-      viewBox="0 0 138 138"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g>
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M72.9644 5.31431C98.8774 43.8211 83.3812 88.048 54.9567 120.735C54.4696 121.298 54.5274 122.151 55.0896 122.639C55.6518 123.126 56.5051 123.068 56.9922 122.506C86.2147 88.9044 101.84 43.3918 75.2003 3.80657C74.7866 3.18904 73.9486 3.02602 73.3287 3.44222C72.7113 3.85613 72.5484 4.69426 72.9644 5.31431Z"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M56.5084 121.007C56.9835 118.685 57.6119 115.777 57.6736 115.445C59.3456 106.446 59.5323 97.67 58.4433 88.5628C58.3558 87.8236 57.6824 87.2948 56.9433 87.3824C56.2042 87.4699 55.6756 88.1435 55.7631 88.8828C56.8219 97.7138 56.6432 106.225 55.0203 114.954C54.926 115.463 53.5093 121.999 53.3221 123.342C53.2427 123.893 53.3688 124.229 53.4061 124.305C53.5887 124.719 53.8782 124.911 54.1287 125.015C54.4123 125.13 54.9267 125.205 55.5376 124.926C56.1758 124.631 57.3434 123.699 57.6571 123.487C62.3995 120.309 67.4155 116.348 72.791 113.634C77.9171 111.045 83.3769 109.588 89.255 111.269C89.9704 111.475 90.7181 111.057 90.9235 110.342C91.1288 109.626 90.7117 108.878 89.9963 108.673C83.424 106.794 77.3049 108.33 71.5763 111.223C66.2328 113.922 61.2322 117.814 56.5084 121.007Z"
-        />
-      </g>
-    </svg>
-  );
-};
+    return (
+        <svg
+            className={`shrink-0 w-12 fill-white opacity-70 ${extraStyle}`}
+            viewBox="0 0 138 138"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <g>
+                <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M72.9644 5.31431C98.8774 43.8211 83.3812 88.048 54.9567 120.735C54.4696 121.298 54.5274 122.151 55.0896 122.639C55.6518 123.126 56.5051 123.068 56.9922 122.506C86.2147 88.9044 101.84 43.3918 75.2003 3.80657C74.7866 3.18904 73.9486 3.02602 73.3287 3.44222C72.7113 3.85613 72.5484 4.69426 72.9644 5.31431Z"
+                />
+                <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M56.5084 121.007C56.9835 118.685 57.6119 115.777 57.6736 115.445C59.3456 106.446 59.5323 97.67 58.4433 88.5628C58.3558 87.8236 57.6824 87.2948 56.9433 87.3824C56.2042 87.4699 55.6756 88.1435 55.7631 88.8828C56.8219 97.7138 56.6432 106.225 55.0203 114.954C54.926 115.463 53.5093 121.999 53.3221 123.342C53.2427 123.893 53.3688 124.229 53.4061 124.305C53.5887 124.719 53.8782 124.911 54.1287 125.015C54.4123 125.13 54.9267 125.205 55.5376 124.926C56.1758 124.631 57.3434 123.699 57.6571 123.487C62.3995 120.309 67.4155 116.348 72.791 113.634C77.9171 111.045 83.3769 109.588 89.255 111.269C89.9704 111.475 90.7181 111.057 90.9235 110.342C91.1288 109.626 90.7117 108.878 89.9963 108.673C83.424 106.794 77.3049 108.33 71.5763 111.223C66.2328 113.922 61.2322 117.814 56.5084 121.007Z"
+                />
+            </g>
+        </svg>
+    )
+}
 
 const Step = ({ emoji, text }: { emoji: string; text: string }) => {
-  return (
-    <div className="w-full md:w-48 flex flex-col gap-2 items-center justify-center">
-      <span className="text-4xl">{emoji}</span>
-      <h3 className="font-bold">{text}</h3>
-    </div>
-  );
-};
+    return (
+        <div className="w-full md:w-48 flex flex-col gap-2 items-center justify-center">
+            <span className="text-4xl">{emoji}</span>
+            <h3 className="font-bold">{text}</h3>
+        </div>
+    )
+}
 
 // Problem Agitation: A crucial, yet overlooked, component for a landing page that sells.
 // It goes under your Hero section, and above your Features section.
@@ -45,33 +45,32 @@ const Step = ({ emoji, text }: { emoji: string; text: string }) => {
 // - Problem Agitation: "In the world of CS:GO skin trading, timing is everything. Yet sellers often find themselves at a disadvantage, stuck to their screens around the clock in a relentless 'race to the bottom' against other sellers. They constantly have to monitor market rates, undercutting one another just to make a sale. As the prices plunge, hard-earned revenue falls dramatically. In a market that never sleeps, it's nerve-wracking, time-consuming, and mentally draining. A small miscalculation or delayed response can mean significant losses. It's an exhausting task, one that can potentially threaten to consume your enjoyment of the game itself. The challenge for many is to achieve the optimal balance between sale speed and earning potential. Without the correct tools to navigate this competitive market, sellers run the risk of either underselling their skins or failing to make sales in a timely manner. This can lead to frustration, lower earnings, and even loss of interest in CS:GO trading altogether. Sellers need a solution that not only keeps up with this fast-paced market but also ensures they get the best price for their skins, while giving them their time back."
 // - Features: "ShieldPeer is safe, fast and running continously to get you the best price for your skins."
 const Problem = () => {
-  return (
-    <section className="bg-black text-neutral-50">
-      <div className="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
-        <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8">
-          80% of assets are sold by
-          <br /> top 1% of the sellers
-        </h2>
-        <p className="max-w-xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20">
-          When it comes to selling these assets, speed is everything. Yet only a
-          chosen few know how to leverage tools like {config.appName} to
-          maximize their earnings.
-        </p>
+    return (
+        <section className="bg-black text-neutral-50">
+            <div className="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
+                <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8">
+                    80% of assets are sold by
+                    <br /> top 1% of the sellers
+                </h2>
+                <p className="max-w-xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20">
+                    When it comes to selling these assets, speed is everything. Yet only a chosen few know how to
+                    leverage tools like {config.appName} to maximize their earnings.
+                </p>
 
-        <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
-          <Step emoji="🧑‍💻" text="Spent a decade acquiring these assets" />
+                <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
+                    <Step emoji="🧑‍💻" text="Spent a decade acquiring these assets" />
 
-          <Arrow extraStyle="max-md:-scale-x-100 md:-rotate-90" />
+                    <Arrow extraStyle="max-md:-scale-x-100 md:-rotate-90" />
 
-          <Step emoji="😮‍💨" text="Struggle to find time to setup automations" />
+                    <Step emoji="😮‍💨" text="Struggle to find time to setup automations" />
 
-          <Arrow extraStyle="md:-scale-x-100 md:-rotate-90" />
+                    <Arrow extraStyle="md:-scale-x-100 md:-rotate-90" />
 
-          <Step emoji="😔" text="Wasted earning potential" />
-        </div>
-      </div>
-    </section>
-  );
-};
+                    <Step emoji="😔" text="Wasted earning potential" />
+                </div>
+            </div>
+        </section>
+    )
+}
 
-export default Problem;
+export default Problem

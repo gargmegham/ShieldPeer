@@ -6,11 +6,11 @@ ShieldPeer is a dedicated CS:GO Trading Bot designed to optimize and automate th
 
 ## Features
 
-- **Automated Trading**: Automates the process of buying and selling CS:GO skins.
-- **Undercutting**: The bot undercuts based on user-set parameters to outshine competitors.
-- **Security**: Ensures safe and secure trading.
-- **Integration with WaxPeer API**: Seamless Integration with Waxpeer API to facilitate transactions.
-- **Integration with PriceEmpire API**: Seamless Integration with PriceEmpire API to source pricing data.
+-   **Automated Trading**: Automates the process of buying and selling CS:GO skins.
+-   **Undercutting**: The bot undercuts based on user-set parameters to outshine competitors.
+-   **Security**: Ensures safe and secure trading.
+-   **Integration with WaxPeer API**: Seamless Integration with Waxpeer API to facilitate transactions.
+-   **Integration with PriceEmpire API**: Seamless Integration with PriceEmpire API to source pricing data.
 
 Landing Page:
 ![Screenshot 2024-06-03 at 7 38 00 PM](https://github.com/gargmegham/ShieldPeer/assets/95271253/f51aa724-de87-48f0-8134-850f38edbb72)

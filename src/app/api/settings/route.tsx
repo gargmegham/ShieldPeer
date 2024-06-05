@@ -1,24 +1,22 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase";
-import type { Setting } from "@/types/database";
+import { NextRequest, NextResponse } from "next/server"
+
+import type { Setting } from "@/types/database"
+import { createClient } from "@/utils/supabase"
 
 export async function GET() {
-  const supabase = createClient();
-  const { data } = await supabase.from("Settings").select("*").single();
-  return NextResponse.json(data as Setting);
+    const supabase = createClient()
+    const { data } = await supabase.from("Settings").select("*").single()
+    return NextResponse.json(data as Setting)
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = createClient();
-  const payload: Setting = await request.json();
-  const { data: user } = await supabase.auth.getUser();
-  if (user?.user?.id) {
-    const { data: row } = await supabase.from("Settings").select("*").single();
-    if (!row) await supabase.from("Settings").insert(payload);
-    else await supabase.from("Settings").update(payload).eq("id", row.id);
-  }
-  return NextResponse.json(
-    { message: "Successfully updated settings" },
-    { status: 200 }
-  );
+    const supabase = createClient()
+    const payload: Setting = await request.json()
+    const { data: user } = await supabase.auth.getUser()
+    if (user?.user?.id) {
+        const { data: row } = await supabase.from("Settings").select("*").single()
+        if (!row) await supabase.from("Settings").insert(payload)
+        else await supabase.from("Settings").update(payload).eq("id", row.id)
+    }
+    return NextResponse.json({ message: "Successfully updated settings" }, { status: 200 })
 }

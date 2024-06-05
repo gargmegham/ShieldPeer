@@ -1,6 +1,6 @@
 ### Resources
 
-- [Docker Installation Guide](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+-   [Docker Installation Guide](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 
 ### Installation
 

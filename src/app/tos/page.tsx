@@ -1,46 +1,42 @@
-import Link from "next/link";
-import { getSEOTags } from "@/utils/seo";
-import config from "@/utils/config";
+import Link from "next/link"
+
+import config from "@/utils/config"
+import { getSEOTags } from "@/utils/seo"
 
 export const metadata = getSEOTags({
-  title: `Terms and Conditions | ${config.appName}`,
-  canonicalUrlRelative: "/tos",
-});
+    title: `Terms and Conditions | ${config.appName}`,
+    canonicalUrlRelative: "/tos",
+})
 
 const TOS = () => {
-  return (
-    <main className="bg-grid-small-white/[0.4]">
-      <div className="max-w-xl mx-auto p-5">
-        <div className="flex justify-end">
-          <Link
-            href="/home"
-            className="flex relative bg-black border text-sm font-medium border-white/[0.2] text-white px-4 py-2 rounded-full"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                fillRule="evenodd"
-                d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z"
-                clipRule="evenodd"
-              />
-            </svg>{" "}
-            <span>Back</span>
-            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
-          </Link>
-        </div>
-        <h1 className="text-3xl font-extrabold pb-6">
-          Terms and Conditions for {config.appName}
-        </h1>
+    return (
+        <main className="bg-grid-small-white/[0.4]">
+            <div className="max-w-xl mx-auto p-5">
+                <div className="flex justify-end">
+                    <Link
+                        href="/home"
+                        className="flex relative bg-black border text-sm font-medium border-white/[0.2] text-white px-4 py-2 rounded-full"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className="w-5 h-5"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z"
+                                clipRule="evenodd"
+                            />
+                        </svg>{" "}
+                        <span>Back</span>
+                        <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
+                    </Link>
+                </div>
+                <h1 className="text-3xl font-extrabold pb-6">Terms and Conditions for {config.appName}</h1>
 
-        <pre
-          className="leading-relaxed whitespace-pre-wrap"
-          style={{ fontFamily: "sans-serif" }}
-        >
-          {`Last Updated: 2024-06-03
+                <pre className="leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "sans-serif" }}>
+                    {`Last Updated: 2024-06-03
 
 These 'Software as a Service' Terms and Conditions (“SaaS Terms”) apply to and are incorporated by reference into the ordering document (the “Quote”) made by and between the Service Provider (as identified on the Quote) and the Customer (as identified on the Quote) and set forth the terms and conditions under which Service Provider will provide the Customer with access to certain applications as set forth on the Quote (“Application(s)”) and user documentation that Service Provider makes generally available in hard copy or electronic form to its general customer base in conjunction with the licensing of such Applications ("Documentation"). The Applications and the Documentation will hereinafter collectively be referred to as the “Software.”
 
@@ -185,10 +181,10 @@ Service Provider and Customer hereby agree as follows:
     11.16. Governing Law; Venue. The laws of the State of Haryana, India govern the interpretation of these SaaS Terms, regardless of conflict of laws principles. The United Nations Convention on Contracts for the International Sale of Goods (1980) and the Uniform Computer Information Transactions Act (UCITA) are hereby excluded in their entirety from application to these SaaS Terms. The parties agree that the federal and state courts located in Mumbai, Haryana, India will have exclusive jurisdiction for any dispute arising under, out of, or relating to these SaaS Terms. Mediation will be held in Yamunanagar, Haryana, India.
 
     11.17. Dispute Resolution. Negotiations. Where there is a dispute, controversy, or claim arising under, out of, or relating to these SaaS Terms, the aggrieved party shall notify the other party in writing of the nature of such dispute with as much detail as possible about the alleged deficient performance of the other party. A representative from senior management of each of the parties shall meet in person or communicate by telephone within five (5) business days of the date of the written notification in order to reach an agreement about the nature of the alleged deficiency and the corrective action to be taken by the respective parties. Mediation. Any dispute, controversy, or claim arising under, out of, or relating to these SaaS Terms and any subsequent amendments of these SaaS Terms, including, without limitation, its formation, validity, binding effect, interpretation, performance, breach, or termination, as well as non-contractual claims, and any claims with respect to the validity of this mediation agreement (hereinafter the “Dispute”), shall be submitted to mediation in accordance with the then-current WIPO Mediation Rules. The language to be used in the mediation will be English. Opportunity to Cure. Notwithstanding anything contained hereunder, Customer agrees and acknowledges that no dispute resolution or litigation will be pursued by Customer for any breach of these SaaS Terms until and unless Service Provider has had an opportunity to cure any alleged breach. Customer agrees to provide Service Provider with a detailed description of any alleged failure and a description of the steps that Customer understands must be taken by Service Provider to resolve the failure. Service Provider shall have sixty (60) days from Service Provider's receipt of Customer's notice to complete the cure. Injunctive Relief. The parties agree that it will not be inconsistent with their duty to mediate to seek injunctive or other interim relief from a competent court. The parties, in addition to all other available remedies, shall each have the right to initiate an action in any court of competent jurisdiction in order to request injunctive or other interim relief with respect to a violation of intellectual property rights or confidentiality obligations. The choice of venue does not prevent a party from seeking injunctive or any interim relief in any appropriate jurisdiction.`}
-        </pre>
-      </div>
-    </main>
-  );
-};
+                </pre>
+            </div>
+        </main>
+    )
+}
 
-export default TOS;
+export default TOS

@@ -1,45 +1,41 @@
-import Link from "next/link";
-import { getSEOTags } from "@/utils/seo";
-import config from "@/utils/config";
+import Link from "next/link"
+
+import config from "@/utils/config"
+import { getSEOTags } from "@/utils/seo"
 
 export const metadata = getSEOTags({
-  title: `Privacy Policy | ${config.appName}`,
-  canonicalUrlRelative: "/privacy-policy",
-});
+    title: `Privacy Policy | ${config.appName}`,
+    canonicalUrlRelative: "/privacy-policy",
+})
 
 const PrivacyPolicy = () => {
-  return (
-    <main className="bg-grid-small-white/[0.4]">
-      <div className="max-w-xl mx-auto p-5">
-        <div className="flex justify-end">
-          <Link
-            href="/home"
-            className="flex relative bg-black border text-sm font-medium border-white/[0.2] text-white px-4 py-2 rounded-full"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                fillRule="evenodd"
-                d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z"
-                clipRule="evenodd"
-              />
-            </svg>{" "}
-            <span>Back</span>
-            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
-          </Link>
-        </div>
-        <h1 className="text-3xl font-extrabold pb-6">
-          Privacy Policy for {config.appName}
-        </h1>
-        <pre
-          className="leading-relaxed whitespace-pre-wrap"
-          style={{ fontFamily: "sans-serif" }}
-        >
-          {`Last Updated: 2024-06-03
+    return (
+        <main className="bg-grid-small-white/[0.4]">
+            <div className="max-w-xl mx-auto p-5">
+                <div className="flex justify-end">
+                    <Link
+                        href="/home"
+                        className="flex relative bg-black border text-sm font-medium border-white/[0.2] text-white px-4 py-2 rounded-full"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className="w-5 h-5"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z"
+                                clipRule="evenodd"
+                            />
+                        </svg>{" "}
+                        <span>Back</span>
+                        <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
+                    </Link>
+                </div>
+                <h1 className="text-3xl font-extrabold pb-6">Privacy Policy for {config.appName}</h1>
+                <pre className="leading-relaxed whitespace-pre-wrap" style={{ fontFamily: "sans-serif" }}>
+                    {`Last Updated: 2024-06-03
 
 This notice applies across all websites that we own and operate and all services we provide, including our online and mobile software services products, and any other apps or services we may offer (our “services”)
 
@@ -143,10 +139,10 @@ Clause 10: Your Rights
 Clause 10: How to contact us
 
 You could get in touch with us at business@meghamgarg.com.`}
-        </pre>
-      </div>
-    </main>
-  );
-};
+                </pre>
+            </div>
+        </main>
+    )
+}
 
-export default PrivacyPolicy;
+export default PrivacyPolicy
