@@ -41,12 +41,18 @@ cd ShieldPeer/bot
 # Create a virtual environment
 sudo vi .env
 
-# Build docker image
-sudo docker build -t shield-peer .
+# Make the rebuild script executable
+sudo chmod +x rebuild.sh
 
-# Run the docker container
-sudo docker run -d --name shield-peer-bot shield-peer
+# Build the Docker image and run the container
+sudo ./rebuild.sh
 
 # Check the logs
 sudo docker logs shield-peer-bot
+
+# Access the container
+sudo docker exec -it shield-peer-bot /bin/bash
+
+# Restart the container
+sudo docker restart shield-peer-bot
 ```
