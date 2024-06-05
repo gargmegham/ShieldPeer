@@ -9,6 +9,7 @@ export interface Setting {
     is_paused?: boolean
     price_empire_key?: string
     waxpeer_key?: string
+    steam_id?: string
 }
 
 export interface PriceRange {

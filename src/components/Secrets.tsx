@@ -18,6 +18,7 @@ import type { Setting } from "@/types/database"
 const FormSchema = z.object({
     price_empire_key: z.string().min(5),
     waxpeer_key: z.string().min(5),
+    steam_id: z.string().min(5),
 })
 
 export default function Secrets({ setting }: { setting: Setting }) {
@@ -37,7 +38,7 @@ export default function Secrets({ setting }: { setting: Setting }) {
             },
             body: JSON.stringify(data),
         })
-            .then((res) => {
+            .then(() => {
                 setIsEditing(false)
                 toast.success("API keys updated successfully.")
             })
@@ -89,6 +90,19 @@ export default function Secrets({ setting }: { setting: Setting }) {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Waxpeer</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="31hkw30*****" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="steam_id"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Steam Id</FormLabel>
                                     <FormControl>
                                         <Input placeholder="31hkw30*****" {...field} />
                                     </FormControl>

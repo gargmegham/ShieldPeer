@@ -17,3 +17,31 @@ Landing Page:
 ![Screenshot 2024-06-03 at 7 38 18 PM](https://github.com/gargmegham/ShieldPeer/assets/95271253/2c928404-8304-443d-916c-17364c75f56b)
 ![Screenshot 2024-06-03 at 7 38 26 PM](https://github.com/gargmegham/ShieldPeer/assets/95271253/13b56cda-1290-482c-abae-a02c2da61d4d)
 ![Screenshot 2024-06-03 at 7 38 33 PM](https://github.com/gargmegham/ShieldPeer/assets/95271253/dabad14f-a368-452f-a2d5-552566a61b64)
+
+### Setup
+
+1. Clone the repository
+2. Install the dependencies
+    ```bash
+    yarn
+    ```
+3. Create a `.env.local` file in the root directory and add the environment variables from the .env-example file.
+4. Run the development server
+    ```bash
+    yarn dev
+    ```
+5. To start the bot server, follow the instructions in the `bot` directory.
+
+#### Instructions for using Image URLs from PriceEmpire API
+
+-   https://community.cloudflare.steamstatic.com/economy/image/{image} for the image URL of the assets
+-   https://avatars.akamai.steamstatic.com/{image}.jpg for the image URL of the user's profile picture
+
+## Tech Stack
+
+-   **Frontend**: Next.js, Tailwind CSS, ShadcnUI
+-   **Backend**: Next.js API Routes
+-   **Database**: Postgre from Supabase
+-   **Scripts**: Python and GCP VMs
+-   **APIs**: Waxpeer API, PriceEmpire API
+-   **Deployment**: Vercel
