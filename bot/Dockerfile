@@ -9,10 +9,7 @@ COPY . .
 
 # Install Supervisor
 RUN apt-get -y update && \
-    apt-get -y upgrade && \
-    apt-get -y install supervisor && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get -y upgrade
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
