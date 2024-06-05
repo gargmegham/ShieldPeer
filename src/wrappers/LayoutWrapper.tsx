@@ -8,8 +8,8 @@ import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import { Tooltip } from "react-tooltip";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import config from "@/utils/config";
-import { color } from "framer-motion";
 
 // Crisp customer chat support:
 // This component is separated from LayoutWrapper because it needs to be wrapped with <SessionProvider> to use useSession() hook
@@ -93,6 +93,7 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
       />
       {/* Set Crisp customer chat support */}
       <CrispChat />
+      <GoogleAnalytics gaId="G-5FCRM1W23B" />
     </>
   );
 };
