@@ -45,3 +45,9 @@ Landing Page:
 -   **Scripts**: Python and GCP VMs
 -   **APIs**: Waxpeer API, PriceEmpire API
 -   **Deployment**: Vercel
+
+### General Know How
+
+-   App ID is basically game id in steam e.x. 730 for CS:GO, see https://steamdb.info/apps/ for complete list
+-   Steam inventory can be looked using https://steamcommunity.com/inventory/{steamId}/{appId}/{contextId} where most valve games just have a static context ID of 2
+-   See https://github.com/DoctorMcKay/node-steam-tradeoffer-manager/blob/master/lib/classes/TradeOffer.js#L275 for sending trade offers on steam, no official support for this is provided by valve
