@@ -14,7 +14,6 @@ export default function Dashboard() {
                 items={[
                     { label: "Inventory", link: "/inventory", icon: MdOutlineInventory },
                     { label: "Logs", link: "/logs", icon: MdOutlineDocumentScanner },
-                    { label: "Logs", link: "/logs", icon: MdOutlineDocumentScanner },
                     {
                         label: "Settings",
                         link: "/settings",
