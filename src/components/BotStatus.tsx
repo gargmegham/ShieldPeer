@@ -42,10 +42,7 @@ export default function BotStatus({ setting }: { setting: Setting }) {
     }, [setting])
     return (
         <Card className="w-full relative">
-            <CardHeader>
-                <CardTitle>Manage Bot Status</CardTitle>
-            </CardHeader>
-            <CardContent>
+            <CardContent className="pt-6">
                 <Form {...form}>
                     <form onSubmit={(e) => e.preventDefault()} className="w-full space-y-6">
                         <div className="space-y-4">
