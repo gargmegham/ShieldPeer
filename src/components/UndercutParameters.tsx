@@ -82,27 +82,22 @@ export default function UndercutParameters({ setting }: { setting: Setting }) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>PriceEmpire Source</FormLabel>
-                                        <FormControl>
-                                            <Select
-                                                {...field}
-                                                onValueChange={(value) => {
-                                                    form.setValue("price_empire_source", value)
-                                                }}
-                                            >
-                                                <SelectTrigger className="w-[180px]">
-                                                    <SelectValue placeholder="Select a source" />
+                                        <Select {...field} onValueChange={field.onChange} defaultValue={field.value}>
+                                            <FormControl>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select a source for base" />
                                                 </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectGroup>
-                                                        {sources.map((source) => (
-                                                            <SelectItem key={source} value={source}>
-                                                                {source}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectGroup>
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
+                                            </FormControl>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    {sources.map((source) => (
+                                                        <SelectItem key={source} value={source}>
+                                                            {`${source[0].toUpperCase()}${source.slice(1)}`}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -113,24 +108,19 @@ export default function UndercutParameters({ setting }: { setting: Setting }) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Undercut By</FormLabel>
-                                        <FormControl>
-                                            <Select
-                                                {...field}
-                                                onValueChange={(value) => {
-                                                    form.setValue("undercut_by", value)
-                                                }}
-                                            >
-                                                <SelectTrigger className="w-[180px]">
+                                        <Select {...field} defaultValue="price" onValueChange={field.onChange}>
+                                            <FormControl>
+                                                <SelectTrigger>
                                                     <SelectValue placeholder="Select a source" />
                                                 </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectGroup>
-                                                        <SelectItem value="price">Price</SelectItem>
-                                                        <SelectItem value="percentage">Percentage</SelectItem>
-                                                    </SelectGroup>
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
+                                            </FormControl>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectItem value="price">Price</SelectItem>
+                                                    <SelectItem value="percentage">Percentage</SelectItem>
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
                                         <FormMessage />
                                     </FormItem>
                                 )}
