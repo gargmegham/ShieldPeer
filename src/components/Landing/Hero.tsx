@@ -6,8 +6,10 @@ import React from "react"
 import integrate from "@/assets/icons/integrate.svg"
 import priceEmpire from "@/assets/logo/price-empire.svg"
 import waxpeer from "@/assets/logo/waxpeer.svg"
-import TestimonialsAvatars from "@/components/Landing/TestimonialsAvatars"
+
 import Spotlight from "@/components/ui/spotlight"
+
+import TestimonialsAvatars from "@/components/Landing/TestimonialsAvatars"
 
 export default function Hero() {
     return (

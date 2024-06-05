@@ -2,8 +2,9 @@
 
 import React from "react"
 
-import { LampContainer } from "@/components/ui/lamp"
 import { motion } from "framer-motion"
+
+import { LampContainer } from "@/components/ui/lamp"
 
 export default function ComingSoon() {
     return (

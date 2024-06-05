@@ -2,9 +2,10 @@
 
 import React from "react"
 
-import Navbar from "@/components/ui/navbar"
 import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
+
+import Navbar from "@/components/ui/navbar"
 
 export default function Dashboard() {
     return (

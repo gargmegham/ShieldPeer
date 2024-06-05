@@ -2,8 +2,9 @@
 
 import React from "react"
 
-import { cn } from "@/utils/cn"
 import { motion } from "framer-motion"
+
+import { cn } from "@/utils/cn"
 
 export const LampContainer = ({ children, className }: { children: React.ReactNode; className?: string }) => {
     return (

@@ -2,11 +2,13 @@
 
 import React, { useEffect, useState } from "react"
 
+import { AiOutlinePlusCircle } from "react-icons/ai"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+
 import type { PriceRange } from "@/types/database"
-import { AiOutlinePlusCircle } from "react-icons/ai"
 
 import AddEditPriceRangeDialog from "./AddEditPriceRangeDialog"
 import { DeletionConfirmationDialog } from "./DeletionConfirmationDialog"

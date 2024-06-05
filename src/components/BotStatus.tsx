@@ -2,14 +2,16 @@
 
 import React, { useEffect, useState } from "react"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormDescription, FormField, FormItem } from "@/components/ui/form"
-import { Switch } from "@/components/ui/switch"
-import type { Setting } from "@/types/database"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { z } from "zod"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form, FormControl, FormDescription, FormField, FormItem } from "@/components/ui/form"
+import { Switch } from "@/components/ui/switch"
+
+import type { Setting } from "@/types/database"
 
 const FormSchema = z.object({
     is_paused: z.boolean(),

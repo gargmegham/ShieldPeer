@@ -5,7 +5,7 @@ export interface Setting {
     price_empire_source?: string
     undercut_by_price?: number
     undercut_by_percentage?: number
-    undercut_by?: string
+    undercut_by?: "price" | "percentage"
     is_paused?: boolean
     price_empire_key?: string
     waxpeer_key?: string
@@ -19,7 +19,7 @@ export interface PriceRange {
     listing_price_min: number
     listing_price_max: number
     listing_price_if_no_one_to_undercut: number
-    when_no_one_to_undercut_list_at: string
+    when_no_one_to_undercut_list_at: "listing_price_max" | "listing_price_if_no_one_to_undercut"
     always_undercut_by_percentage_if_listing_price_is_greater_than: number
 }
 
@@ -68,7 +68,10 @@ export interface Log {
     item_id: Item["id"]
     user_id: string
     created_at: string
-    type: string
+    type: "success" | "failure" | "caution"
     message: string
-    meta_data?: object
+    meta_data?: {
+        listing_id?: Listing["id"]
+        error?: string
+    }
 }

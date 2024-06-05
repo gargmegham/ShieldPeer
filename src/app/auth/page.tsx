@@ -5,9 +5,10 @@ import Link from "next/link"
 
 import { useState } from "react"
 
-import config from "@/utils/config"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Provider } from "@supabase/supabase-js"
+
+import config from "@/utils/config"
 
 export default function Auth() {
     const supabase = createClientComponentClient()

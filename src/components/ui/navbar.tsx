@@ -5,11 +5,12 @@ import Link from "next/link"
 
 import React from "react"
 
-import { cn } from "@/utils/cn"
-import config from "@/utils/config"
 import { AnimatePresence, motion } from "framer-motion"
 import { IoMdLogIn } from "react-icons/io"
 import { MdOutlinePriceChange, MdOutlineSupport } from "react-icons/md"
+
+import { cn } from "@/utils/cn"
+import config from "@/utils/config"
 
 const Navbar = ({
     logoLink = "/home",

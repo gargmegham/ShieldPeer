@@ -5,7 +5,6 @@ import Script from "next/script"
 
 import { ReactNode, useEffect, useState } from "react"
 
-import config from "@/utils/config"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Crisp } from "crisp-sdk-web"
@@ -13,6 +12,8 @@ import { SessionProvider } from "next-auth/react"
 import NextTopLoader from "nextjs-toploader"
 import { Toaster } from "react-hot-toast"
 import { Tooltip } from "react-tooltip"
+
+import config from "@/utils/config"
 
 // Crisp customer chat support:
 // This component is separated from LayoutWrapper because it needs to be wrapped with <SessionProvider> to use useSession() hook

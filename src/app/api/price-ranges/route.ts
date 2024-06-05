@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import type { PriceRange } from "@/types/database"
 import { createClient } from "@/utils/supabase"
+
+import type { PriceRange } from "@/types/database"
 
 export async function GET() {
     const supabase = createClient()
