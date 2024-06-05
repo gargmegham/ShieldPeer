@@ -13,14 +13,13 @@ import Navbar from "@/components/ui/navbar"
 
 import LogTable from "@/components/LogTable"
 
-import { logs as demoLogs } from "@/constants/demo"
-
 import { cn } from "@/utils/cn"
 
 import type { Log } from "@/types/database"
 
 export default function Logs() {
     const [logs, setLogs] = useState<Log[]>([])
+    const [demoLogs, setDemoLogs] = useState<Log[]>([])
     const [loading, setLoading] = useState(true)
     const [showDemoLogs, setShowDemoLogs] = useState(false)
 
@@ -36,6 +35,15 @@ export default function Logs() {
             })
             .finally(() => {
                 setLoading(false)
+            })
+        fetch("/demo/logs.json")
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data) return
+                setDemoLogs(data)
+            })
+            .catch(() => {
+                toast.error("Failed to fetch demo logs")
             })
     }, [])
 
