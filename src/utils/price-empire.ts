@@ -37,6 +37,43 @@ export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     return await response.json()
 }
 
-export const formatItems = (items: PriceEmpireItem[]) => {
-    return [{}] as Item[]
+export const formatItems = (items: PriceEmpireItem[], setting: Setting) => {
+    return items.map((item: PriceEmpireItem) => {
+        const selectedSource = setting.price_empire_source
+        const price = selectedSource ? item.prices[selectedSource] : null
+        return {
+            user_id: setting.user_id,
+            asset_id: item.assetId,
+            name: item.name,
+            type: item.type,
+            float: item.float,
+            is_active: false,
+            price,
+            prices: item.prices,
+            stickers: item.stickers.map((sticker) => ({
+                slot: sticker.slot,
+                price: sticker.price,
+                wear: sticker.wear,
+                market_hash_name: sticker.marketHashName,
+                image: sticker.image,
+            })),
+            inspect_link: item.inspectLink,
+            exterior: item.exterior,
+            rarity_color: item.rarityColor,
+            updated_at: new Date().toISOString(),
+            tradelock: item.tradelock,
+            image: item.image,
+            app_id: item.appId,
+            quality: item.quality,
+            family: item.family,
+            category: item.category,
+            market_hash_name: item.marketHashName,
+            cheapest: item.cheapest,
+            liquidity: item.liquidity,
+            paint_seed: item.paintSeed,
+            weapon_id: item.weaponId,
+            pattern: item.pattern,
+            d: item.d,
+        }
+    }) as Item[]
 }

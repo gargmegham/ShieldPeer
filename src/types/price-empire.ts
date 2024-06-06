@@ -1,28 +1,26 @@
 export interface Item {
     id: number
-    tradelock: false
-    name: string
+    tradelock: boolean
+    name?: string
     image: string
     appId: number
-    quality: string
-    family: string
+    quality?: string
+    family?: string
     category: string
     marketHashName: string
     price: number
     cheapest: number
     liquidity: string
-    type: string
-    paintSeed: number
-    weaponId: number
-    float: number
+    type?: string
+    paintSeed?: number
+    weaponId?: number
+    float?: number
     assetId: string
-    d: string
+    d?: string
     prices: {
-        buff: number
-        waxpeer: number
-        csgoempire: number
+        [key: string]: number
     }
-    pattern: null
+    pattern?: string
     rarityColor: string
     exterior: string
     inspectLink: string

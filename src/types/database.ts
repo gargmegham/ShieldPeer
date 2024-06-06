@@ -28,17 +28,39 @@ export interface Item {
     id: string
     user_id: string
     asset_id: string
-    name: string
-    type: string
-    condition: string
+    name?: string
+    type?: string
     price: number
     created_at: string
     is_active: boolean
-    price_updated_at: string
-    condition_updated_at: string
-    meta_data: {
-        image: string
+    updated_at: string
+    tradelock: boolean
+    image: string
+    float?: number
+    app_id: number
+    quality?: string
+    family?: string
+    category: string
+    market_hash_name: string
+    cheapest: number
+    liquidity: string
+    paint_seed?: number
+    weapon_id?: number
+    d?: string
+    prices: {
+        [key: string]: number
     }
+    pattern?: string
+    rarity_color: string
+    exterior: string
+    inspect_link: string
+    stickers: {
+        slot: number
+        price: number
+        wear: number
+        market_hash_name: string
+        image: string
+    }[]
 }
 
 export interface ItemSetting {
@@ -48,11 +70,11 @@ export interface ItemSetting {
     undercut_by_price?: number
     undercut_by_percentage?: number
     undercut_by?: string
-    listing_price_min: number
-    listing_price_max: number
-    listing_price_if_no_one_to_undercut: number
-    when_no_one_to_undercut_list_at: string
-    always_undercut_by_percentage_if_listing_price_is_greater_than: number
+    listing_price_min?: number
+    listing_price_max?: number
+    listing_price_if_no_one_to_undercut?: number
+    when_no_one_to_undercut_list_at?: string
+    always_undercut_by_percentage_if_listing_price_is_greater_than?: number
     item_id: Item["id"]
 }
 
@@ -62,8 +84,7 @@ export interface Listing {
     item_id: Item["id"]
     price: number
     created_at: string
-    updated_at?: string
-    meta_data?: object
+    updated_at: string
 }
 
 export interface Log {
@@ -74,7 +95,7 @@ export interface Log {
     type: "success" | "failure" | "caution"
     message: string
     item_name: Item["name"]
-    item_image: Item["meta_data"]["image"]
+    item_image: Item["image"]
     meta_data?: {
         listing_id?: Listing["id"]
         error?: string

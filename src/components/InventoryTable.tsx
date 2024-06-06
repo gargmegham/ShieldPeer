@@ -69,7 +69,7 @@ export const columns: ColumnDef<Item>[] = [
             return (
                 <div className="flex px-4 items-center gap-x-2">
                     <Image
-                        src={`https://community.cloudflare.steamstatic.com/economy/image/${item?.meta_data?.image ?? "N/A"}`}
+                        src={`https://community.cloudflare.steamstatic.com/economy/image/${item?.image ?? "N/A"}`}
                         alt="Waxpeer"
                         className="size-8 bg-neutral-200 rounded-lg"
                         width={32}
