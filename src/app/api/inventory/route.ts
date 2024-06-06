@@ -6,6 +6,7 @@ import type { Item } from "@/types/database"
 
 export async function GET(request: NextRequest) {
     const supabase = getSupabaseClient()
-    const { data } = await supabase.from("Items").select("*")
+    const { data, error } = await supabase.from("Items").select("*")
+    if (error) return NextResponse.json({ message: error.message }, { status: 500 })
     return NextResponse.json(data as Item[])
 }

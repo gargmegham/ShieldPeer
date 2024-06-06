@@ -6,6 +6,7 @@ import type { Log } from "@/types/database"
 
 export async function GET(request: NextRequest) {
     const supabase = getSupabaseClient()
-    const { data } = await supabase.from("Logs").select("*")
+    const { data, error } = await supabase.from("Logs").select("*")
+    if (error) return NextResponse.json({ message: error.message }, { status: 500 })
     return NextResponse.json(data as Log[])
 }

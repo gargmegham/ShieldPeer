@@ -6,14 +6,16 @@ import type { PriceRange } from "@/types/database"
 
 export async function GET() {
     const supabase = getSupabaseClient()
-    const { data } = await supabase.from("PriceRange").select("*")
+    const { data, error } = await supabase.from("PriceRange").select("*")
+    if (error) return NextResponse.json({ message: error.message }, { status: 500 })
     return NextResponse.json(data as PriceRange[])
 }
 
 export async function POST(request: NextRequest) {
     const supabase = getSupabaseClient()
     const payload = await request.json()
-    await supabase.from("PriceRange").insert(payload)
+    const { error } = await supabase.from("PriceRange").insert(payload)
+    if (error) return NextResponse.json({ message: error.message }, { status: 500 })
     return NextResponse.json({ message: "Successfully added price range." }, { status: 200 })
 }
 
@@ -23,7 +25,8 @@ export async function PUT(request: NextRequest) {
     if (!payload.id) {
         return NextResponse.json({ message: "Please provide an ID." }, { status: 400 })
     }
-    await supabase.from("PriceRange").upsert(payload)
+    const { error } = await supabase.from("PriceRange").upsert(payload)
+    if (error) return NextResponse.json({ message: error.message }, { status: 500 })
     return NextResponse.json({ message: "Successfully updated price range." }, { status: 200 })
 }
 
@@ -33,9 +36,10 @@ export async function DELETE(request: NextRequest) {
     if (!searchParams.has("id")) {
         return NextResponse.json({ message: "Please provide an ID." }, { status: 400 })
     }
-    await supabase
+    const { error } = await supabase
         .from("PriceRange")
         .delete()
         .match({ id: searchParams.get("id") })
+    if (error) return NextResponse.json({ message: error.message }, { status: 500 })
     return NextResponse.json({ message: "Successfully deleted price range." }, { status: 200 })
 }
