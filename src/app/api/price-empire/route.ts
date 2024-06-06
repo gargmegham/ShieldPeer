@@ -26,7 +26,7 @@ export async function POST() {
             )
             const items: Item[] = formatItems(inventory.items, setting)
             await supabase.from("Items").upsert(items, {
-                onConflict: "asset_id,user_id",
+                onConflict: "asset_id, user_id",
             })
         } catch (error: any) {
             console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
