@@ -227,7 +227,7 @@ export default function ItemSettings() {
                     <CardContent className="pt-2 pb-4">
                         <div className="flex justify-center items-center bg-neutral-800 rounded-lg ">
                             <Image
-                                src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image}`}
+                                src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image ?? "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2G9SupUijOjAotyg3w2x_0ZkZ2rzd4OXdgRoYQuE8gDtyL_mg5K4tJ7XiSw0WqKv8kM"}`}
                                 alt="Waxpeer"
                                 className="p-2"
                                 loading="lazy"
