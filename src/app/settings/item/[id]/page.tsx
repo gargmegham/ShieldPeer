@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import LineGraph from "@/components/ui/line-graph"
 import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -45,7 +46,12 @@ export default function ItemSettings() {
     const router = useRouter()
     const [itemSetting, setItemSetting] = useState<ItemSetting>({} as ItemSetting)
     const [loading, setLoading] = useState(true)
+    const [itemPriceHistory, setItemPriceHistory] = useState<number[]>([])
     const [isEditing, setIsEditing] = useState(false)
+    const demoPriceHistory = [
+        11, 22, 33, 44, 55, 66, 77, 76, 74, 72, 71, 76, 74, 72, 71, 88, 99, 110, 121, 132, 143, 154, 165, 176, 187, 198,
+        209, 220, 231, 242,
+    ]
     const [deleteConfirmation, setDeleteConfirmation] = useState("")
     const [saving, setSaving] = useState(false)
     const [item, setItem] = useState({} as Item)
@@ -134,9 +140,29 @@ export default function ItemSettings() {
             setSaving(false)
         }
     }
+    const fetchPriceHistory = async () => {
+        fetch(`/api/item/price-history`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                market_hash_name: item.market_hash_name,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data) return
+                setItemPriceHistory(data)
+            })
+            .catch(() => {
+                toast.error("Failed to fetch price history")
+            })
+    }
     useEffect(() => {
         fetchItem()
         fetchSettings()
+        fetchPriceHistory()
     }, [])
     useEffect(() => {
         form.reset(itemSetting)
@@ -158,8 +184,8 @@ export default function ItemSettings() {
                 ]}
                 logoLink="/"
             />
-            <div className="flex gap-8 flex-wrap">
-                <Card className="relative py-6 max-h-[450px] max-w-[300px]">
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-4">
+                <Card className="relative py-6 max-h-[450px]">
                     <div className="px-6 flex items-center text-xs justify-between">
                         <TooltipProvider>
                             <Tooltip>
@@ -199,11 +225,11 @@ export default function ItemSettings() {
                         </TooltipProvider>
                     </div>
                     <CardContent className="pt-2 pb-4">
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center bg-neutral-800 rounded-lg ">
                             <Image
                                 src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image}`}
                                 alt="Waxpeer"
-                                className="bg-neutral-800 rounded-lg p-2"
+                                className="p-2"
                                 loading="lazy"
                                 width={245}
                                 height={185}
@@ -218,10 +244,12 @@ export default function ItemSettings() {
                     </CardHeader>
                     <div className="px-6 mt-2 space-y-1">
                         <div className="font-extrabold text-neutral-200 font-bricolage">
-                            {item.price.toLocaleString("en-US", {
-                                style: "currency",
-                                currency: "USD",
-                            })}
+                            {item.price
+                                ? item.price.toLocaleString("en-US", {
+                                      style: "currency",
+                                      currency: "USD",
+                                  })
+                                : "N/A"}
                         </div>
                         <div className="flex gap-2 text-sm">
                             <div className="text-neutral-500">Float</div>
@@ -239,226 +267,222 @@ export default function ItemSettings() {
                         </Button>
                     </div>
                 </Card>
-                <Card className="relative">
-                    <Button
-                        disabled={isEditing}
-                        size={"xs"}
-                        className="absolute top-4 right-4"
-                        onClick={() => setIsEditing((prev) => !prev)}
-                    >
-                        <AiOutlineEdit className="size-4" />
-                    </Button>
-                    <CardHeader>
-                        <CardTitle>Item Settings</CardTitle>
+                <Card className="relative py-6 h-[450px] w-full col-span-1 md:col-span-3">
+                    <CardHeader className="pb-0">
+                        <CardTitle>Price History</CardTitle>
                         <CardDescription>
-                            Set your listing parameters here. These parameters will be used to list the items on the
-                            marketplace.
+                            This graph shows the price history of the item. You can see the price changes over time.
                         </CardDescription>
+                        {itemPriceHistory.length === 0 && (
+                            <div className="text-amber-400/80 text-xs mt-4">
+                                These are demo prices as the item does not have any price history.
+                            </div>
+                        )}
                     </CardHeader>
-                    <CardContent>
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="undercut_by"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Undercut By</FormLabel>
-                                                <FormDescription>
-                                                    Select how you want to undercut other sellers.
-                                                </FormDescription>
-                                                <Select {...field} defaultValue="price" onValueChange={field.onChange}>
-                                                    <FormControl>
-                                                        <SelectTrigger>
-                                                            <SelectValue placeholder="Select a source" />
-                                                        </SelectTrigger>
-                                                    </FormControl>
+                    <LineGraph
+                        curve="monotoneX"
+                        height="290px"
+                        enableSlices="x"
+                        data={[
+                            {
+                                id: "Price",
+                                data:
+                                    itemPriceHistory.length === 0
+                                        ? demoPriceHistory.map((price, index) => ({ x: index, y: price }))
+                                        : itemPriceHistory.map((price, index) => ({ x: index, y: price })),
+                            },
+                        ]}
+                        enableArea
+                    />
+                </Card>
+            </div>
+            <Card className="relative">
+                <Button
+                    disabled={isEditing}
+                    size={"xs"}
+                    className="absolute top-4 right-4"
+                    onClick={() => setIsEditing((prev) => !prev)}
+                >
+                    <AiOutlineEdit className="size-4" />
+                </Button>
+                <CardHeader>
+                    <CardTitle>Item Settings</CardTitle>
+                    <CardDescription>
+                        Set your listing parameters here. These parameters will be used to list the items on the
+                        marketplace.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <FormField
+                                    control={form.control}
+                                    name="undercut_by"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Undercut By</FormLabel>
+                                            <FormDescription>
+                                                Select how you want to undercut other sellers.
+                                            </FormDescription>
+                                            <Select {...field} defaultValue="price" onValueChange={field.onChange}>
+                                                <FormControl>
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select a source" />
+                                                    </SelectTrigger>
+                                                </FormControl>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectItem value="price">Price</SelectItem>
+                                                        <SelectItem value="percentage">Percentage</SelectItem>
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="undercut_by_price"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Undercut By Price</FormLabel>
+                                            <FormDescription>
+                                                By how much you want to undercut other sellers.
+                                            </FormDescription>
+                                            <FormControl>
+                                                <Input
+                                                    {...field}
+                                                    placeholder="0.01"
+                                                    type="number"
+                                                    step="0.01"
+                                                    onChange={(e) => {
+                                                        form.setValue("undercut_by_price", Number(e.target.value))
+                                                    }}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="undercut_by_percentage"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Undercut By Percentage</FormLabel>
+                                            <FormDescription>
+                                                By how much you want to undercut other sellers.
+                                            </FormDescription>
+                                            <FormControl>
+                                                <Input
+                                                    {...field}
+                                                    placeholder="1"
+                                                    type="number"
+                                                    step="0.01"
+                                                    onChange={(e) => {
+                                                        form.setValue("undercut_by_percentage", Number(e.target.value))
+                                                    }}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <FormField
+                                    control={form.control}
+                                    name="listing_price_min"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>1. Listing Price Min Percentage</FormLabel>
+                                            <FormDescription>
+                                                Minimum price you want to list the item for.
+                                            </FormDescription>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="110%"
+                                                    {...field}
+                                                    onChange={(e) => {
+                                                        form.setValue("listing_price_min", Number(e.target.value))
+                                                    }}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="listing_price_max"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>2. Listing Price Max Percentage</FormLabel>
+                                            <FormDescription>
+                                                Maximum price you want to list the item for.
+                                            </FormDescription>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="130%"
+                                                    {...field}
+                                                    onChange={(e) => {
+                                                        form.setValue("listing_price_max", Number(e.target.value))
+                                                    }}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <FormField
+                                    control={form.control}
+                                    name="when_no_one_to_undercut_list_at"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>3. When No One To Undercut List At</FormLabel>
+                                            <FormDescription>
+                                                If no one is there to undercut, should we list at max price or at a
+                                                specific percentage specified at (4) below.
+                                            </FormDescription>
+                                            <FormControl>
+                                                <Select
+                                                    {...field}
+                                                    onValueChange={(value) => {
+                                                        form.setValue("when_no_one_to_undercut_list_at", value)
+                                                    }}
+                                                >
+                                                    <SelectTrigger className="">
+                                                        <SelectValue placeholder="Select an option" />
+                                                    </SelectTrigger>
                                                     <SelectContent>
                                                         <SelectGroup>
-                                                            <SelectItem value="price">Price</SelectItem>
-                                                            <SelectItem value="percentage">Percentage</SelectItem>
+                                                            <SelectItem value="listing_price_max">
+                                                                Listing Price Max
+                                                            </SelectItem>
+                                                            <SelectItem value="listing_price_if_no_one_to_undercut">
+                                                                Listing Price If No One To Undercut
+                                                            </SelectItem>
                                                         </SelectGroup>
                                                     </SelectContent>
                                                 </Select>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="undercut_by_price"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Undercut By Price</FormLabel>
-                                                <FormDescription>
-                                                    By how much you want to undercut other sellers.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input
-                                                        {...field}
-                                                        placeholder="0.01"
-                                                        type="number"
-                                                        step="0.01"
-                                                        onChange={(e) => {
-                                                            form.setValue("undercut_by_price", Number(e.target.value))
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="undercut_by_percentage"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>Undercut By Percentage</FormLabel>
-                                                <FormDescription>
-                                                    By how much you want to undercut other sellers.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input
-                                                        {...field}
-                                                        placeholder="1"
-                                                        type="number"
-                                                        step="0.01"
-                                                        onChange={(e) => {
-                                                            form.setValue(
-                                                                "undercut_by_percentage",
-                                                                Number(e.target.value)
-                                                            )
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="listing_price_min"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>1. Listing Price Min Percentage</FormLabel>
-                                                <FormDescription>
-                                                    Minimum price you want to list the item for.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="110%"
-                                                        {...field}
-                                                        onChange={(e) => {
-                                                            form.setValue("listing_price_min", Number(e.target.value))
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="listing_price_max"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>2. Listing Price Max Percentage</FormLabel>
-                                                <FormDescription>
-                                                    Maximum price you want to list the item for.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="130%"
-                                                        {...field}
-                                                        onChange={(e) => {
-                                                            form.setValue("listing_price_max", Number(e.target.value))
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="when_no_one_to_undercut_list_at"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>3. When No One To Undercut List At</FormLabel>
-                                                <FormDescription>
-                                                    If no one is there to undercut, should we list at max price or at a
-                                                    specific percentage specified at (4) below.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Select
-                                                        {...field}
-                                                        onValueChange={(value) => {
-                                                            form.setValue("when_no_one_to_undercut_list_at", value)
-                                                        }}
-                                                    >
-                                                        <SelectTrigger className="">
-                                                            <SelectValue placeholder="Select an option" />
-                                                        </SelectTrigger>
-                                                        <SelectContent>
-                                                            <SelectGroup>
-                                                                <SelectItem value="listing_price_max">
-                                                                    Listing Price Max
-                                                                </SelectItem>
-                                                                <SelectItem value="listing_price_if_no_one_to_undercut">
-                                                                    Listing Price If No One To Undercut
-                                                                </SelectItem>
-                                                            </SelectGroup>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="listing_price_if_no_one_to_undercut"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>4. List at this percentage if no one to undercut</FormLabel>
-                                                <FormDescription>
-                                                    If no one is there to undercut, and you have selected to list at a
-                                                    specific percentage, then we will list at this price.
-                                                </FormDescription>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="130%"
-                                                        {...field}
-                                                        onChange={(e) => {
-                                                            form.setValue(
-                                                                "listing_price_if_no_one_to_undercut",
-                                                                Number(e.target.value)
-                                                            )
-                                                        }}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                                 <FormField
                                     control={form.control}
-                                    name="always_undercut_by_percentage_if_listing_price_is_greater_than"
+                                    name="listing_price_if_no_one_to_undercut"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>
-                                                5. Always undercut by percentage if listing price is greater than
-                                            </FormLabel>
+                                            <FormLabel>4. List at this percentage if no one to undercut</FormLabel>
                                             <FormDescription>
-                                                If listing price is greater than this value, we will always undercut by
-                                                the percentage specified below. Even if you have selected to undercut by
-                                                price in general settings.
+                                                If no one is there to undercut, and you have selected to list at a
+                                                specific percentage, then we will list at this price.
                                             </FormDescription>
                                             <FormControl>
                                                 <Input
@@ -466,7 +490,7 @@ export default function ItemSettings() {
                                                     {...field}
                                                     onChange={(e) => {
                                                         form.setValue(
-                                                            "always_undercut_by_percentage_if_listing_price_is_greater_than",
+                                                            "listing_price_if_no_one_to_undercut",
                                                             Number(e.target.value)
                                                         )
                                                     }}
@@ -476,39 +500,67 @@ export default function ItemSettings() {
                                         </FormItem>
                                     )}
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="is_active"
-                                    render={({ field }) => (
-                                        <FormItem className="flex items-center gap-4">
-                                            <div>
-                                                <FormLabel>Enable/Disable Settings</FormLabel>
-                                                <FormDescription>
-                                                    If Enabled these settings will be used instead of the global
-                                                    settings.
-                                                </FormDescription>
-                                            </div>
-                                            <FormControl>
-                                                <Switch
-                                                    disabled={saving || !isEditing}
-                                                    checked={field.value}
-                                                    onCheckedChange={(e) => {
-                                                        field.onChange(e)
-                                                    }}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <Button type="submit" disabled={saving || !isEditing}>
-                                    Save
-                                </Button>
-                            </form>
-                        </Form>
-                    </CardContent>
-                </Card>
-            </div>
+                            </div>
+                            <FormField
+                                control={form.control}
+                                name="always_undercut_by_percentage_if_listing_price_is_greater_than"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            5. Always undercut by percentage if listing price is greater than
+                                        </FormLabel>
+                                        <FormDescription>
+                                            If listing price is greater than this value, we will always undercut by the
+                                            percentage specified below. Even if you have selected to undercut by price
+                                            in general settings.
+                                        </FormDescription>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="130%"
+                                                {...field}
+                                                onChange={(e) => {
+                                                    form.setValue(
+                                                        "always_undercut_by_percentage_if_listing_price_is_greater_than",
+                                                        Number(e.target.value)
+                                                    )
+                                                }}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="is_active"
+                                render={({ field }) => (
+                                    <FormItem className="flex items-center gap-4">
+                                        <div>
+                                            <FormLabel>Enable/Disable Settings</FormLabel>
+                                            <FormDescription>
+                                                If Enabled these settings will be used instead of the global settings.
+                                            </FormDescription>
+                                        </div>
+                                        <FormControl>
+                                            <Switch
+                                                disabled={saving || !isEditing}
+                                                checked={field.value}
+                                                onCheckedChange={(e) => {
+                                                    field.onChange(e)
+                                                }}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit" disabled={saving || !isEditing}>
+                                Save
+                            </Button>
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
             <Card className="relative">
                 <CardHeader>
                     <CardTitle>Danzer Zone</CardTitle>

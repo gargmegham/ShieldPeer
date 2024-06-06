@@ -204,10 +204,12 @@ export default function Inventory() {
                                             {setting.price_empire_source.slice(1)}
                                         </div>
                                         <div className="font-extrabold text-neutral-200 font-bricolage">
-                                            {item.price.toLocaleString("en-US", {
-                                                style: "currency",
-                                                currency: "USD",
-                                            })}
+                                            {item.price
+                                                ? item.price.toLocaleString("en-US", {
+                                                      style: "currency",
+                                                      currency: "USD",
+                                                  })
+                                                : "N/A"}
                                         </div>
                                     </div>
                                 )}
