@@ -19,16 +19,20 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
+import { cn } from "@/utils/cn"
+
 export default function DataTable({
     data,
     columns,
     filterKey,
     filterPlaceholder,
+    hidePagination,
 }: {
     data: any[]
     columns: ColumnDef<any>[]
     filterKey: string
     filterPlaceholder: string
+    hidePagination?: boolean
 }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -106,7 +110,7 @@ export default function DataTable({
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
+            <div className={cn("flex items-center justify-end space-x-2 py-4", hidePagination && "hidden")}>
                 <div className="flex-1 text-sm text-muted-foreground">
                     {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{" "}
                     row(s) selected.

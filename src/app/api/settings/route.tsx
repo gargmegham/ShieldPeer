@@ -13,11 +13,6 @@ export async function GET() {
 export async function POST(request: NextRequest) {
     const supabase = getSupabaseClient()
     const payload: Setting = await request.json()
-    const { data: user } = await supabase.auth.getUser()
-    if (user?.user?.id) {
-        const { data: row } = await supabase.from("Settings").select("*").single()
-        if (!row) await supabase.from("Settings").insert(payload)
-        else await supabase.from("Settings").update(payload).eq("id", row.id)
-    }
+    await supabase.from("Settings").upsert([payload], { onConflict: "id" })
     return NextResponse.json({ message: "Successfully updated settings" }, { status: 200 })
 }

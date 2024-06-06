@@ -75,6 +75,7 @@ export interface ItemSetting {
     listing_price_if_no_one_to_undercut?: number
     when_no_one_to_undercut_list_at?: string
     always_undercut_by_percentage_if_listing_price_is_greater_than?: number
+    is_active: boolean
     item_id: Item["id"]
 }
 

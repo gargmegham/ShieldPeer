@@ -6,9 +6,6 @@ import type { Log } from "@/types/database"
 
 export async function GET(request: NextRequest) {
     const supabase = getSupabaseClient()
-    const { searchParams } = new URL(request.url)
-    const page = Number(searchParams.get("page")) || 1
-    const itemsPerPage = Number(searchParams.get("itemsPerPage")) || 10
-    const { data } = await supabase.from("Logs").select("*").range(page, itemsPerPage)
+    const { data } = await supabase.from("Logs").select("*")
     return NextResponse.json(data as Log[])
 }

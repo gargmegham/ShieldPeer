@@ -13,10 +13,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
     const supabase = getSupabaseClient()
     const payload = await request.json()
-    const { data: user } = await supabase.auth.getUser()
-    if (user?.user?.id) {
-        await supabase.from("PriceRange").insert(payload)
-    }
+    await supabase.from("PriceRange").insert(payload)
     return NextResponse.json({ message: "Successfully added price range." }, { status: 200 })
 }
 

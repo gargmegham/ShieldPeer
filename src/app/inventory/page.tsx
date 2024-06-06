@@ -9,7 +9,7 @@ import toast from "react-hot-toast"
 import { CgMediaLive } from "react-icons/cg"
 import { FaRegPauseCircle } from "react-icons/fa"
 import { IoSettingsOutline } from "react-icons/io5"
-import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
+import { MdOutlineDocumentScanner, MdOutlineInventory, MdSettings } from "react-icons/md"
 import { SiGunicorn } from "react-icons/si"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -84,7 +84,8 @@ export default function Inventory() {
         <main
             className={cn(
                 inventory.length === 0 && !showDemoInventory && "flex justify-center items-center",
-                inventory.length === 0 && showDemoInventory && "py-[16vh] relative flex justify-center px-8 md:px-20"
+                inventory.length === 0 && showDemoInventory && "py-[16vh] relative flex justify-center px-8 md:px-20",
+                inventory.length > 0 && "py-[16vh] relative flex justify-center px-8 md:px-20"
             )}
             id="dashboard"
         >
@@ -111,7 +112,7 @@ export default function Inventory() {
             >
                 <Avatar className="size-16 border border-rose-100/30 shadow shadow-primary">
                     <AvatarImage src={`https://avatars.akamai.steamstatic.com/${user?.image}_full.jpg`} />
-                    <AvatarFallback className="text-amber-300">{user?.name[0]}</AvatarFallback>
+                    <AvatarFallback className="text-amber-300">{user?.name ? user?.name[0] : "N/A"}</AvatarFallback>
                 </Avatar>
             </Link>
             {inventory.length === 0 && !showDemoInventory && (
@@ -138,7 +139,7 @@ export default function Inventory() {
                 )
                     .sort((a, b) => (a.price > b.price ? -1 : 1))
                     .map((item) => (
-                        <Card key={item.asset_id} className="relative py-6">
+                        <Card key={item.asset_id} className="relative py-6 max-h-[450px]">
                             <div className="px-6 flex items-center text-xs justify-between">
                                 <TooltipProvider>
                                     <Tooltip>
@@ -218,10 +219,14 @@ export default function Inventory() {
                                 </div>
                             </div>
                             <div className="px-6 mt-4 w-full">
-                                <Button className="w-full relative" size="lg" variant="outline">
+                                <Link
+                                    className="w-full gap-x-2 relative flex items-center justify-center py-2 bg-zinc-900 rounded-xl border"
+                                    href={`/settings/item/${item.asset_id}`}
+                                >
+                                    <MdSettings className="size-4 text-amber-500/90" />
                                     Settings
                                     <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
-                                </Button>
+                                </Link>
                             </div>
                         </Card>
                     ))}
