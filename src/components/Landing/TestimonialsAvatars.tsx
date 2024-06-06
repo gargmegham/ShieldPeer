@@ -66,7 +66,7 @@ const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
                         </svg>
                     ))}
                 </div>
-                <div className="text-xs text-neutral-50">
+                <div className="text-xs">
                     <span className="font-semibold">Gamers </span>
                     love {config.appName}
                 </div>

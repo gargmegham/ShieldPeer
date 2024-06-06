@@ -52,7 +52,6 @@ export default function Logs() {
     ) : (
         <main
             className={cn(
-                "bg-black min-h-screen bg-grid-small-white/30",
                 logs.length === 0 && !showDemoLogs && "flex justify-center items-center",
                 logs.length === 0 && showDemoLogs && "py-[16vh] relative flex justify-center px-8 md:px-20"
             )}

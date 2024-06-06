@@ -10,7 +10,7 @@ export const metadata = getSEOTags({
 
 const PrivacyPolicy = () => {
     return (
-        <main className="bg-grid-small-white/[0.4]">
+        <main>
             <div className="max-w-xl mx-auto p-5">
                 <div className="flex justify-end">
                     <Link

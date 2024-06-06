@@ -9,7 +9,7 @@ import Navbar from "@/components/ui/navbar"
 
 export default function Inventory() {
     return (
-        <main className="bg-black min-h-screen bg-grid-small-white/30" id="dashboard">
+        <main id="dashboard">
             <Navbar
                 items={[
                     {
@@ -18,7 +18,6 @@ export default function Inventory() {
                         icon: MdOutlineInventory,
                         inFocus: true,
                     },
-                    { label: "Logs", link: "/logs", icon: MdOutlineDocumentScanner },
                     { label: "Logs", link: "/logs", icon: MdOutlineDocumentScanner },
                     {
                         label: "Settings",

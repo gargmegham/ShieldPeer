@@ -39,8 +39,8 @@ export default function Auth() {
     }
 
     return (
-        <main id="auth" className="h-screen flex justify-center items-center px-10 bg-grid-white/[0.1] bg-black">
-            <div className="bg-neutral-950 p-10 rounded-xl relative">
+        <main id="auth" className="flex justify-center items-center px-10">
+            <div className="bg-neutral-950 p-10 rounded-xl relative border shadow-sm shadow-amber-900">
                 <Link href="/home" aria-current="page">
                     <div className="flex mb-4 justify-center items-center">
                         <Image
@@ -52,12 +52,10 @@ export default function Auth() {
                             height={24}
                         />
                     </div>
-                    <div className="font-extrabold tracking-tight text-2xl md:text-4xl text-neutral-50">
-                        {config.appName}
-                    </div>
+                    <div className="font-extrabold tracking-tight text-2xl md:text-4xl">{config.appName}</div>
                 </Link>
                 <button
-                    className="flex items-center justify-center gap-2 w-full p-2 mt-8 bg-neutral-800 text-neutral-50 rounded-md"
+                    className="flex items-center justify-center gap-2 w-full p-2 mt-8 bg-neutral-800 rounded-md"
                     onClick={(e) => handleSignup(e, { type: "oauth", provider: "google" })}
                     disabled={isLoading}
                 >

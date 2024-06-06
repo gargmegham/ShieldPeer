@@ -36,10 +36,7 @@ export default function Settings() {
     return loading ? (
         <Loader />
     ) : (
-        <main
-            className="py-[16vh] relative bg-black px-8 md:px-20 bg-grid-small-white/[0.3] min-h-screen space-y-4"
-            id="dashboard"
-        >
+        <main className="py-[16vh] relative px-8 md:px-20 space-y-4" id="dashboard">
             <Navbar
                 items={[
                     { label: "Inventory", link: "/inventory", icon: MdOutlineInventory },

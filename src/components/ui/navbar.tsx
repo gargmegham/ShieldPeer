@@ -70,7 +70,7 @@ const Navbar = ({
                         width={24}
                         height={24}
                     />
-                    <strong className="font-extrabold text-neutral-50 tracking-tight text-base md:text-lg hover:text-neutral-300">
+                    <strong className="font-extrabold tracking-tight text-base md:text-lg hover:text-neutral-300">
                         {config.appName}
                     </strong>
                 </Link>

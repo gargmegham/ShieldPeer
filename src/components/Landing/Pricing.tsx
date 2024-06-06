@@ -6,7 +6,7 @@ import { FaGift } from "react-icons/fa"
 
 const Pricing = () => {
     return (
-        <section id="pricing" className="bg-grid-white/[0.1] bg-black text-neutral-50">
+        <section id="pricing" className="bg-grid-white/[0.1] bg-black">
             <div className="py-24 px-8 max-w-5xl mx-auto">
                 <div className="flex flex-col text-center w-full mb-12">
                     <p className="font-medium text-amber-500 mb-8">Pricing</p>

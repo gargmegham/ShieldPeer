@@ -63,3 +63,7 @@ body {
         text-wrap: balance;
     }
 }
+
+main {
+    @apply bg-black min-h-screen bg-grid-small-white/30 text-neutral-50;
+}

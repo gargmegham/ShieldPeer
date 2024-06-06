@@ -9,7 +9,7 @@ import Navbar from "@/components/ui/navbar"
 
 export default function Dashboard() {
     return (
-        <main className="bg-black min-h-screen bg-grid-small-white/30" id="dashboard">
+        <main id="dashboard">
             <Navbar
                 items={[
                     { label: "Inventory", link: "/inventory", icon: MdOutlineInventory },
