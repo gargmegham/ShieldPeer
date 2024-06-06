@@ -44,9 +44,9 @@ export const columns: ColumnDef<Log>[] = [
                 <div
                     className={cn(
                         "flex items-center gap-x-2 px-4",
-                        log.type === "failure" && "text-red-500",
-                        log.type === "caution" && "text-yellow-500",
-                        log.type === "success" && "text-green-500"
+                        log.type === "failure" && "text-red-500/80",
+                        log.type === "caution" && "text-yellow-500/80",
+                        log.type === "success" && "text-green-500/80"
                     )}
                 >
                     {icon}
@@ -80,7 +80,7 @@ export const columns: ColumnDef<Log>[] = [
                     <div className="flex gap-x-1">
                         <Link
                             href={`https://steamcommunity.com/market/listings/730/${log?.item_name}`}
-                            className="text-amber-400"
+                            className="text-amber-400/80"
                         >
                             {log?.item_name ?? "N/A"}
                         </Link>
@@ -110,7 +110,7 @@ export const columns: ColumnDef<Log>[] = [
                             {" "}
                             <Link
                                 href={`/listings/${log?.meta_data?.listing_id}`}
-                                className="text-amber-400 flex items-center gap-x-2"
+                                className="text-amber-400/80 flex items-center gap-x-2"
                             >
                                 Listing <FaExternalLinkAlt />
                             </Link>
