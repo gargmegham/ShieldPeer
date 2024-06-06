@@ -90,13 +90,12 @@ export interface Listing {
 
 export interface Log {
     id: string
-    item_id: Item["id"]
     user_id: string
     created_at: string
     type: "success" | "failure" | "caution"
     message: string
-    item_name: Item["name"]
-    item_image: Item["image"]
+    name: Item["name"]
+    image: Item["image"]
     meta_data?: {
         listing_id?: Listing["id"]
         error?: string

@@ -56,11 +56,11 @@ export const columns: ColumnDef<Log>[] = [
         },
     },
     {
-        accessorKey: "item_id",
+        accessorKey: "name",
         header: ({ column }) => {
             return (
                 <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-                    Item
+                    For
                     <CaretSortIcon className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -70,7 +70,7 @@ export const columns: ColumnDef<Log>[] = [
             return (
                 <div className="flex px-4 items-center gap-2">
                     <Image
-                        src={`https://community.cloudflare.steamstatic.com/economy/image/${log?.item_image ?? "N/A"}`}
+                        src={`https://community.cloudflare.steamstatic.com/economy/image/${log?.image ?? "N/A"}`}
                         alt="Waxpeer"
                         className="size-10 bg-neutral-200 rounded-lg"
                         width={32}
@@ -79,10 +79,10 @@ export const columns: ColumnDef<Log>[] = [
                     />
                     <div className="flex gap-1">
                         <Link
-                            href={`https://steamcommunity.com/market/listings/730/${log?.item_name}`}
+                            href={`https://steamcommunity.com/market/listings/730/${log?.name}`}
                             className="text-amber-400/80"
                         >
-                            {log?.item_name ?? "N/A"}
+                            {log?.name ?? "N/A"}
                         </Link>
                     </div>
                 </div>
