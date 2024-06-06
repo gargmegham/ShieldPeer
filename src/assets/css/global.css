@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "./loader.css";
+@import "./typography.css";
 
 @layer base {
     :root {

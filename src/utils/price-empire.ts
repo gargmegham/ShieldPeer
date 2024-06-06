@@ -37,7 +37,9 @@ export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     return await response.json()
 }
 
-export const formatItems = (items: PriceEmpireItem[], setting: Setting) => {
+const randomBoolean = () => Math.random() < 0.5
+
+export const formatItems = (items: PriceEmpireItem[], setting: Setting, isDemo?: boolean) => {
     return items.map((item: PriceEmpireItem) => {
         const selectedSource = setting.price_empire_source
         const price = selectedSource ? item.prices[selectedSource] : null
@@ -47,7 +49,7 @@ export const formatItems = (items: PriceEmpireItem[], setting: Setting) => {
             name: item.name,
             type: item.type,
             float: item.float,
-            is_active: false,
+            is_active: isDemo ? randomBoolean() : false,
             price,
             prices: item.prices,
             stickers: item.stickers.map((sticker) => ({

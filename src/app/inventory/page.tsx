@@ -1,8 +1,12 @@
 "use client"
 
+import Image from "next/image"
+
 import React, { useEffect, useState } from "react"
 
 import toast from "react-hot-toast"
+import { CgMediaLive } from "react-icons/cg"
+import { FaRegPauseCircle } from "react-icons/fa"
 import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
 
@@ -22,7 +26,18 @@ export default function Inventory() {
     const [demoInventory, setDemoInventory] = useState<PriceEmpireInventoryItem[]>([])
     const [loading, setLoading] = useState(true)
     const [showDemoInventory, setShowDemoInventory] = useState(false)
-
+    const [setting, setSetting] = useState<Setting>({} as Setting)
+    useEffect(() => {
+        fetch("/api/settings")
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data) return
+                setSetting(data)
+            })
+            .catch(() => {
+                toast.error("Failed to fetch settings")
+            })
+    }, [])
     useEffect(() => {
         fetch("/api/inventory")
             .then((res) => res.json())
@@ -85,17 +100,49 @@ export default function Inventory() {
             )}
             {inventory.length === 0 && showDemoInventory && (
                 <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {formatItems(demoInventory, {
-                        price_empire_source: "buff",
-                        user_id: "demo_63728uhkjhgT^R%^RTD",
-                    } as Setting).map((item) => (
-                        <Card key={item.asset_id} className="">
-                            <CardHeader>
-                                <CardTitle>{item?.name ?? item.market_hash_name}</CardTitle>
-                                <CardDescription></CardDescription>
+                    {formatItems(
+                        demoInventory,
+                        {
+                            price_empire_source: "buff",
+                            user_id: "demo_63728uhkjhgT^R%^RTD",
+                        } as Setting,
+                        true
+                    ).map((item) => (
+                        <Card key={item.asset_id} className="relative py-6">
+                            <div className="px-6 flex items-center gap-x-2 text-xs">
+                                {item.is_active ? (
+                                    <>
+                                        <CgMediaLive className="text-green-300 animate-pulse" />
+                                        Active
+                                    </>
+                                ) : (
+                                    <>
+                                        <FaRegPauseCircle className="text-red-500" />
+                                        Inactive
+                                    </>
+                                )}
+                            </div>
+                            <CardContent className="pt-2 pb-4">
+                                <div className="flex justify-center items-center">
+                                    <Image
+                                        src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image}`}
+                                        alt="Waxpeer"
+                                        className="bg-neutral-800 rounded-lg p-2"
+                                        loading="lazy"
+                                        width={245}
+                                        height={185}
+                                    />
+                                </div>
+                            </CardContent>
+                            <CardHeader className="relative py-0">
+                                <CardTitle className="truncate pr-4 text-sm text-neutral-300">
+                                    {item?.name ?? item.market_hash_name}
+                                </CardTitle>
                             </CardHeader>
-                            <CardContent></CardContent>
-                            <CardFooter></CardFooter>
+                            <div className="px-6 py-2 flex">
+                                <div className="text-neutral-200">{setting.price_empire_source}: </div>
+                                <div className="font-extrabold text-neutral-200 font-bricolage">${item.price}</div>
+                            </div>
                         </Card>
                     ))}
                 </div>

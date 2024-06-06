@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Link from "next/link"
 
 import "@/assets/css/global.css"
 
@@ -18,7 +19,10 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="en" className="dark">
+        <html className="dark" lang="en">
+            <head>
+                <Link rel="preconnect" href="https://fonts.gstatic.com" />
+            </head>
             <body className={inter.className}>
                 <LayoutWrapper>{children}</LayoutWrapper>
             </body>
