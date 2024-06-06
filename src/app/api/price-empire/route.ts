@@ -1,6 +1,4 @@
-import { NextRequest, NextResponse } from "next/server"
-
-import { metadata } from "@/app/layout"
+import { NextResponse } from "next/server"
 
 import { fetchInventoryFromPriceEmpire, fetchPriceHistoryFromPriceEmpire, formatItems } from "@/utils/price-empire"
 import { getSupabaseServiceClient } from "@/utils/supabase"
