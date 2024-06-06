@@ -12,10 +12,6 @@ export async function POST() {
     for (const setting of data as Setting[]) {
         try {
             const inventory: PriceEmpireInventory = await fetchInventoryFromPriceEmpire(setting)
-            const priceHistory: PriceHistory = await fetchPriceHistoryFromPriceEmpire(setting)
-            await supabase.from("PriceHistory").insert({
-                price_history: priceHistory,
-            })
             await supabase.from("SteamUser").upsert(
                 {
                     steam_id: inventory.user.steam64Id,
@@ -31,6 +27,14 @@ export async function POST() {
             const items: Item[] = formatItems(inventory.items, setting)
             await supabase.from("Items").upsert(items, {
                 onConflict: "asset_id, user_id",
+            })
+        } catch (error: any) {
+            console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
+        }
+        try {
+            const priceHistory: PriceHistory = await fetchPriceHistoryFromPriceEmpire(setting)
+            await supabase.from("PriceHistory").insert({
+                price_history: priceHistory,
             })
         } catch (error: any) {
             console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
