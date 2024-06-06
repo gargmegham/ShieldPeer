@@ -4,7 +4,7 @@
         "user_id": "u5gr84i9",
         "created_at": "2021-08-10T10:10:10",
         "name": "★ Karambit",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2PLacDBA5ciJlY20heL2KoTcl3lT5MB4kOzFyoD8j1yg5UNkaz_xIdfEd1A5aQ3U-lPskunphJHptZvPwSM26CUht3_UmUe3gEpSLrs4ZlidBgY",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2PLacDBA5ciJlY20heL2KoTcl3lT5MB4kOzFyoD8j1yg5UNkaz_xIdfEd1A5aQ3U-lPskunphJHptZvPwSM26CUht3_UmUe3gEpSLrs4ZlidBgY",
         "type": "success",
         "message": "Item price fetched successfully"
     },
@@ -14,8 +14,56 @@
         "created_at": "2021-12-10T10:10:10",
         "type": "failure",
         "name": "★ Butterfly Knife",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0ebcZThQ6tCvq4GGqPX4Mrjahm5Q-slOh-jT94DwgU6xryw-DDWqc97RbA9vN1GD8gO2ybq7hsK9tZ_By3ZqsiJw7X3elxzj1xpPb7c506GZSVmAR_selHmOwYo",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0ebcZThQ6tCvq4GGqPX4Mrjahm5Q-slOh-jT94DwgU6xryw-DDWqc97RbA9vN1GD8gO2ybq7hsK9tZ_By3ZqsiJw7X3elxzj1xpPb7c506GZSVmAR_selHmOwYo",
         "message": "Could not fetch item price",
+        "meta_data": {
+            "error": "Item not found"
+        }
+    },
+    {
+        "id": "m5g1221r84i8",
+        "user_id": "u5gr84i8",
+        "created_at": "2021-12-10T10:10:10",
+        "type": "success",
+        "name": "PriceEmpire",
+        "image": "https://www.shieldpeer.in/price-empire.svg",
+        "message": "Price history fetched successfully",
+        "meta_data": {
+            "error": "Item not found"
+        }
+    },
+    {
+        "id": "m5g1221r84i8",
+        "user_id": "u5gr84i8",
+        "created_at": "2021-12-10T10:10:10",
+        "type": "failure",
+        "name": "PriceEmpire",
+        "image": "https://www.shieldpeer.in/price-empire.svg",
+        "message": "Could not fetch price history",
+        "meta_data": {
+            "error": "Item not found"
+        }
+    },
+    {
+        "id": "m5g1221r84i8",
+        "user_id": "u5gr84i8",
+        "created_at": "2021-12-10T10:10:10",
+        "type": "failure",
+        "name": "PriceEmpire",
+        "image": "https://www.shieldpeer.in/price-empire.svg",
+        "message": "Could not fetch item price",
+        "meta_data": {
+            "error": "Item not found"
+        }
+    },
+    {
+        "id": "m5g1221r84i8",
+        "user_id": "u5gr84i8",
+        "created_at": "2021-12-10T10:10:10",
+        "type": "success",
+        "name": "PriceEmpire",
+        "image": "https://www.shieldpeer.in/price-empire.svg",
+        "message": "Price history fetched successfully",
         "meta_data": {
             "error": "Item not found"
         }
@@ -27,7 +75,7 @@
         "type": "success",
         "message": "Listed item for sale",
         "name": "AWP",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17P7NdTRH-t26q4SZlvD7PYTQgXtu4MBwnPCPrI73jgLh-xY5ZDygJIGVd1Q6NVjRqVO8k-a5gMW4upzBwSEwuSl3t2GdwUKlZg2OYg",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17P7NdTRH-t26q4SZlvD7PYTQgXtu4MBwnPCPrI73jgLh-xY5ZDygJIGVd1Q6NVjRqVO8k-a5gMW4upzBwSEwuSl3t2GdwUKlZg2OYg",
         "meta_data": {
             "listing_id": "l5gr84i7"
         }
@@ -39,7 +87,7 @@
         "type": "failure",
         "message": "Failed to list item for sale",
         "name": "M4A1-S",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO3mb-GkuP1P6jummJW4NE_2-zHpN2g3Vfj-kFvZ2ChJtfEJ1M2YF_Sq1LqkOm515fpup-cyHFluD5iuyj8q1fJzg",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO3mb-GkuP1P6jummJW4NE_2-zHpN2g3Vfj-kFvZ2ChJtfEJ1M2YF_Sq1LqkOm515fpup-cyHFluD5iuyj8q1fJzg",
         "meta_data": {
             "error": "Insufficient funds"
         }
@@ -48,7 +96,7 @@
         "id": "m5gr84i5",
         "user_id": "u5gr84i5",
         "name": "★ Talon Knife",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfxPrMfipP7dezhr-Kmsj5MqnTmm5u7sR1j9bW_Ij6n2u4ohQ0J3fyJoTGcVJqZ1nW8lLsl-nrjMK-6ZqdzSBkvyl25nvdlkS0gxFPZudtm7XAHraYUhpC",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfxPrMfipP7dezhr-Kmsj5MqnTmm5u7sR1j9bW_Ij6n2u4ohQ0J3fyJoTGcVJqZ1nW8lLsl-nrjMK-6ZqdzSBkvyl25nvdlkS0gxFPZudtm7XAHraYUhpC",
         "created_at": "2021-06-10T10:10:10",
         "type": "caution",
         "message": "Item can not be listed due to specified parameters"
@@ -56,7 +104,7 @@
     {
         "id": "m5gr84i4",
         "name": "M24",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DeXEl7NwdOtbagFABs3OXNYgJP48i5hoOSlPvxDLbYmH9u_Nd4i-fG-YnKhVGwogYxfT-nJIPEIA48M1vYq1TtlLzoh8fv6MnNzHY1uSRw4SrdlxDihBtKOOVxxavJ_VHCqCI",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DeXEl7NwdOtbagFABs3OXNYgJP48i5hoOSlPvxDLbYmH9u_Nd4i-fG-YnKhVGwogYxfT-nJIPEIA48M1vYq1TtlLzoh8fv6MnNzHY1uSRw4SrdlxDihBtKOOVxxavJ_VHCqCI",
         "user_id": "u5gr84i4",
         "created_at": "2021-10-10T10:10:10",
         "type": "success",
@@ -65,7 +113,7 @@
     {
         "id": "m5gr84i3",
         "name": "AK-47",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszOeC9H_9mkhIWFg8j1OO-GqWlD6dN-teTE8YXghRrkqRVqMGzzIYeTIAVqaQuErlbvlb-80JfuusvJmHFr6SRxsXzfm0fkn1gSOc02RC4r",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszOeC9H_9mkhIWFg8j1OO-GqWlD6dN-teTE8YXghRrkqRVqMGzzIYeTIAVqaQuErlbvlb-80JfuusvJmHFr6SRxsXzfm0fkn1gSOc02RC4r",
         "user_id": "u5gr84i3",
         "created_at": "2021-10-10T10:10:10",
         "type": "success",
@@ -74,7 +122,7 @@
     {
         "id": "m5gr84i2",
         "name": "Desert Eagle",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposr-kLAtl7PLJTjtO7dGzh7-HnvD8J_XVkjoFuMYiiLqUrI-k3le3r0s5amj7d9eTI1I-M1rW-Fm_xO-50Jfvot2XnhS4_w8U",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposr-kLAtl7PLJTjtO7dGzh7-HnvD8J_XVkjoFuMYiiLqUrI-k3le3r0s5amj7d9eTI1I-M1rW-Fm_xO-50Jfvot2XnhS4_w8U",
         "user_id": "u5gr84i2",
         "created_at": "2021-10-10T10:10:10",
         "type": "success",
@@ -83,7 +131,7 @@
     {
         "id": "m5gr84i1",
         "name": "★ Flip Knife",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1f_BYQJD4eO7lZKJm_LLNbrVk1Rd4cJ5nqeUoo2s0Qe1qUVqYGuhddSSdgRqMlHWr1nrk7u705-0uJrKnyNm6CQq-z-DyE8NXPC5",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1f_BYQJD4eO7lZKJm_LLNbrVk1Rd4cJ5nqeUoo2s0Qe1qUVqYGuhddSSdgRqMlHWr1nrk7u705-0uJrKnyNm6CQq-z-DyE8NXPC5",
         "user_id": "u5gr84i1",
         "created_at": "2021-10-10T10:10:10",
         "type": "success",
@@ -92,7 +140,7 @@
     {
         "id": "m5gr84i0",
         "name": "★ Survival Knife",
-        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0PLGeC597d2JkoGPksj4OrzZgiUIup0m3OrHpt7xjQ3grRE4a22hLdPGcwBoZVjVqwfvx-bqjcO6vc_M1zI97Zq6-M4l",
+        "image": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0PLGeC597d2JkoGPksj4OrzZgiUIup0m3OrHpt7xjQ3grRE4a22hLdPGcwBoZVjVqwfvx-bqjcO6vc_M1zI97Zq6-M4l",
         "user_id": "u5gr84i0",
         "created_at": "2021-10-10T10:10:10",
         "type": "success",
