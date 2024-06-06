@@ -13,6 +13,9 @@ export async function POST() {
         try {
             const inventory: PriceEmpireInventory = await fetchInventoryFromPriceEmpire(setting)
             const priceHistory: PriceHistory = await fetchPriceHistoryFromPriceEmpire(setting)
+            await supabase.from("PriceHistory").insert({
+                price_history: priceHistory,
+            })
             await supabase.from("SteamUser").upsert(
                 {
                     steam_id: inventory.user.steam64Id,
