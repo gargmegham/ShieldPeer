@@ -7,19 +7,19 @@ import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 
-import InventoryTable from "@/components/InventoryTable"
-
 import { cn } from "@/utils/cn"
+import { formatItems } from "@/utils/price-empire"
 
-import type { Item } from "@/types/database"
+import type { Item, Setting } from "@/types/database"
+import type { Item as PriceEmpireInventoryItem } from "@/types/price-empire"
 
 export default function Inventory() {
     const [inventory, setInventory] = useState<Item[]>([])
-    const [demoInventory, setDemoInventory] = useState<Item[]>([])
+    const [demoInventory, setDemoInventory] = useState<PriceEmpireInventoryItem[]>([])
     const [loading, setLoading] = useState(true)
     const [showDemoInventory, setShowDemoInventory] = useState(false)
 
@@ -83,7 +83,23 @@ export default function Inventory() {
                     </CardContent>
                 </Card>
             )}
-            {inventory.length === 0 && showDemoInventory && <InventoryTable items={demoInventory} />}
+            {inventory.length === 0 && showDemoInventory && (
+                <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {formatItems(demoInventory, {
+                        price_empire_source: "buff",
+                        user_id: "demo_63728uhkjhgT^R%^RTD",
+                    } as Setting).map((item) => (
+                        <Card key={item.asset_id} className="">
+                            <CardHeader>
+                                <CardTitle>{item?.name ?? item.market_hash_name}</CardTitle>
+                                <CardDescription></CardDescription>
+                            </CardHeader>
+                            <CardContent></CardContent>
+                            <CardFooter></CardFooter>
+                        </Card>
+                    ))}
+                </div>
+            )}
         </main>
     )
 }
