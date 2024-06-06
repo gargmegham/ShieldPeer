@@ -145,12 +145,12 @@ export default function Inventory() {
                                     <Tooltip>
                                         <TooltipTrigger>
                                             {item.is_active ? (
-                                                <div className="flex items-center gap-x-2">
+                                                <div className="flex items-center gap-2">
                                                     <CgMediaLive className="text-green-300 animate-pulse" />
                                                     Active
                                                 </div>
                                             ) : (
-                                                <div className="flex items-center gap-x-2">
+                                                <div className="flex items-center gap-2">
                                                     <FaRegPauseCircle className="text-red-500" />
                                                     Inactive
                                                 </div>
@@ -198,7 +198,7 @@ export default function Inventory() {
                             </CardHeader>
                             <div className="px-6 mt-2 space-y-1">
                                 {setting.price_empire_source && (
-                                    <div className="flex gap-x-2">
+                                    <div className="flex gap-2">
                                         <div className="text-neutral-500 underline decoration-wavy">
                                             {setting.price_empire_source[0].toLocaleUpperCase()}
                                             {setting.price_empire_source.slice(1)}
@@ -211,7 +211,7 @@ export default function Inventory() {
                                         </div>
                                     </div>
                                 )}
-                                <div className="flex gap-x-2 text-sm">
+                                <div className="flex gap-2 text-sm">
                                     <div className="text-neutral-500">Float</div>
                                     <div className="font-extrabold text-neutral-200">
                                         {item?.float?.toFixed(5) ?? "N/A"}
@@ -220,8 +220,8 @@ export default function Inventory() {
                             </div>
                             <div className="px-6 mt-4 w-full">
                                 <Link
-                                    className="w-full gap-x-2 relative flex items-center justify-center py-2 bg-zinc-900 rounded-xl border"
-                                    href={`/settings/item/${item.asset_id}`}
+                                    className="w-full gap-2 relative flex items-center justify-center py-2 bg-zinc-900 rounded-xl border"
+                                    href={`/settings/item/${item.id ?? item.asset_id}`}
                                 >
                                     <MdSettings className="size-4 text-amber-500/90" />
                                     Settings

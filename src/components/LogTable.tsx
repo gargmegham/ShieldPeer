@@ -43,7 +43,7 @@ export const columns: ColumnDef<Log>[] = [
             return (
                 <div
                     className={cn(
-                        "flex items-center gap-x-2 px-4",
+                        "flex items-center gap-2 px-4",
                         log.type === "failure" && "text-red-500/80",
                         log.type === "caution" && "text-yellow-500/80",
                         log.type === "success" && "text-green-500/80"
@@ -68,7 +68,7 @@ export const columns: ColumnDef<Log>[] = [
         cell: ({ row }) => {
             const log = row.original
             return (
-                <div className="flex px-4 items-center gap-x-2">
+                <div className="flex px-4 items-center gap-2">
                     <Image
                         src={`https://community.cloudflare.steamstatic.com/economy/image/${log?.item_image ?? "N/A"}`}
                         alt="Waxpeer"
@@ -77,7 +77,7 @@ export const columns: ColumnDef<Log>[] = [
                         loading="lazy"
                         height={32}
                     />
-                    <div className="flex gap-x-1">
+                    <div className="flex gap-1">
                         <Link
                             href={`https://steamcommunity.com/market/listings/730/${log?.item_name}`}
                             className="text-amber-400/80"
@@ -110,7 +110,7 @@ export const columns: ColumnDef<Log>[] = [
                             {" "}
                             <Link
                                 href={`/listings/${log?.meta_data?.listing_id}`}
-                                className="text-amber-400/80 flex items-center gap-x-2"
+                                className="text-amber-400/80 flex items-center gap-2"
                             >
                                 Listing <FaExternalLinkAlt />
                             </Link>
