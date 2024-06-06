@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
+import { metadata } from "@/app/layout"
+
 import { fetchInventoryFromPriceEmpire, fetchPriceHistoryFromPriceEmpire, formatItems } from "@/utils/price-empire"
 import { getSupabaseServiceClient } from "@/utils/supabase"
 
@@ -28,7 +30,22 @@ export async function POST() {
             await supabase.from("Items").upsert(items, {
                 onConflict: "asset_id, user_id",
             })
+            await supabase.from("Logs").insert({
+                name: "Price Empire",
+                message: "Successfully fetched inventory",
+                type: "success",
+                image: "https://www.shieldpeer.in/price-empires.svg",
+            })
         } catch (error: any) {
+            await supabase.from("Logs").insert({
+                name: "Price Empire",
+                message: "Failed to fetch inventory",
+                type: "failure",
+                image: "https://www.shieldpeer.in/price-empires.svg",
+                metadata: {
+                    error: error?.message ?? "Unknown error",
+                },
+            })
             console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
         }
         try {
@@ -36,7 +53,22 @@ export async function POST() {
             await supabase.from("PriceHistory").insert({
                 price_history: priceHistory,
             })
+            await supabase.from("Logs").insert({
+                name: "Price Empire",
+                message: "Successfully fetched price history",
+                type: "success",
+                image: "https://www.shieldpeer.in/price-empires.svg",
+            })
         } catch (error: any) {
+            await supabase.from("Logs").insert({
+                name: "Price Empire",
+                message: "Failed to fetch price history",
+                type: "failure",
+                image: "https://www.shieldpeer.in/price-empires.svg",
+                metadata: {
+                    error: error?.message ?? "Unknown error",
+                },
+            })
             console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
         }
     }

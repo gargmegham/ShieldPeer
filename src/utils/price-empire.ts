@@ -1,19 +1,19 @@
 import { Item, Setting } from "@/types/database"
-import type { Item as PriceEmpireItem, PriceHistory } from "@/types/price-empire"
+import type { Item as PriceEmpireItem } from "@/types/price-empire"
 
 export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     const apiKey = setting.price_empire_key
     if (!apiKey) {
         const error = new Error()
         error.name = "MissingAPIKey"
-        error.message = "Price Empire API key is not set"
+        error.message = "Price empire API key is not set in settings"
         throw error
     }
     const steamId = setting.steam_id
     if (!steamId) {
         const error = new Error()
         error.name = "MissingSteamID"
-        error.message = "Steam ID is not set"
+        error.message = "Steam ID is not set in settings"
         throw error
     }
     const apiURLBase = `https://api.pricempire.com/v3/inventory/${steamId}`
@@ -85,14 +85,14 @@ export const fetchPriceHistoryFromPriceEmpire = async (setting: Setting) => {
     if (!apiKey) {
         const error = new Error()
         error.name = "MissingAPIKey"
-        error.message = "Price Empire"
+        error.message = "Price empire API key is not set in settings"
         throw error
     }
     const source = setting.price_empire_source
     if (!source) {
         const error = new Error()
         error.name = "MissingSource"
-        error.message = "Price Empire"
+        error.message = "Price empire source is not set in settings"
         throw error
     }
     const apiURLBase = "https://api.pricempire.com/v3/items/prices/history"
