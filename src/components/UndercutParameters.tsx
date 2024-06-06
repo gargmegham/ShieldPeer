@@ -82,7 +82,7 @@ export default function UndercutParameters({ setting }: { setting: Setting }) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>PriceEmpire Source</FormLabel>
-                                        <Select {...field} onValueChange={field.onChange} defaultValue={field.value}>
+                                        <Select {...field} onValueChange={field.onChange} defaultValue="buff">
                                             <FormControl>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="Select a source for base" />
