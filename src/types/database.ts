@@ -6,7 +6,7 @@ export interface Setting {
     undercut_by_price?: number
     undercut_by_percentage?: number
     undercut_by?: "price" | "percentage"
-    is_paused?: boolean
+    is_running?: boolean
     price_empire_key?: string
     waxpeer_key?: string
     steam_id?: string

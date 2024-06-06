@@ -14,7 +14,7 @@ import { Switch } from "@/components/ui/switch"
 import type { Setting } from "@/types/database"
 
 const FormSchema = z.object({
-    is_paused: z.boolean(),
+    is_running: z.boolean(),
 })
 
 export default function BotStatus({ setting }: { setting: Setting }) {
@@ -48,7 +48,7 @@ export default function BotStatus({ setting }: { setting: Setting }) {
                         <div className="space-y-4">
                             <FormField
                                 control={form.control}
-                                name="is_paused"
+                                name="is_running"
                                 render={({ field }) => (
                                     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                                         <div className="space-y-0.5">
