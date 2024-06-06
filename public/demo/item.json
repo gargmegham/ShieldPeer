@@ -1,0 +1,145 @@
+{
+    "data": [
+        {
+            "id": 2728,
+            "market_hash_name": "AWP | Asiimov (Field-Tested)",
+            "type": "skin",
+            "item_type": "Covert Sniper Rifle",
+            "status": true,
+            "created_at": "2022-09-12T14:17:19.819Z",
+            "updated_at": "2023-08-21T17:20:19.331Z",
+            "meta": {
+                "slug": "awp-asiimov-field-tested",
+                "keywords": "awp | asiimov (field-tested)",
+                "like": 0,
+                "dislike": 0,
+                "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2G9SupUijOjAotyg3w2x_0ZkZ2rzd4OXdgRoYQuE8gDtyL_mg5K4tJ7XiSw0WqKv8kM",
+                "color": null
+            },
+            "game": {
+                "app_id": 730,
+                "name": "Counter-Strike: Global Offensive",
+                "short": "CS:GO",
+                "slug": null,
+                "image": ""
+            },
+            "paint": {
+                "id": 186,
+                "paint_id": 279,
+                "weapon_id": 9,
+                "released": "2014-02-20T01:00:00.000Z",
+                "image": "https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2G9SupUijOjAotyg3w2x_0ZkZ2rzd4OXdgRoYQuE8gDtyL_mg5K4tJ7XiSw0WqKv8kM",
+                "float_min": 0.18,
+                "float_max": 1,
+                "souvenir": false,
+                "stattrak": true,
+                "slug": "asiimov",
+                "quality": {
+                    "name": "Covert",
+                    "key": "covert"
+                },
+                "family": {
+                    "name": "Asiimov"
+                },
+                "wears": [
+                    {
+                        "short": "bs",
+                        "name": "Battle-Scarred",
+                        "color": "red"
+                    },
+                    {
+                        "short": "ft",
+                        "name": "Field-Tested",
+                        "color": "#2a85e1"
+                    },
+                    {
+                        "short": "ww",
+                        "name": "Well-Worn",
+                        "color": "#b5b52c"
+                    }
+                ],
+                "containers": [
+                    {
+                        "id": 131,
+                        "name": "Operation Phoenix Weapon Case",
+                        "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFUuh6qZJmlD7tiyl4OIlaGhYuLTzjhVupJ12urH89ii3lHlqEdoMDr2I5jVLFFSv_J2Rg",
+                        "released": "2014-02-20T01:00:00.000Z",
+                        "type": "container",
+                        "rare": "knives",
+                        "rare_count": 65,
+                        "market_hash_name": "Operation Phoenix Weapon Case",
+                        "price_from": 144
+                    }
+                ],
+                "collection": {
+                    "key": "set_community_2",
+                    "name": "The Phoenix Collection",
+                    "released": "2014-02-20T01:00:00.000Z"
+                }
+            },
+            "base": {
+                "weapon_id": 9,
+                "name": "AWP",
+                "slug": "awp",
+                "description": "Sniper rifle featuring a scope. Based on the Accuracy International Arctic Warfare rifle developed in the UK. This is one of the most popular weapons in CS:GO. Among the main advantages of the AWP are very high damage and high accuracy at long distances. This rifle’s damage is enough to kill 5 opponents standing in a row with a single bullet. Disadvantages include a high price, low rate of fire, and low kill award.",
+                "sticker_amount": 4
+            },
+            "connected_items": [
+                {
+                    "market_hash_name": "AWP | Asiimov (Well-Worn)",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2G9SupUijOjAotyg3w2x_0ZkZ2rzd4OXdgRoYQuE8gDtyL_mg5K4tJ7XiSw0WqKv8kM",
+                    "slug": null,
+                    "price_from": 9657
+                },
+                {
+                    "market_hash_name": "StatTrak™ AWP | Asiimov (Well-Worn)",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2G9SupUijOjAotyg3w2x_0ZkZ2rzd4OXdgRoYQuE8gDtyL_mg5K4tJ7XiSw0WqKv8kM",
+                    "slug": null,
+                    "price_from": 19128
+                },
+                {
+                    "market_hash_name": "AWP | Asiimov (Field-Tested)",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2G9SupUijOjAotyg3w2x_0ZkZ2rzd4OXdgRoYQuE8gDtyL_mg5K4tJ7XiSw0WqKv8kM",
+                    "slug": null,
+                    "price_from": 12165
+                },
+                {
+                    "market_hash_name": "AWP | Asiimov (Battle-Scarred)",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0n_L1JaKfzzoGuJJ02e2W8d6m2gztrkRoZmigItDGcgA_N1iFqwC-xr_m1J-57YOJlyVerprbwA",
+                    "slug": null,
+                    "price_from": 7773
+                },
+                {
+                    "market_hash_name": "StatTrak™ AWP | Asiimov (Field-Tested)",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2G9SupUijOjAotyg3w2x_0ZkZ2rzd4OXdgRoYQuE8gDtyL_mg5K4tJ7XiSw0WqKv8kM",
+                    "slug": null,
+                    "price_from": 27741
+                },
+                {
+                    "market_hash_name": "StatTrak™ AWP | Asiimov (Battle-Scarred)",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0n_L1JaKfzzoGuJJ02e2W8d6m2gztrkRoZmigItDGcgA_N1iFqwC-xr_m1J-57YOJlyVerprbwA",
+                    "slug": null,
+                    "price_from": 12917
+                }
+            ],
+            "variants": [],
+            "stats": {
+                "7_day_low": 0,
+                "7_day_high": 101000,
+                "30_day_low": 0,
+                "30_day_high": 149000,
+                "52_week_low": 0,
+                "52_week_high": 966305,
+                "count": "120596",
+                "marketcap": 1389265920,
+                "30d_prev_exists": "119895",
+                "avg_price": null,
+                "liquidity": "1",
+                "currently_listed": 24526,
+                "steam_volume": 22,
+                "d7_trades": 3884,
+                "marketcap7d": "1474708500"
+            }
+        }
+    ]
+}
