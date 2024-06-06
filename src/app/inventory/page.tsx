@@ -98,55 +98,69 @@ export default function Inventory() {
                     </CardContent>
                 </Card>
             )}
-            {inventory.length === 0 && showDemoInventory && (
-                <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {formatItems(
-                        demoInventory,
-                        {
-                            price_empire_source: "buff",
-                            user_id: "demo_63728uhkjhgT^R%^RTD",
-                        } as Setting,
-                        true
-                    ).map((item) => (
-                        <Card key={item.asset_id} className="relative py-6">
-                            <div className="px-6 flex items-center gap-x-2 text-xs">
-                                {item.is_active ? (
-                                    <>
-                                        <CgMediaLive className="text-green-300 animate-pulse" />
-                                        Active
-                                    </>
-                                ) : (
-                                    <>
-                                        <FaRegPauseCircle className="text-red-500" />
-                                        Inactive
-                                    </>
-                                )}
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {(inventory.length === 0 && showDemoInventory
+                    ? formatItems(
+                          demoInventory,
+                          {
+                              price_empire_source: "buff",
+                              user_id: "demo_63728uhkjhgT^R%^RTD",
+                          } as Setting,
+                          true
+                      )
+                    : inventory
+                ).map((item) => (
+                    <Card key={item.asset_id} className="relative py-6">
+                        <div className="px-6 flex items-center gap-x-2 text-xs">
+                            {item.is_active ? (
+                                <>
+                                    <CgMediaLive className="text-green-300 animate-pulse" />
+                                    Active
+                                </>
+                            ) : (
+                                <>
+                                    <FaRegPauseCircle className="text-red-500" />
+                                    Inactive
+                                </>
+                            )}
+                        </div>
+                        <CardContent className="pt-2 pb-4">
+                            <div className="flex justify-center items-center">
+                                <Image
+                                    src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image}`}
+                                    alt="Waxpeer"
+                                    className="bg-neutral-800 rounded-lg p-2"
+                                    loading="lazy"
+                                    width={245}
+                                    height={185}
+                                />
                             </div>
-                            <CardContent className="pt-2 pb-4">
-                                <div className="flex justify-center items-center">
-                                    <Image
-                                        src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image}`}
-                                        alt="Waxpeer"
-                                        className="bg-neutral-800 rounded-lg p-2"
-                                        loading="lazy"
-                                        width={245}
-                                        height={185}
-                                    />
+                        </CardContent>
+                        <CardHeader className="relative py-0">
+                            <CardTitle className="truncate pr-4 text-sm text-neutral-300">
+                                {item?.name ?? item.market_hash_name}
+                            </CardTitle>
+                        </CardHeader>
+                        <div className="px-6 pt-2 space-y-1">
+                            {setting.price_empire_source && (
+                                <div className="flex gap-x-2">
+                                    <div className="text-neutral-500 underline decoration-wavy">
+                                        {setting.price_empire_source[0].toLocaleUpperCase()}
+                                        {setting.price_empire_source.slice(1)}
+                                    </div>
+                                    <div className="font-extrabold text-neutral-200 font-bricolage">${item.price}</div>
                                 </div>
-                            </CardContent>
-                            <CardHeader className="relative py-0">
-                                <CardTitle className="truncate pr-4 text-sm text-neutral-300">
-                                    {item?.name ?? item.market_hash_name}
-                                </CardTitle>
-                            </CardHeader>
-                            <div className="px-6 py-2 flex">
-                                <div className="text-neutral-200">{setting.price_empire_source}: </div>
-                                <div className="font-extrabold text-neutral-200 font-bricolage">${item.price}</div>
-                            </div>
-                        </Card>
-                    ))}
-                </div>
-            )}
+                            )}
+                            {item.float && (
+                                <div className="flex gap-x-2 text-sm">
+                                    <div className="text-neutral-500">Float</div>
+                                    <div className="font-extrabold text-neutral-200">{item.float.toFixed(5)}</div>
+                                </div>
+                            )}
+                        </div>
+                    </Card>
+                ))}
+            </div>
         </main>
     )
 }

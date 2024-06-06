@@ -20,10 +20,8 @@ export default function RootLayout({
 }>) {
     return (
         <html className="dark" lang="en">
-            <head>
-                <Link rel="preconnect" href="https://fonts.gstatic.com" />
-            </head>
             <body className={inter.className}>
+                <Link rel="preconnect" href="https://fonts.gstatic.com" />
                 <LayoutWrapper>{children}</LayoutWrapper>
             </body>
         </html>
