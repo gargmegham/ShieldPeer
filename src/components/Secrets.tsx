@@ -1,5 +1,8 @@
 "use client"
 
+import Image from "next/image"
+import Link from "next/link"
+
 import React, { useEffect, useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -10,8 +13,12 @@ import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+
+import PriceEmpire from "@/assets/logo/price-empire.svg"
+import Steam from "@/assets/logo/steam.svg"
+import Waxpeer from "@/assets/logo/waxpeer.svg"
 
 import type { Setting } from "@/types/database"
 
@@ -76,7 +83,24 @@ export default function Secrets({ setting }: { setting: Setting }) {
                             name="price_empire_key"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>PriceEmpire</FormLabel>
+                                    <div className="flex items-center space-x-2">
+                                        <Image
+                                            src={PriceEmpire}
+                                            alt="PriceEmpire"
+                                            className="size-8 border rounded-full border-gray-200/20"
+                                            width={32}
+                                            height={32}
+                                        />
+                                        <div>
+                                            <FormLabel>PriceEmpire</FormLabel>
+                                            <FormDescription>
+                                                You can find your PriceEmpire API Key{" "}
+                                                <Link href="https://pricempire.com/api" className="text-amber-400">
+                                                    here
+                                                </Link>
+                                            </FormDescription>
+                                        </div>
+                                    </div>
                                     <FormControl>
                                         <Input placeholder="8dqw30*****" {...field} />
                                     </FormControl>
@@ -89,7 +113,21 @@ export default function Secrets({ setting }: { setting: Setting }) {
                             name="waxpeer_key"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Waxpeer</FormLabel>
+                                    <div className="flex items-center space-x-2">
+                                        <Image src={Waxpeer} alt="Waxpeer" className="size-8" width={32} height={32} />
+                                        <div>
+                                            <FormLabel>Waxpeer</FormLabel>
+                                            <FormDescription>
+                                                You can find your Waxpeer API Key{" "}
+                                                <Link
+                                                    href="https://waxpeer.com/profile/user"
+                                                    className="text-amber-400"
+                                                >
+                                                    here
+                                                </Link>
+                                            </FormDescription>
+                                        </div>
+                                    </div>
                                     <FormControl>
                                         <Input placeholder="31hkw30*****" {...field} />
                                     </FormControl>
@@ -102,7 +140,15 @@ export default function Secrets({ setting }: { setting: Setting }) {
                             name="steam_id"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Steam Id</FormLabel>
+                                    <div className="flex items-center space-x-2">
+                                        <Image src={Steam} alt="Steam" className="size-8" width={32} height={32} />
+                                        <div>
+                                            <FormLabel>Steam Id</FormLabel>
+                                            <FormDescription>
+                                                You can find your Steam ID by clicking on your profile on Steam website.
+                                            </FormDescription>
+                                        </div>
+                                    </div>
                                     <FormControl>
                                         <Input placeholder="31hkw30*****" {...field} />
                                     </FormControl>
