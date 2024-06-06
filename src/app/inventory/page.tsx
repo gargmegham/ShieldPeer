@@ -11,15 +11,15 @@ import { Card, CardContent } from "@/components/ui/card"
 import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 
-import LogTable from "@/components/LogTable"
+import InventoryTable from "@/components/InventoryTable"
 
 import { cn } from "@/utils/cn"
 
-import type { Log } from "@/types/database"
+import type { Item } from "@/types/database"
 
 export default function Inventory() {
-    const [inventory, setInventory] = useState<Log[]>([])
-    const [demoInventory, setDemoInventory] = useState<Log[]>([])
+    const [inventory, setInventory] = useState<Item[]>([])
+    const [demoInventory, setDemoInventory] = useState<Item[]>([])
     const [loading, setLoading] = useState(true)
     const [showDemoInventory, setShowDemoInventory] = useState(false)
 
@@ -83,7 +83,7 @@ export default function Inventory() {
                     </CardContent>
                 </Card>
             )}
-            {inventory.length === 0 && showDemoInventory && <LogTable logs={demoInventory} />}
+            {inventory.length === 0 && showDemoInventory && <InventoryTable items={demoInventory} />}
         </main>
     )
 }

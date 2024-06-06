@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { createClient } from "@/utils/supabase"
+import { getSupabaseClient } from "@/utils/supabase"
 
 import type { Item } from "@/types/database"
 
 export async function GET(request: NextRequest) {
-    const supabase = createClient()
+    const supabase = getSupabaseClient()
     const { searchParams } = new URL(request.url)
     const page = Number(searchParams.get("page")) || 1
     const itemsPerPage = Number(searchParams.get("itemsPerPage")) || 10

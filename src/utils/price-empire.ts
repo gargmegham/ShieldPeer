@@ -2,9 +2,19 @@ import { Setting } from "@/types/database"
 
 export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     const apiKey = setting.price_empire_key
-    if (!apiKey) throw new Error("Price Empire API key is not set")
+    if (!apiKey) {
+        const error = new Error()
+        error.name = "MissingAPIKey"
+        error.message = "Price Empire API key is not set"
+        throw error
+    }
     const steamId = setting.steam_id
-    if (!steamId) throw new Error("Steam ID is not set")
+    if (!steamId) {
+        const error = new Error()
+        error.name = "MissingSteamID"
+        error.message = "Steam ID is not set"
+        throw error
+    }
     const apiURLBase = `https://api.pricempire.com/v3/inventory/${steamId}`
     const params = new URLSearchParams({
         api_key: apiKey,
@@ -17,5 +27,11 @@ export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
         },
     }
     const response = await fetch(apiURL, requestOptions)
+    if (!response.ok) {
+        const error = new Error()
+        error.name = "PriceEmpireError"
+        error.message = `Failed to fetch inventory from Price Empire: ${response.statusText}`
+        throw error
+    }
     return await response.json()
 }
