@@ -27,7 +27,7 @@ export interface PriceRange {
 export interface Item {
     id: string
     user_id: string
-    waxpeer_id: string
+    asset_id: string
     name: string
     type: string
     condition: string
