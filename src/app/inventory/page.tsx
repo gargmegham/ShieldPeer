@@ -11,6 +11,7 @@ import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
 import { SiGunicorn } from "react-icons/si"
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Loader from "@/components/ui/Loader"
@@ -21,7 +22,7 @@ import { cn } from "@/utils/cn"
 import { formatItems } from "@/utils/price-empire"
 
 import type { Item, Setting } from "@/types/database"
-import type { Item as PriceEmpireInventoryItem } from "@/types/price-empire"
+import type { Inventory, Item as PriceEmpireInventoryItem } from "@/types/price-empire"
 
 export default function Inventory() {
     const [inventory, setInventory] = useState<Item[]>([])
@@ -29,12 +30,24 @@ export default function Inventory() {
     const [loading, setLoading] = useState(true)
     const [showDemoInventory, setShowDemoInventory] = useState(false)
     const [setting, setSetting] = useState<Setting>({} as Setting)
+    const [user, setUser] = useState<Inventory["user"]>({} as Inventory["user"])
     useEffect(() => {
         fetch("/api/settings")
             .then((res) => res.json())
             .then((data) => {
                 if (!data) return
                 setSetting(data)
+            })
+            .catch(() => {
+                toast.error("Failed to fetch settings")
+            })
+    }, [])
+    useEffect(() => {
+        fetch("/api/steam")
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data) return
+                setUser(data)
             })
             .catch(() => {
                 toast.error("Failed to fetch settings")
@@ -90,6 +103,18 @@ export default function Inventory() {
                 ]}
                 logoLink="/"
             />
+            <Avatar className="absolute bottom-10 right-10">
+                <AvatarImage>
+                    <Image
+                        src={`https://avatars.akamai.steamstatic.com/${user?.image}_full.jpg`}
+                        alt={user?.name}
+                        className="rounded-full"
+                        width={50}
+                        height={50}
+                    />
+                </AvatarImage>
+                <AvatarFallback className="text-amber-300 border border-rose-100/30">{user?.name[0]}</AvatarFallback>
+            </Avatar>
             {inventory.length === 0 && !showDemoInventory && (
                 <Card className="w-[350px]">
                     <CardContent className="pt-6 space-y-4">
