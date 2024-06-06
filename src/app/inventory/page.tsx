@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 
 import React, { useEffect, useState } from "react"
 
@@ -103,18 +104,16 @@ export default function Inventory() {
                 ]}
                 logoLink="/"
             />
-            <Avatar className="absolute bottom-10 right-10">
-                <AvatarImage>
-                    <Image
-                        src={`https://avatars.akamai.steamstatic.com/${user?.image}_full.jpg`}
-                        alt={user?.name}
-                        className="rounded-full"
-                        width={50}
-                        height={50}
-                    />
-                </AvatarImage>
-                <AvatarFallback className="text-amber-300 border border-rose-100/30">{user?.name[0]}</AvatarFallback>
-            </Avatar>
+            <Link
+                className="fixed bottom-10 right-10 z-20"
+                target="_blank"
+                href={`https://steamcommunity.com/profiles/${setting.steam_id}/?utm_source=ShieldPeer`}
+            >
+                <Avatar className="size-16 border border-rose-100/30 shadow shadow-primary">
+                    <AvatarImage src={`https://avatars.akamai.steamstatic.com/${user?.image}_full.jpg`} />
+                    <AvatarFallback className="text-amber-300">{user?.name[0]}</AvatarFallback>
+                </Avatar>
+            </Link>
             {inventory.length === 0 && !showDemoInventory && (
                 <Card className="w-[350px]">
                     <CardContent className="pt-6 space-y-4">
