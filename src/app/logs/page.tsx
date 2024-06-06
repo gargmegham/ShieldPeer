@@ -86,6 +86,7 @@ export default function Logs() {
                 </Card>
             )}
             {logs.length === 0 && showDemoLogs && <LogTable logs={demoLogs} />}
+            {logs.length > 0 && <LogTable logs={logs} />}
         </main>
     )
 }

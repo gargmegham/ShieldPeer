@@ -1,4 +1,5 @@
-import { Setting } from "@/types/database"
+import { Item, Setting } from "@/types/database"
+import type { Item as PriceEmpireItem } from "@/types/price-empire"
 
 export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     const apiKey = setting.price_empire_key
@@ -34,4 +35,8 @@ export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
         throw error
     }
     return await response.json()
+}
+
+export const formatItems = (items: PriceEmpireItem[]) => {
+    return [{}] as Item[]
 }

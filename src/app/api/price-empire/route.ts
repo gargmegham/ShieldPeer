@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-import { fetchInventoryFromPriceEmpire } from "@/utils/price-empire"
+import { fetchInventoryFromPriceEmpire, formatItems } from "@/utils/price-empire"
 import { getSupabaseServiceClient } from "@/utils/supabase"
 
 import type { Setting } from "@/types/database"
@@ -21,6 +21,7 @@ export async function POST() {
                 user_id: setting.user_id,
             })
             const items = inventory.items
+            const foramttedItems = formatItems(items)
         } catch (error: any) {
             console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
         }

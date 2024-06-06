@@ -9,6 +9,7 @@ import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { ColumnDef } from "@tanstack/react-table"
 import toast from "react-hot-toast"
 import { BiSolidErrorAlt } from "react-icons/bi"
+import { FaExternalLinkAlt } from "react-icons/fa"
 import { LuBadgeCheck } from "react-icons/lu"
 import { MdErrorOutline } from "react-icons/md"
 
@@ -71,8 +72,9 @@ export const columns: ColumnDef<Log>[] = [
                     <Image
                         src={`https://community.cloudflare.steamstatic.com/economy/image/${log?.item_image ?? "N/A"}`}
                         alt="Waxpeer"
-                        className="size-8 bg-neutral-200 rounded-lg"
+                        className="size-10 bg-neutral-200 rounded-lg"
                         width={32}
+                        loading="lazy"
                         height={32}
                     />
                     <div className="flex gap-x-1">
@@ -98,7 +100,24 @@ export const columns: ColumnDef<Log>[] = [
             )
         },
         cell: ({ row }) => {
-            return <div className="font-medium px-4">{row.getValue("message")}</div>
+            const log = row.original
+            return (
+                <div className="font-medium px-4">
+                    <div>{log.message}</div>
+                    <div className="text-xs text-neutral-400">{log.type === "failure" && log?.meta_data?.error}</div>
+                    {log?.meta_data?.listing_id && (
+                        <div className="text-xs text-neutral-400">
+                            {" "}
+                            <Link
+                                href={`/listings/${log?.meta_data?.listing_id}`}
+                                className="text-amber-400 flex items-center gap-x-2"
+                            >
+                                Listing <FaExternalLinkAlt />
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            )
         },
     },
     {
