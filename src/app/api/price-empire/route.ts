@@ -42,11 +42,3 @@ export async function POST() {
     }
     return NextResponse.json({ status: 200 })
 }
-
-export async function GET(request: NextRequest) {
-    const requestUrl = new URL(request.url)
-    const appId = requestUrl.searchParams.get("app_id") ?? "730"
-    const days = requestUrl.searchParams.get("days") ?? "7"
-    const currency = requestUrl.searchParams.get("currency") ?? "USD"
-    return NextResponse.json({})
-}
