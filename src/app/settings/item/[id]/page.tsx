@@ -5,7 +5,7 @@ import { useParams } from "next/navigation"
 import React, { useEffect, useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { set, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { AiOutlineEdit } from "react-icons/ai"
 import { IoSettingsOutline } from "react-icons/io5"
