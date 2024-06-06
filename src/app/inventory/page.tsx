@@ -9,11 +9,13 @@ import { CgMediaLive } from "react-icons/cg"
 import { FaRegPauseCircle } from "react-icons/fa"
 import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
+import { SiGunicorn } from "react-icons/si"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 import { cn } from "@/utils/cn"
 import { formatItems } from "@/utils/price-empire"
@@ -111,18 +113,30 @@ export default function Inventory() {
                     : inventory
                 ).map((item) => (
                     <Card key={item.asset_id} className="relative py-6">
-                        <div className="px-6 flex items-center gap-x-2 text-xs">
+                        <div className="px-6 flex items-center text-xs justify-between">
                             {item.is_active ? (
-                                <>
+                                <div className="flex items-center gap-x-2">
                                     <CgMediaLive className="text-green-300 animate-pulse" />
                                     Active
-                                </>
+                                </div>
                             ) : (
-                                <>
+                                <div className="flex items-center gap-x-2">
                                     <FaRegPauseCircle className="text-red-500" />
                                     Inactive
-                                </>
+                                </div>
                             )}
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <div className="rounded-full border border-yellow-600/30 p-1">
+                                            <SiGunicorn color={item.rarity_color} className="size-4" />
+                                        </div>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>Rarity Color</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
                         </div>
                         <CardContent className="pt-2 pb-4">
                             <div className="flex justify-center items-center">
@@ -140,23 +154,35 @@ export default function Inventory() {
                             <CardTitle className="truncate pr-4 text-sm text-neutral-300">
                                 {item?.name ?? item.market_hash_name}
                             </CardTitle>
+                            <CardDescription>{item?.exterior ?? "N/A"}</CardDescription>
                         </CardHeader>
-                        <div className="px-6 pt-2 space-y-1">
+                        <div className="px-6 mt-2 space-y-1">
                             {setting.price_empire_source && (
                                 <div className="flex gap-x-2">
                                     <div className="text-neutral-500 underline decoration-wavy">
                                         {setting.price_empire_source[0].toLocaleUpperCase()}
                                         {setting.price_empire_source.slice(1)}
                                     </div>
-                                    <div className="font-extrabold text-neutral-200 font-bricolage">${item.price}</div>
+                                    <div className="font-extrabold text-neutral-200 font-bricolage">
+                                        {item.price.toLocaleString("en-US", {
+                                            style: "currency",
+                                            currency: "USD",
+                                        })}
+                                    </div>
                                 </div>
                             )}
-                            {item.float && (
-                                <div className="flex gap-x-2 text-sm">
-                                    <div className="text-neutral-500">Float</div>
-                                    <div className="font-extrabold text-neutral-200">{item.float.toFixed(5)}</div>
+                            <div className="flex gap-x-2 text-sm">
+                                <div className="text-neutral-500">Float</div>
+                                <div className="font-extrabold text-neutral-200">
+                                    {item?.float?.toFixed(5) ?? "N/A"}
                                 </div>
-                            )}
+                            </div>
+                        </div>
+                        <div className="px-6 mt-4 w-full">
+                            <Button className="w-full relative" size="lg" variant="outline">
+                                Settings
+                                <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
+                            </Button>
                         </div>
                     </Card>
                 ))}
