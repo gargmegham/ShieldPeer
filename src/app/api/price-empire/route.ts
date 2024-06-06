@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-import { fetchInventoryFromPriceEmpire, formatItems } from "@/utils/price-empire"
+import { fetchInventoryFromPriceEmpire, fetchPriceHistoryFromPriceEmpire, formatItems } from "@/utils/price-empire"
 import { getSupabaseServiceClient } from "@/utils/supabase"
 
 import type { Item, Setting } from "@/types/database"
-import type { Inventory as PriceEmpireInventory } from "@/types/price-empire"
+import type { Inventory as PriceEmpireInventory, PriceHistory } from "@/types/price-empire"
 
 export async function POST() {
     const supabase = getSupabaseServiceClient()
@@ -12,6 +12,7 @@ export async function POST() {
     for (const setting of data as Setting[]) {
         try {
             const inventory: PriceEmpireInventory = await fetchInventoryFromPriceEmpire(setting)
+            const priceHistory: PriceHistory = await fetchPriceHistoryFromPriceEmpire(setting)
             await supabase.from("SteamUser").upsert(
                 {
                     steam_id: inventory.user.steam64Id,
@@ -33,4 +34,12 @@ export async function POST() {
         }
     }
     return NextResponse.json({ status: 200 })
+}
+
+export async function GET(request: NextRequest) {
+    const requestUrl = new URL(request.url)
+    const appId = requestUrl.searchParams.get("app_id") ?? "730"
+    const days = requestUrl.searchParams.get("days") ?? "7"
+    const currency = requestUrl.searchParams.get("currency") ?? "USD"
+    return NextResponse.json({})
 }

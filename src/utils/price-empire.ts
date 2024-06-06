@@ -1,5 +1,5 @@
 import { Item, Setting } from "@/types/database"
-import type { Item as PriceEmpireItem } from "@/types/price-empire"
+import type { Item as PriceEmpireItem, PriceHistory } from "@/types/price-empire"
 
 export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     const apiKey = setting.price_empire_key
@@ -78,4 +78,41 @@ export const formatItems = (items: PriceEmpireItem[], setting: Setting, isDemo?:
             d: item.d,
         }
     }) as Item[]
+}
+
+export const fetchPriceHistoryFromPriceEmpire = async (setting: Setting) => {
+    const apiKey = setting.price_empire_key
+    if (!apiKey) {
+        const error = new Error()
+        error.name = "MissingAPIKey"
+        error.message = "Price Empire"
+        throw error
+    }
+    const source = setting.price_empire_source
+    if (!source) {
+        const error = new Error()
+        error.name = "MissingSource"
+        error.message = "Price Empire"
+        throw error
+    }
+    const apiURLBase = "https://api.pricempire.com/v3/items/prices/history"
+    const params = new URLSearchParams({
+        api_key: apiKey,
+        source,
+    })
+    const apiURL = `${apiURLBase}?${params.toString()}`
+    let requestOptions = {
+        method: "GET",
+        headers: {
+            accept: "application/json",
+        },
+    }
+    const response = await fetch(apiURL, requestOptions)
+    if (!response.ok) {
+        const error = new Error()
+        error.name = "PriceEmpireError"
+        error.message = `Failed to fetch price history from Price Empire: ${response.statusText}`
+        throw error
+    }
+    return await response.json()
 }
