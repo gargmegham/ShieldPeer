@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 
 import { createClient } from "@/utils/supabase"
 
+const exemptedPaths = ["/home", "/auth", "/api/auth", "/api/price-empire", "/tos", "/privacy-policy"]
+
 export const config = {
     matcher: [
         /*
@@ -21,14 +23,7 @@ export async function middleware(request: NextRequest) {
     const requestPath = request.nextUrl.pathname
     const supabase = createClient()
     const { data: session } = await supabase.auth.getSession()
-    if (
-        session?.session === null &&
-        !requestPath.startsWith("/home") &&
-        !requestPath.startsWith("/auth") &&
-        !requestPath.startsWith("/api/auth") &&
-        !requestPath.startsWith("/tos") &&
-        !requestPath.startsWith("/privacy-policy")
-    ) {
+    if (session?.session === null && !exemptedPaths.some((path) => requestPath.startsWith(path))) {
         // Redirect to /home if not logged in and not on /home or /auth
         const requestUrl = new URL(request.url)
         return NextResponse.redirect(requestUrl.origin + "/home")
