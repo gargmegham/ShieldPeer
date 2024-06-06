@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { createClient } from "@/utils/supabase"
+import { getSupabaseClient } from "@/utils/supabase"
 
 import type { Setting } from "@/types/database"
 
 export async function GET() {
-    const supabase = createClient()
+    const supabase = getSupabaseClient()
     const { data } = await supabase.from("Settings").select("*").single()
     return NextResponse.json(data as Setting)
 }
 
 export async function POST(request: NextRequest) {
-    const supabase = createClient()
+    const supabase = getSupabaseClient()
     const payload: Setting = await request.json()
     const { data: user } = await supabase.auth.getUser()
     if (user?.user?.id) {

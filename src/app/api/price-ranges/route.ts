@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { createClient } from "@/utils/supabase"
+import { getSupabaseClient } from "@/utils/supabase"
 
 import type { PriceRange } from "@/types/database"
 
 export async function GET() {
-    const supabase = createClient()
+    const supabase = getSupabaseClient()
     const { data } = await supabase.from("PriceRange").select("*")
     return NextResponse.json(data as PriceRange[])
 }
 
 export async function POST(request: NextRequest) {
-    const supabase = createClient()
+    const supabase = getSupabaseClient()
     const payload = await request.json()
     const { data: user } = await supabase.auth.getUser()
     if (user?.user?.id) {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-    const supabase = createClient()
+    const supabase = getSupabaseClient()
     const payload = await request.json()
     if (!payload.id) {
         return NextResponse.json({ message: "Please provide an ID." }, { status: 400 })
@@ -31,7 +31,7 @@ export async function PUT(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-    const supabase = createClient()
+    const supabase = getSupabaseClient()
     const { searchParams } = new URL(request.url)
     if (!searchParams.has("id")) {
         return NextResponse.json({ message: "Please provide an ID." }, { status: 400 })
