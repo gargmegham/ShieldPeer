@@ -2,7 +2,7 @@
     "crons": [
         {
             "path": "/api/price-empire",
-            "schedule": "0 * * * *"
+            "schedule": "0 0 * * *"
         }
     ]
 }
