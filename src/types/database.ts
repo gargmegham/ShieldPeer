@@ -86,6 +86,7 @@ export interface Listing {
     price: number
     created_at: string
     updated_at: string
+    item: Item
 }
 
 export interface Log {
