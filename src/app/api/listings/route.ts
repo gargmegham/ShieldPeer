@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server"
 
+import { Waxpeer } from "waxpeer"
+
 import { getSupabaseClient } from "@/utils/supabase"
-import { deleteAllFromWaxpeer } from "@/utils/waxpeer"
 
 import type { Listing } from "@/types/database"
 
@@ -23,14 +24,17 @@ export async function DELETE() {
     if (!settings || !settings?.waxpeer_key)
         return NextResponse.json({ message: "Waxpeer API key not set in settings" }, { status: 400 })
     try {
-        await deleteAllFromWaxpeer(settings?.waxpeer_key)
+        const waxpeer = new Waxpeer(settings?.waxpeer_key)
+        await waxpeer.removeAll()
     } catch (err: any) {
+        const response = err?.response?.data
+        const status_code = err?.response?.status
         return NextResponse.json(
             {
-                message: "Failed to delete items from Waxpeer",
-                error: err?.message ?? err.toString(),
+                message: "Failed to delete item from Waxpeer",
+                error: response?.msg ?? "Unknown error",
             },
-            { status: 500 }
+            { status: status_code ?? 500 }
         )
     }
     const { error } = await await supabase.from("Listing").delete()
