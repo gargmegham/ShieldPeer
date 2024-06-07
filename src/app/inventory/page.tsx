@@ -182,7 +182,7 @@ export default function Inventory() {
                                 <div className="flex justify-center items-center">
                                     <Image
                                         src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image}`}
-                                        alt="Waxpeer"
+                                        alt={item.name ?? item.market_hash_name}
                                         className="bg-neutral-800 rounded-lg p-2"
                                         loading="lazy"
                                         width={245}

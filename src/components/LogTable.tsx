@@ -71,7 +71,7 @@ export const columns: ColumnDef<Log>[] = [
                 <div className="flex px-4 items-center gap-2">
                     <Image
                         src={log?.image}
-                        alt="Waxpeer"
+                        alt={log?.name ?? "N/A"}
                         className="size-10 bg-neutral-200 rounded-lg"
                         width={32}
                         loading="lazy"

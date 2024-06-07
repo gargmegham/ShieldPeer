@@ -3,13 +3,14 @@ import Link from "next/link"
 
 import React from "react"
 
-import integrate from "@/assets/icons/integrate.svg"
-import priceEmpire from "@/assets/logo/price-empire.svg"
-import waxpeer from "@/assets/logo/waxpeer.svg"
-
 import Spotlight from "@/components/ui/spotlight"
 
 import TestimonialsAvatars from "@/components/Landing/TestimonialsAvatars"
+
+import integrate from "@/assets/icons/integrate.svg"
+import priceEmpire from "@/assets/logo/price-empire.svg"
+import steam from "@/assets/logo/steam.svg"
+import waxpeer from "@/assets/logo/waxpeer.svg"
 
 export default function Hero() {
     return (
@@ -31,14 +32,15 @@ export default function Hero() {
                 </p>
                 <p className="mt-4 flex justify-center space-x-2">
                     <Image src={integrate} alt="Integrate" width={100} height={100} className="w-20 h-20" />
+                    <Image src={steam} alt="steam" width={100} height={100} className="w-20 h-20" />
                     <Image
                         src={priceEmpire}
-                        alt="Integrate"
+                        alt="priceEmpire"
                         width={100}
                         height={100}
                         className="w-20 h-20 rounded-full p-2 border border-neutral-300/[0.3]"
                     />
-                    <Image src={waxpeer} alt="Integrate" width={100} height={100} className="w-20 h-20" />
+                    <Image src={waxpeer} alt="waxpeer" width={100} height={100} className="w-20 h-20" />
                 </p>
                 <p className="my-4 flex justify-center space-x-2">
                     <a
