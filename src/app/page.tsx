@@ -26,6 +26,21 @@ export default function Dashboard() {
     const [showDemo, setShowDemo] = useState(false)
     const [setting, setSetting] = useState<Setting>({} as Setting)
     const [user, setUser] = useState<Inventory["user"]>({} as Inventory["user"])
+    const refreshListings = () => {
+        setLoading(true)
+        fetch("/api/listings")
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data) return
+                setListings(data)
+            })
+            .catch(() => {
+                toast.error("Failed to fetch listings")
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
     // fetch settings
     useEffect(() => {
         fetch("/api/settings")
@@ -52,18 +67,7 @@ export default function Dashboard() {
     }, [])
     // Fetch listings
     useEffect(() => {
-        fetch("/api/listings")
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setListings(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch listings")
-            })
-            .finally(() => {
-                setLoading(false)
-            })
+        refreshListings()
         fetch("/demo/listings.json")
             .then((res) => res.json())
             .then((data) => {
@@ -114,13 +118,13 @@ export default function Dashboard() {
                 </Card>
             ) : listings.length === 0 && showDemo ? (
                 <div className="space-y-8">
-                    <Statistics showDemo={true} listings={demoListings} />
-                    <Listings listings={demoListings} setting={setting} />
+                    <Statistics showDemo={true} listings={demoListings} refreshListings={refreshListings} />
+                    <Listings listings={demoListings} setting={setting} refreshListings={refreshListings} />
                 </div>
             ) : (
                 <div className="space-y-8">
-                    <Statistics setting={setting} user={user} listings={listings} />
-                    <Listings listings={listings} setting={setting} />
+                    <Statistics setting={setting} user={user} listings={listings} refreshListings={refreshListings} />
+                    <Listings listings={listings} setting={setting} refreshListings={refreshListings} />
                 </div>
             )}
         </main>

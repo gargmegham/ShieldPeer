@@ -3,6 +3,11 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import React, { useState } from "react"
+
+import { TrashIcon } from "@radix-ui/react-icons"
+import toast from "react-hot-toast"
+import { BiSync } from "react-icons/bi"
 import { CgMediaLive } from "react-icons/cg"
 import { FaRegPauseCircle } from "react-icons/fa"
 import { MdSettings } from "react-icons/md"
@@ -13,13 +18,37 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 import type { Listing, Setting } from "@/types/database"
 
-const Listings = ({ listings, setting }: { setting: Setting; listings: Listing[] }) => {
+import { Button } from "./ui/button"
+
+const Listings = ({
+    listings,
+    setting,
+    refreshListings,
+}: {
+    setting: Setting
+    listings: Listing[]
+    refreshListings: () => void
+}) => {
+    const [deleting, setDeleting] = useState(false)
+    const removeListing = async (id: string) => {
+        try {
+            setDeleting(true)
+            await fetch(`/api/listings/${id}`, {
+                method: "DELETE",
+            })
+            refreshListings()
+        } catch (err: any) {
+            toast.error(err?.message ?? "Failed to delete item")
+        } finally {
+            setDeleting(false)
+        }
+    }
     return (
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 rounded-3xl">
             {listings
                 .sort((a, b) => (a.price > b.price ? -1 : 1))
                 .map((listing) => (
-                    <Card key={listing.item.asset_id} className="relative py-6 max-h-[480px]">
+                    <Card key={listing.item.asset_id} className="relative py-6 max-h-[510px]">
                         <div className="px-6 flex items-center text-xs justify-between">
                             <TooltipProvider>
                                 <Tooltip>
@@ -120,6 +149,21 @@ const Listings = ({ listings, setting }: { setting: Setting; listings: Listing[]
                                 Details
                                 <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
                             </Link>
+                        </div>
+                        <div className="px-6 mt-4 w-full relative">
+                            <Button
+                                variant={"destructive"}
+                                className="w-full bg-neutral-900 flex items-center gap-x-2"
+                                onClick={() => removeListing(listing.item.asset_id)}
+                            >
+                                {deleting ? (
+                                    <BiSync className="animate-spin size-4 text-rose-500/90" />
+                                ) : (
+                                    <TrashIcon className="size-4 text-rose-500/90" />
+                                )}
+                                Remove
+                                <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-rose-500 to-transparent h-px" />
+                            </Button>
                         </div>
                     </Card>
                 ))}

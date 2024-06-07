@@ -6,7 +6,9 @@ import { useEffect, useState } from "react"
 
 import { ResponsiveCalendar } from "@nivo/calendar"
 import { Pie } from "@nivo/pie"
+import { TrashIcon } from "@radix-ui/react-icons"
 import toast from "react-hot-toast"
+import { BiSync } from "react-icons/bi"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -18,6 +20,7 @@ import { formatItems } from "@/utils/price-empire"
 import type { Item, Listing, Setting } from "@/types/database"
 import { Inventory } from "@/types/price-empire"
 
+import { Button } from "./ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 
 const crunchGameWiseInventoryValue = (inventory: Item[]) => {
@@ -51,11 +54,13 @@ export default function Statistics({
     showDemo,
     user,
     setting,
+    refreshListings,
     listings,
 }: {
     showDemo?: boolean
     setting?: Setting
     user?: Inventory["user"]
+    refreshListings: () => void
     listings: Listing[]
 }) {
     const [inventory, setInventory] = useState<Item[]>([])
@@ -66,6 +71,21 @@ export default function Statistics({
             value: number
         }[]
     >([])
+
+    const [deleting, setDeleting] = useState(false)
+    const removeListings = async () => {
+        try {
+            setDeleting(true)
+            await fetch(`/api/listings`, {
+                method: "DELETE",
+            })
+            refreshListings()
+        } catch (err: any) {
+            toast.error(err?.message ?? "Failed to delete item")
+        } finally {
+            setDeleting(false)
+        }
+    }
     // fetch inventory
     useEffect(() => {
         fetch("/api/inventory")
@@ -107,7 +127,20 @@ export default function Statistics({
             })
     }, [])
     return (
-        <Card>
+        <Card className="relative">
+            <Button
+                variant={"destructive"}
+                className="bg-neutral-900 flex items-center gap-x-2 absolute top-4 right-4 text-xs"
+                onClick={removeListings}
+            >
+                {deleting ? (
+                    <BiSync className="animate-spin size-4 text-rose-500/90" />
+                ) : (
+                    <TrashIcon className="size-4 text-rose-500/90" />
+                )}
+                Remove All Listings
+                <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-rose-500 to-transparent h-px" />
+            </Button>
             <CardHeader>
                 <CardTitle>Dashboard</CardTitle>
                 <CardDescription>
