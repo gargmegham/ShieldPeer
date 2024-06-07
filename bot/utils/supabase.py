@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from dotenv import load_dotenv
 from supabase._async.client import AsyncClient, create_client
@@ -39,13 +40,15 @@ async def get_item_settings(client: AsyncClient, user_id: str, item_id: str):
             {
                 "user_id": user_id,
                 "item_id": item_id,
+                "is_active": True,
             }
         )
         .limit(1)
-        .single()
         .execute()
     )
-    return response.data
+    if len(response.data) == 0:
+        return None
+    return response.data[0]
 
 
 async def get_items(client: AsyncClient, user_id: str):
@@ -80,89 +83,73 @@ async def get_listings(client: AsyncClient, user_id: str):
     return response.data
 
 
-async def insert_log(
+async def insert_logs(
     client: AsyncClient,
-    user_id: str,
-    name: str,
-    message: str,
-    type: str,
-    image: str,
-    meta_data: dict = {},
+    logs: list,
 ):
     """
-    Insert a log
-    @param user_id: The user id
-    @param name: The name of the associated item
-    @param type: The type of the log, e.g. 'success', 'failure', 'caution'
-    @param message: The message of the log
-    @param image: The image of the item
-    @param meta_data: The meta data of the log, can contain error, or listing_id
+    Insert logs into the database
+    @param logs: The logs to insert
     @param client: The Supabase client
     """
-    response = (
-        await client.table("Logs")
-        .insert(
-            [
-                {
-                    "user_id": user_id,
-                    "name": name,
-                    "message": message,
-                    "type": type,
-                    "image": image,
-                    "meta_data": meta_data,
-                }
-            ]
-        )
-        .execute()
-    )
+    response = await client.table("Logs").insert(logs).execute()
     return response.data
 
 
-async def insert_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
+async def insert_unique_logs(
+    client: AsyncClient,
+    logs: list,
+):
     """
-    Insert a listing
-    @param user_id: The user id
-    @param item_id: The item id
-    @param price: The price of the item
+    Insert logs into the database
+    * Only insert logs that are not already in the database for the last hour
+    @param logs: The logs to insert
     @param client: The Supabase client
     """
-    response = (
-        await client.table("Listing")
-        .insert(
-            [
-                {
-                    "user_id": user_id,
-                    "item_id": item_id,
-                    "price": price,
-                    "updated_at": "now()",  # Update the timestamp
-                }
-            ]
+    unique_logs = set()
+    logs_to_insert = []
+    for log in logs:
+        if log["message"] in unique_logs:
+            continue
+        # find the last log with the same message
+        last_log = (
+            await client.table("Logs")
+            .select("*")
+            .eq("user_id", log["user_id"])
+            .eq("message", log["message"])
+            .order("created_at", desc=True)
+            .limit(1)
+            .execute()
         )
-        .execute()
-    )
+        if len(last_log.data) == 0:
+            logs_to_insert.append(log)
+        else:
+            last_log = last_log.data[0]
+            # if the last log was more than 1 hour ago
+            if (datetime.now() - last_log["created_at"]).total_seconds() > 3600:
+                logs_to_insert.append(log)
+        unique_logs.add(log["message"])
+    response = await client.table("Logs").insert(logs_to_insert).execute()
     return response.data
 
 
-async def update_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
+async def insert_listings(client: AsyncClient, listings: list):
     """
-    Update a listing
-    @param user_id: The user id
-    @param item_id: The item id
-    @param price: The price of the item
+    Insert listings into the database
+    @param listings: The listings to insert
     @param client: The Supabase client
     """
-    response = (
-        await client.table("Listing")
-        .update(
-            {
-                "price": price,
-                "updated_at": "now()",  # Update the timestamp
-            }
-        )
-        .eq("user_id", user_id)
-        .eq("item_id", item_id)
-        .execute()
-    )
+    response = await client.table("Listing").insert(listings).execute()
+    return response.data
+
+
+async def update_listings(client: AsyncClient, listings):
+    """
+    Update listings in the database
+    @param listings: The listings to update contains id, price, updated_at
+    @param client: The Supabase client
+    """
+    response = await client.table("Listing").upsert(listings).execute()
     return response.data
 
 
@@ -183,3 +170,39 @@ async def get_last_waxpeer_log(client: AsyncClient, user_id: str):
     if len(response.data) == 0:
         return None
     return response.data[0]
+
+
+async def is_item_in_my_inventory(client: AsyncClient, user_id: str, asset_id: str):
+    """
+    Check if the item is in the user's inventory
+    @param user_id: The user id
+    @param asset_id: The asset id i.e. steam id
+    @param client: The Supabase client
+    @returns bool
+    """
+    response = (
+        await client.table("Items")
+        .select("*")
+        .match(
+            {
+                "user_id": user_id,
+                "asset_id": asset_id,
+            }
+        )
+        .execute()
+    )
+    return len(response.data) > 0
+
+
+async def get_price_ranges(client: AsyncClient, user_id: str):
+    """
+    Get the price ranges for a user
+    @param user_id: The user id
+    @param client: The Supabase client
+    """
+    response = (
+        await client.table("PriceRange").select("*").eq("user_id", user_id).execute()
+    )
+    if response.data is None:
+        return []
+    return response.data
