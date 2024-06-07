@@ -119,7 +119,7 @@ export const fetchPriceHistoryFromPriceEmpire = async (setting: Setting) => {
     return await response.json()
 }
 
-export const cronJob = async () => {
+export const priceEmpire = async () => {
     const supabase = getSupabaseServiceClient()
     const { data } = await supabase.from("Settings").select("*")
     for (const setting of data as Setting[]) {
