@@ -9,7 +9,7 @@ const config = {
         // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
         id: "30e2a2f2-6d09-4207-bac4-561ae9ebd38e",
         // Hide Crisp by default, except on route "/". Crisp is toggled with <ButtonSupport/>. If you want to show Crisp on every routes, just remove this below
-        onlyShowOnRoutes: ["/"],
+        onlyShowOnRoutes: ["/", "/auth", "/settings", "/logs"],
     },
     mailgun: {
         // subdomain to use when sending emails, if you don't have a subdomain, just remove it. Highly recommended to have one (i.e. mg.yourdomain.com or mail.yourdomain.com)
