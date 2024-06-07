@@ -15,7 +15,7 @@ import type { Listing, Setting } from "@/types/database"
 
 const Listings = ({ listings, setting }: { setting: Setting; listings: Listing[] }) => {
     return (
-        <div className="grid bg-grid-small-white/10 gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-neutral-950 p-6 rounded-3xl">
+        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 rounded-3xl">
             {listings
                 .sort((a, b) => (a.price > b.price ? -1 : 1))
                 .map((listing) => (

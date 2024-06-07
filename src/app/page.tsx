@@ -15,6 +15,7 @@ import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 
 import Listings from "@/components/Listings"
+import Statistics from "@/components/Statistics"
 
 import { cn } from "@/utils/cn"
 
@@ -125,9 +126,15 @@ export default function Dashboard() {
                     </CardContent>
                 </Card>
             ) : listings.length === 0 && showDemo ? (
-                <Listings listings={demoListings} setting={setting} />
+                <div className="space-y-8">
+                    <Statistics showDemo={true} />
+                    <Listings listings={demoListings} setting={setting} />
+                </div>
             ) : (
-                <Listings listings={listings} setting={setting} />
+                <div className="space-y-8">
+                    <Statistics setting={setting} />
+                    <Listings listings={listings} setting={setting} />
+                </div>
             )}
         </main>
     )
