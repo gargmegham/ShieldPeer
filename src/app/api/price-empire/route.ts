@@ -32,12 +32,14 @@ export async function POST() {
             })
             await supabase.from("Logs").insert({
                 name: "Price Empire",
+                user_id: setting.user_id,
                 message: "Successfully fetched inventory",
                 type: "success",
                 image: "https://www.shieldpeer.in/price-empires.svg",
             })
         } catch (error: any) {
             await supabase.from("Logs").insert({
+                user_id: setting.user_id,
                 name: "Price Empire",
                 message: "Failed to fetch inventory",
                 type: "failure",
@@ -54,6 +56,7 @@ export async function POST() {
                 price_history: priceHistory,
             })
             await supabase.from("Logs").insert({
+                user_id: setting.user_id,
                 name: "Price Empire",
                 message: "Successfully fetched price history",
                 type: "success",
@@ -62,6 +65,7 @@ export async function POST() {
         } catch (error: any) {
             await supabase.from("Logs").insert({
                 name: "Price Empire",
+                user_id: setting.user_id,
                 message: "Failed to fetch price history",
                 type: "failure",
                 image: "https://www.shieldpeer.in/price-empires.svg",
