@@ -1,23 +1,16 @@
 import json
-from dataclasses import dataclass
 
 import httpx
 
 
-@dataclass
-class ItemsType:
-    id: int
-    price: float
-
-
-async def edit_listing_price(items: ItemsType, apiKey: str):
+async def edit_listing_price(items, apiKey: str):
     """
     Update the price of the item on Waxpeer
     *warning* has rate limit of 2 requests per 120 seconds
     @param items: The items to update
     @param apiKey: The Waxpeer API key
     """
-    payload = {"items": [{"item_id": item.id, "price": item.price} for item in items]}
+    payload = {"items": items}
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     async with httpx.AsyncClient() as client:
         response = await client.post(
@@ -29,14 +22,14 @@ async def edit_listing_price(items: ItemsType, apiKey: str):
     return response.json()
 
 
-async def create_listing(items: ItemsType, apiKey: str):
+async def create_listing(items, apiKey: str):
     """
     Create a listing on Waxpeer
     *warning* has rate limit of 2 requests per 120 seconds
     @param items: The items to create
     @param apiKey: The Waxpeer API key
     """
-    payload = {"items": [{"item_id": item.id, "price": item.price} for item in items]}
+    payload = {"items": items}
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     async with httpx.AsyncClient() as client:
         response = await client.post(

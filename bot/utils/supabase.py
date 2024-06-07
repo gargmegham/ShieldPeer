@@ -18,40 +18,66 @@ async def get_supabase_client() -> AsyncClient:
 
 async def get_general_settings(client: AsyncClient):
     """
-    Get the general settings for all users
+    Get the general settings for all users where is_running is True and waxpeer_key is not null
+    @param user_id: The user id
     @param client: The Supabase client
     """
-    response = await client.table("Settings").select("*").execute()
+    response = (
+        await client.table("Settings")
+        .select("*")
+        .eq("is_running", True)
+        .neq("waxpeer_key", None)
+        .execute()
+    )
+    response.raise_when_api_error()
     return response.get("data", [{}])
 
 
-async def get_item_settings(client: AsyncClient):
+async def get_item_settings(client: AsyncClient, user_id: str, item_id: str):
     """
-    Get the settings for all items
+    Get settings for an item
     @param user_id: The user id
     @param item_id: The item id
     @param client: The Supabase client
     """
-    response = await client.table("ItemSettings").select("*").execute()
+    response = (
+        await client.table("ItemSettings")
+        .select("*")
+        .match(
+            {
+                "user_id": user_id,
+                "item_id": item_id,
+            }
+        )
+        .limit(1)
+        .single()
+        .execute()
+    )
+    response.raise_when_api_error()
     return response.get("data", {})
 
 
-async def get_items(client: AsyncClient):
+async def get_items(client: AsyncClient, user_id: str):
     """
-    Get all the items
-    @param client: The Supabase client
-    """
-    response = await client.table("Items").select("*").execute()
-    return response.get("data", [])
-
-
-async def get_listings(client: AsyncClient):
-    """
-    Get all the listings
+    Get all the items for a user
     @param user_id: The user id
     @param client: The Supabase client
     """
-    response = await client.table("Listing").select("*").execute()
+    response = await client.table("Items").select("*").eq("user_id", user_id).execute()
+    response.raise_when_api_error()
+    return response.get("data", [])
+
+
+async def get_listings(client: AsyncClient, user_id: str):
+    """
+    Get all the listings for a user
+    @param user_id: The user id
+    @param client: The Supabase client
+    """
+    response = (
+        await client.table("Listing").select("*").eq("user_id", user_id).execute()
+    )
+    response.raise_when_api_error()
     return response.get("data", [])
 
 
@@ -74,7 +100,7 @@ async def insert_log(
     @param meta_data: The meta data of the log, can contain error, or listing_id
     @param client: The Supabase client
     """
-    return (
+    response = (
         await client.table("Logs")
         .insert(
             [
@@ -90,6 +116,8 @@ async def insert_log(
         )
         .execute()
     )
+    response.raise_when_api_error()
+    return response.get("data")
 
 
 async def insert_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
@@ -100,7 +128,7 @@ async def insert_listing(client: AsyncClient, user_id: str, item_id: str, price:
     @param price: The price of the item
     @param client: The Supabase client
     """
-    return (
+    response = (
         await client.table("Listing")
         .insert(
             [
@@ -114,6 +142,8 @@ async def insert_listing(client: AsyncClient, user_id: str, item_id: str, price:
         )
         .execute()
     )
+    response.raise_when_api_error()
+    return response.get("data")
 
 
 async def update_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
@@ -124,7 +154,7 @@ async def update_listing(client: AsyncClient, user_id: str, item_id: str, price:
     @param price: The price of the item
     @param client: The Supabase client
     """
-    return (
+    response = (
         await client.table("Listing")
         .update(
             {
@@ -136,3 +166,5 @@ async def update_listing(client: AsyncClient, user_id: str, item_id: str, price:
         .eq("item_id", item_id)
         .execute()
     )
+    response.raise_when_api_error()
+    return response.get("data")
