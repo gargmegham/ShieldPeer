@@ -12,6 +12,7 @@ export async function POST() {
     const { data } = await supabase.from("Settings").select("*")
     for (const setting of data as Setting[]) {
         try {
+            console.info(`Fetching inventory for user ${setting.user_id}...`)
             const inventory: PriceEmpireInventory = await fetchInventoryFromPriceEmpire(setting)
             await supabase.from("SteamUser").upsert(
                 {
@@ -36,16 +37,17 @@ export async function POST() {
                 image: "https://www.shieldpeer.in/price-empires.svg",
             })
         } catch (error: any) {
-            await supabase.from("Logs").insert({
+            const { error: logError } = await supabase.from("Logs").insert({
                 name: "Price Empire",
                 message: "Failed to fetch inventory",
                 type: "failure",
                 image: "https://www.shieldpeer.in/price-empires.svg",
-                metadata: {
+                meta_data: {
                     error: error?.message ?? "Unknown error",
                 },
             })
-            console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
+            console.error(`${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
+            console.error(`Log error:`, logError)
         }
         try {
             const priceHistory: PriceHistory = await fetchPriceHistoryFromPriceEmpire(setting)
@@ -64,11 +66,11 @@ export async function POST() {
                 message: "Failed to fetch price history",
                 type: "failure",
                 image: "https://www.shieldpeer.in/price-empires.svg",
-                metadata: {
+                meta_data: {
                     error: error?.message ?? "Unknown error",
                 },
             })
-            console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
+            console.error(`${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
         }
     }
     console.info("Cron job finished.")
