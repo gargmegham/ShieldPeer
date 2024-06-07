@@ -31,7 +31,7 @@ async def cron():
                     },
                 )
     except Exception as err:
-        logger.error(f"An error occurred in cron: {err}", exc_info=True)
+        logger.error(f"An error occurred in cron:", exc_info=True)
 
 
 def main():
@@ -42,6 +42,6 @@ def main():
     except KeyboardInterrupt:
         logger.info("ShieldPeer Cron: service stopped")
     except Exception as err:
-        logger.error(f"ShieldPeer Cron: {err}")
+        logger.error(f"ShieldPeer Cron:", exc_info=True)
     finally:
         logger.info("ShieldPeer Cron: service stopped")
