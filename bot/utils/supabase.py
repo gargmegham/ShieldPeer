@@ -18,19 +18,11 @@ async def get_supabase_client() -> AsyncClient:
 
 async def get_general_settings(client: AsyncClient):
     """
-    Get the general settings for all users where is_running is True and waxpeer_key is not null
-    @param user_id: The user id
+    Get the general settings for all users
     @param client: The Supabase client
     """
-    response = (
-        await client.table("Settings")
-        .select("*")
-        .eq("is_running", True)
-        .neq("waxpeer_key", None)
-        .execute()
-    )
-    response.raise_when_api_error()
-    return response.get("data", [{}])
+    response = await client.table("Settings").select("*").execute()
+    return response.data
 
 
 async def get_item_settings(client: AsyncClient, user_id: str, item_id: str):
@@ -53,8 +45,7 @@ async def get_item_settings(client: AsyncClient, user_id: str, item_id: str):
         .single()
         .execute()
     )
-    response.raise_when_api_error()
-    return response.get("data", {})
+    return response.data
 
 
 async def get_items(client: AsyncClient, user_id: str):
@@ -64,8 +55,7 @@ async def get_items(client: AsyncClient, user_id: str):
     @param client: The Supabase client
     """
     response = await client.table("Items").select("*").eq("user_id", user_id).execute()
-    response.raise_when_api_error()
-    return response.get("data", [])
+    return response.data
 
 
 async def get_listings(client: AsyncClient, user_id: str):
@@ -77,8 +67,7 @@ async def get_listings(client: AsyncClient, user_id: str):
     response = (
         await client.table("Listing").select("*").eq("user_id", user_id).execute()
     )
-    response.raise_when_api_error()
-    return response.get("data", [])
+    return response.data
 
 
 async def insert_log(
@@ -88,7 +77,7 @@ async def insert_log(
     message: str,
     type: str,
     image: str,
-    meta_data: dict,
+    meta_data: dict = {},
 ):
     """
     Insert a log
@@ -116,8 +105,7 @@ async def insert_log(
         )
         .execute()
     )
-    response.raise_when_api_error()
-    return response.get("data")
+    return response.data
 
 
 async def insert_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
@@ -142,8 +130,7 @@ async def insert_listing(client: AsyncClient, user_id: str, item_id: str, price:
         )
         .execute()
     )
-    response.raise_when_api_error()
-    return response.get("data")
+    return response.data
 
 
 async def update_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
@@ -166,5 +153,4 @@ async def update_listing(client: AsyncClient, user_id: str, item_id: str, price:
         .eq("item_id", item_id)
         .execute()
     )
-    response.raise_when_api_error()
-    return response.get("data")
+    return response.data

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 
+import { priceEmpire } from "@/utils/price-empire"
 import { getSupabaseClient } from "@/utils/supabase"
 
 import type { Setting } from "@/types/database"

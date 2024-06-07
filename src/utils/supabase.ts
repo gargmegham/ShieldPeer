@@ -33,6 +33,7 @@ export function getSupabaseClient() {
     })
 }
 
-export const getSupabaseServiceClient = (): SupabaseClient => {
+export const getSupabaseServiceClient = (key?: string): SupabaseClient => {
+    if (key) return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key)
     return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 }

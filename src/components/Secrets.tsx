@@ -48,13 +48,6 @@ export default function Secrets({ setting }: { setting: Setting }) {
             .then(() => {
                 setIsEditing(false)
                 toast.success("API keys updated successfully.")
-                // try fetching inventory from PriceEmpire
-                fetch("/api/price-empire", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
             })
             .catch(() => {
                 toast.error("Failed to update API keys.")

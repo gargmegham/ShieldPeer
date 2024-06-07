@@ -1,5 +1,7 @@
+import { type SupabaseClient } from "@supabase/supabase-js"
+
 import { Item, Setting } from "@/types/database"
-import type { Item as PriceEmpireItem } from "@/types/price-empire"
+import type { Inventory as PriceEmpireInventory, Item as PriceEmpireItem, PriceHistory } from "@/types/price-empire"
 
 export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     const apiKey = setting.price_empire_key
@@ -114,4 +116,68 @@ export const fetchPriceHistoryFromPriceEmpire = async (setting: Setting) => {
         throw error
     }
     return await response.json()
+}
+
+export async function priceEmpire(supabase: SupabaseClient, setting: Setting) {
+    try {
+        const inventory: PriceEmpireInventory = await fetchInventoryFromPriceEmpire(setting)
+        await supabase.from("SteamUser").upsert(
+            {
+                steam_id: inventory.user.steam64Id,
+                name: inventory.user.name,
+                image: inventory.user.image,
+                country: inventory.user.country,
+                user_id: setting.user_id,
+            },
+            {
+                onConflict: "user_id",
+            }
+        )
+        const items: Item[] = formatItems(inventory.items, setting)
+        await supabase.from("Items").upsert(items, {
+            onConflict: "asset_id, user_id",
+        })
+        await supabase.from("Logs").insert({
+            name: "Price Empire",
+            user_id: setting.user_id,
+            message: "Successfully fetched inventory",
+            type: "success",
+            image: "https://www.shieldpeer.in/price-empire.svg",
+        })
+    } catch (error: any) {
+        await supabase.from("Logs").insert({
+            user_id: setting.user_id,
+            name: "Price Empire",
+            message: "Failed to fetch inventory",
+            type: "failure",
+            image: "https://www.shieldpeer.in/price-empire.svg",
+            meta_data: {
+                error: error?.message ?? "Unknown error",
+            },
+        })
+    }
+    try {
+        const priceHistory: PriceHistory = await fetchPriceHistoryFromPriceEmpire(setting)
+        await supabase.from("PriceHistory").insert({
+            price_history: priceHistory,
+        })
+        await supabase.from("Logs").insert({
+            user_id: setting.user_id,
+            name: "Price Empire",
+            message: "Successfully fetched price history",
+            type: "success",
+            image: "https://www.shieldpeer.in/price-empire.svg",
+        })
+    } catch (err: any) {
+        await supabase.from("Logs").insert({
+            name: "Price Empire",
+            user_id: setting.user_id,
+            message: "Failed to fetch price history",
+            type: "failure",
+            image: "https://www.shieldpeer.in/price-empire.svg",
+            meta_data: {
+                error: err?.message ?? "Unknown error",
+            },
+        })
+    }
 }
