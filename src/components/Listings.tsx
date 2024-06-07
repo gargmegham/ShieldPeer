@@ -48,7 +48,7 @@ const Listings = ({
             {listings
                 .sort((a, b) => (a.price > b.price ? -1 : 1))
                 .map((listing) => (
-                    <Card key={listing.item.asset_id} className="relative py-6 max-h-[510px]">
+                    <Card key={listing.item.asset_id} className="relative py-6 max-h-[526px]">
                         <div className="px-6 flex items-center text-xs justify-between">
                             <TooltipProvider>
                                 <Tooltip>
