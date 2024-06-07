@@ -1,14 +1,22 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL")
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")
+
+interface User {
+    email: string
+}
+
+interface WebhookPayload {
+    type: "INSERT"
+    table: string
+    record: User
+    schema: "public"
+    old_record: null
+}
 
 const handler = async (_request: Request): Promise<Response> => {
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
-    const result = await supabase.from("auth.users").select("email").order("created_at", { ascending: false }).limit(1)
-    const email = result.data?.[0]?.email ?? "No email found"
+    const payload: WebhookPayload = await _request.json()
+    const email = payload?.record?.email ?? "404"
     const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -20,12 +28,11 @@ const handler = async (_request: Request): Promise<Response> => {
             to: ["meghamgarg@gmail.com"],
             subject: "New Signup On ShieldPeer! 🚀",
             html: `
-Hi Megham,
-
-A new user just signed up on ShieldPeer with the email ${email}.
-
-Cheers,
-The ShieldPeer Team
+<div>
+          <h1>New Signup On ShieldPeer! 🚀</h1>
+          <div style='margin-top: 4px;'><strong>Email:</strong> ${email}</div>
+          <div style='margin-top: 4px;'><strong>Time:</strong> ${new Date().toISOString()}</div>
+</div>
 `,
         }),
     })
