@@ -79,3 +79,5 @@ export async function POST() {
     console.info("Cron job finished.")
     return NextResponse.json({ status: 200 })
 }
+
+export const maxDuration = 60 // 1 minute as per hobby plan
