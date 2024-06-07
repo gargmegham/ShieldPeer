@@ -18,7 +18,8 @@ async def edit_listing_price(items, apiKey: str):
             headers=headers,
             data=json.dumps(payload),
         )
-    response.raise_for_status()
+    if response.status_code != 200:
+        raise Exception(response.text)
     return response.json()
 
 
@@ -37,5 +38,6 @@ async def create_listing(items, apiKey: str):
             headers=headers,
             data=json.dumps(payload),
         )
-    response.raise_for_status()
+    if response.status_code != 200:
+        raise Exception(response.text)
     return response.json()
