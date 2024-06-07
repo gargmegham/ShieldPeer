@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from supabase import Client, create_client
+from supabase._async.client import AsyncClient, create_client
 
 load_dotenv()
 
@@ -9,54 +9,54 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
 
 
-def get_supabase_client() -> Client:
+async def get_supabase_client() -> AsyncClient:
     """
     Get the Supabase client
     """
-    return create_client(SUPABASE_URL, SUPABASE_KEY)
+    return await create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
-def get_general_settings(client: Client):
+async def get_general_settings(client: AsyncClient):
     """
     Get the general settings for all users
     @param client: The Supabase client
     """
-    response = client.table("Settings").select("*").execute()
+    response = await client.table("Settings").select("*").execute()
     return response.get("data", [{}])
 
 
-def get_item_settings(client: Client):
+async def get_item_settings(client: AsyncClient):
     """
     Get the settings for all items
     @param user_id: The user id
     @param item_id: The item id
     @param client: The Supabase client
     """
-    response = client.table("ItemSettings").select("*").execute()
+    response = await client.table("ItemSettings").select("*").execute()
     return response.get("data", {})
 
 
-def get_items(client: Client):
+async def get_items(client: AsyncClient):
     """
     Get all the items
     @param client: The Supabase client
     """
-    response = client.table("Items").select("*").execute()
+    response = await client.table("Items").select("*").execute()
     return response.get("data", [])
 
 
-def get_listings(client: Client):
+async def get_listings(client: AsyncClient):
     """
     Get all the listings
     @param user_id: The user id
     @param client: The Supabase client
     """
-    response = client.table("Listing").select("*").execute()
+    response = await client.table("Listing").select("*").execute()
     return response.get("data", [])
 
 
-def insert_log(
-    client: Client,
+async def insert_log(
+    client: AsyncClient,
     user_id: str,
     name: str,
     message: str,
@@ -75,7 +75,7 @@ def insert_log(
     @param client: The Supabase client
     """
     return (
-        client.table("Logs")
+        await client.table("Logs")
         .insert(
             [
                 {
@@ -92,7 +92,7 @@ def insert_log(
     )
 
 
-def insert_listing(client: Client, user_id: str, item_id: str, price: float):
+async def insert_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
     """
     Insert a listing
     @param user_id: The user id
@@ -101,7 +101,7 @@ def insert_listing(client: Client, user_id: str, item_id: str, price: float):
     @param client: The Supabase client
     """
     return (
-        client.table("Listing")
+        await client.table("Listing")
         .insert(
             [
                 {
@@ -116,7 +116,7 @@ def insert_listing(client: Client, user_id: str, item_id: str, price: float):
     )
 
 
-def update_listing(client: Client, user_id: str, item_id: str, price: float):
+async def update_listing(client: AsyncClient, user_id: str, item_id: str, price: float):
     """
     Update a listing
     @param user_id: The user id
@@ -125,7 +125,7 @@ def update_listing(client: Client, user_id: str, item_id: str, price: float):
     @param client: The Supabase client
     """
     return (
-        client.table("Listing")
+        await client.table("Listing")
         .update(
             {
                 "price": price,
