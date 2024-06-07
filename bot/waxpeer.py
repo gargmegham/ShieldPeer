@@ -1,5 +1,4 @@
 import time
-
 from logger import get_logger
 
 if __name__ == '__main__':
