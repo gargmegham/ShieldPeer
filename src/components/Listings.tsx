@@ -109,30 +109,32 @@ const Listings = ({
                             <div className="flex gap-2">
                                 <div className="text-neutral-400 underline decoration-wavy">Listed At</div>
                                 <div className="font-extrabold text-lime-300 font-bricolage">
+                                    {/* prices are to be divided by 1000 for waxpeer */}
                                     {listing.price
-                                        ? listing.price.toLocaleString("en-US", {
+                                        ? (listing.price / 1000).toLocaleString("en-US", {
                                               style: "currency",
                                               currency: "USD",
                                           })
                                         : "N/A"}
                                 </div>
                             </div>
-                            {setting.price_empire_source && (
-                                <div className="flex gap-2 text-sm">
-                                    <div className="text-neutral-500">
-                                        {setting.price_empire_source[0].toLocaleUpperCase()}
-                                        {setting.price_empire_source.slice(1)}
-                                    </div>
-                                    <div className="font-extrabold text-neutral-200 font-bricolage">
-                                        {listing.item.price
-                                            ? listing.item.price.toLocaleString("en-US", {
-                                                  style: "currency",
-                                                  currency: "USD",
-                                              })
-                                            : "N/A"}
-                                    </div>
+                            <div className="flex gap-2 text-sm">
+                                <div className="text-neutral-500">
+                                    {setting.price_empire_source
+                                        ? setting.price_empire_source[0].toLocaleUpperCase()
+                                        : "B"}
+                                    {setting.price_empire_source?.slice(1) ?? "uff"}
                                 </div>
-                            )}
+                                <div className="font-extrabold text-neutral-200 font-bricolage">
+                                    {/* prices are in cents */}
+                                    {listing.item.price
+                                        ? (listing.item.price / 100).toLocaleString("en-US", {
+                                              style: "currency",
+                                              currency: "USD",
+                                          })
+                                        : "N/A"}
+                                </div>
+                            </div>
                             <div className="flex gap-2 text-sm">
                                 <div className="text-neutral-500">Float</div>
                                 <div className="font-extrabold text-neutral-200">

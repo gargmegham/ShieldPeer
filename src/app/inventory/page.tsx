@@ -197,22 +197,23 @@ export default function Inventory() {
                                 <CardDescription>{item?.exterior ?? "N/A"}</CardDescription>
                             </CardHeader>
                             <div className="px-6 mt-2 space-y-1">
-                                {setting.price_empire_source && (
-                                    <div className="flex gap-2">
-                                        <div className="text-neutral-500 underline decoration-wavy">
-                                            {setting.price_empire_source[0].toLocaleUpperCase()}
-                                            {setting.price_empire_source.slice(1)}
-                                        </div>
-                                        <div className="font-extrabold text-neutral-200 font-bricolage">
-                                            {item.price
-                                                ? item.price.toLocaleString("en-US", {
-                                                      style: "currency",
-                                                      currency: "USD",
-                                                  })
-                                                : "N/A"}
-                                        </div>
+                                <div className="flex gap-2">
+                                    <div className="text-neutral-500 underline decoration-wavy">
+                                        {setting.price_empire_source
+                                            ? setting.price_empire_source[0].toLocaleUpperCase()
+                                            : "B"}
+                                        {setting.price_empire_source?.slice(1) ?? "uff"}
                                     </div>
-                                )}
+                                    <div className="font-extrabold text-neutral-200 font-bricolage">
+                                        {/* prices are in cents */}
+                                        {item.price
+                                            ? (item.price / 100).toLocaleString("en-US", {
+                                                  style: "currency",
+                                                  currency: "USD",
+                                              })
+                                            : "N/A"}
+                                    </div>
+                                </div>
                                 <div className="flex gap-2 text-sm">
                                     <div className="text-neutral-500">Float</div>
                                     <div className="font-extrabold text-neutral-200">

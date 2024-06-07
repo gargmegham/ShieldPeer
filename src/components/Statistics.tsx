@@ -30,7 +30,8 @@ const crunchGameWiseInventoryValue = (inventory: Item[]) => {
     inventory.forEach((item) => {
         if (!item.app_id) return
         if (!results[item.app_id.toString()]) results[item.app_id.toString()] = 0
-        results[item.app_id.toString()] += item.price ?? 0
+        // price is in cents
+        results[item.app_id.toString()] += item.price ? item.price / 100 : 0
     })
     return Object.entries(apps).map(([app_id, app]) => {
         return {
@@ -175,13 +176,13 @@ export default function Statistics({
                             <div className="font-extrabold text-neutral-200 font-bricolage">
                                 {showDemo
                                     ? demoInventory
-                                          .reduce((acc, item) => acc + (item.price ?? 0), 0)
+                                          .reduce((acc, item) => acc + (item.price ? item.price / 100 : 0), 0)
                                           .toLocaleString("en-US", {
                                               style: "currency",
                                               currency: "USD",
                                           })
                                     : inventory
-                                          .reduce((acc, item) => acc + (item.price ?? 0), 0)
+                                          .reduce((acc, item) => acc + (item.price ? item.price / 100 : 0), 0)
                                           .toLocaleString("en-US", {
                                               style: "currency",
                                               currency: "USD",
