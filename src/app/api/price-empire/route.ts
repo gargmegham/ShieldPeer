@@ -7,6 +7,7 @@ import type { Item, Setting } from "@/types/database"
 import type { Inventory as PriceEmpireInventory, PriceHistory } from "@/types/price-empire"
 
 export async function POST() {
+    console.info("Cron job for fetching Price Empire inventory and price history has started...")
     const supabase = getSupabaseServiceClient()
     const { data } = await supabase.from("Settings").select("*")
     for (const setting of data as Setting[]) {
@@ -70,5 +71,6 @@ export async function POST() {
             console.error(`Error ${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
         }
     }
+    console.info("Cron job finished.")
     return NextResponse.json({ status: 200 })
 }
