@@ -6,14 +6,14 @@ export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     if (!apiKey) {
         const error = new Error()
         error.name = "MissingAPIKey"
-        error.message = "Price empire API key is not set in settings"
+        error.message = "Missing PriceEmpire API Key in settings"
         throw error
     }
     const steamId = setting.steam_id
     if (!steamId) {
         const error = new Error()
         error.name = "MissingSteamID"
-        error.message = "Steam ID is not set in settings"
+        error.message = "Missing Steam ID in settings"
         throw error
     }
     const apiURLBase = `https://api.pricempire.com/v3/inventory/${steamId}`
@@ -31,7 +31,7 @@ export const fetchInventoryFromPriceEmpire = async (setting: Setting) => {
     if (!response.ok) {
         const error = new Error()
         error.name = "PriceEmpireError"
-        error.message = `Failed to fetch inventory from Price Empire: ${response.statusText}`
+        error.message = `Price Empire Response: ${response.statusText}`
         throw error
     }
     return await response.json()
@@ -84,14 +84,14 @@ export const fetchPriceHistoryFromPriceEmpire = async (setting: Setting) => {
     if (!apiKey) {
         const error = new Error()
         error.name = "MissingAPIKey"
-        error.message = "Price empire API key is not set in settings"
+        error.message = "Missing PriceEmpire API Key in settings"
         throw error
     }
     const source = setting.price_empire_source
     if (!source) {
         const error = new Error()
         error.name = "MissingSource"
-        error.message = "Price empire source is not set in settings"
+        error.message = "Missing PriceEmpire Source in settings"
         throw error
     }
     const apiURLBase = "https://api.pricempire.com/v3/items/prices/history"
@@ -110,7 +110,7 @@ export const fetchPriceHistoryFromPriceEmpire = async (setting: Setting) => {
     if (!response.ok) {
         const error = new Error()
         error.name = "PriceEmpireError"
-        error.message = `Failed to fetch price history from Price Empire: ${response.statusText}`
+        error.message = `Price Empire Response: ${response.statusText}`
         throw error
     }
     return await response.json()
