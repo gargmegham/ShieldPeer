@@ -37,7 +37,7 @@ export async function POST() {
                 image: "https://www.shieldpeer.in/price-empires.svg",
             })
         } catch (error: any) {
-            const { error: logError } = await supabase.from("Logs").insert({
+            await supabase.from("Logs").insert({
                 name: "Price Empire",
                 message: "Failed to fetch inventory",
                 type: "failure",
@@ -47,7 +47,6 @@ export async function POST() {
                 },
             })
             console.error(`${error?.name ?? "unknown"}: ${error?.message ?? "unknown"}`)
-            console.error(`Log error:`, logError)
         }
         try {
             const priceHistory: PriceHistory = await fetchPriceHistoryFromPriceEmpire(setting)
