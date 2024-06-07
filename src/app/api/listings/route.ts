@@ -20,7 +20,7 @@ export async function GET() {
 
 export async function DELETE() {
     const supabase = getSupabaseClient()
-    const { data: settings } = await supabase.from("Settings").select("*").single()
+    const { data: settings } = await supabase.from("Settings").select("*").limit(1).single()
     if (!settings || !settings?.waxpeer_key)
         return NextResponse.json({ message: "Waxpeer API key not set in settings" }, { status: 400 })
     try {

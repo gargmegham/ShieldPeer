@@ -6,7 +6,7 @@ import { getSupabaseClient } from "@/utils/supabase"
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     const supabase = getSupabaseClient()
-    const { data: settings } = await supabase.from("Settings").select("*").single()
+    const { data: settings } = await supabase.from("Settings").select("*").limit(1).single()
     if (!settings || !settings?.waxpeer_key)
         return NextResponse.json({ message: "Waxpeer API key not set in settings" }, { status: 400 })
     const id = params.id

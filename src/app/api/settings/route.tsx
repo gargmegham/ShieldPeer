@@ -6,7 +6,7 @@ import type { Setting } from "@/types/database"
 
 export async function GET() {
     const supabase = getSupabaseClient()
-    const { data, error } = await supabase.from("Settings").select("*").single()
+    const { data, error } = await supabase.from("Settings").select("*").limit(1).single()
     if (error) return NextResponse.json({ message: error.message }, { status: 500 })
     return NextResponse.json(data as Setting)
 }

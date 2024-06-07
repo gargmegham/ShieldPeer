@@ -7,7 +7,7 @@ import type { ItemSetting } from "@/types/database"
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     const supabase = getSupabaseClient()
     const id = params.id
-    const { data } = await supabase.from("ItemSettings").select("*").match({ item_id: id }).single()
+    const { data } = await supabase.from("ItemSettings").select("*").match({ item_id: id }).limit(1).single()
     return NextResponse.json(data as ItemSetting)
 }
 
