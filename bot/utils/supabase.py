@@ -50,11 +50,21 @@ async def get_item_settings(client: AsyncClient, user_id: str, item_id: str):
 
 async def get_items(client: AsyncClient, user_id: str):
     """
-    Get all the items for a user
+    Get all active items for a user
     @param user_id: The user id
     @param client: The Supabase client
     """
-    response = await client.table("Items").select("*").eq("user_id", user_id).execute()
+    response = (
+        await client.table("Items")
+        .select("*")
+        .match(
+            {
+                "user_id": user_id,
+                "is_active": True,
+            }
+        )
+        .execute()
+    )
     return response.data
 
 
@@ -154,3 +164,22 @@ async def update_listing(client: AsyncClient, user_id: str, item_id: str, price:
         .execute()
     )
     return response.data
+
+
+async def get_last_waxpeer_log(client: AsyncClient, user_id: str):
+    """
+    Get the last waxpeer log
+    @param user_id: The user id
+    @param client: The Supabase client
+    """
+    response = (
+        await client.table("Logs")
+        .select("*")
+        .eq("name", "Waxpeer")
+        .order("created_at", desc=True)
+        .limit(1)
+        .execute()
+    )
+    if len(response.data) == 0:
+        return None
+    return response.data[0]
