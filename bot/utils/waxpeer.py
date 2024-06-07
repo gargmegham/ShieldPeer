@@ -41,3 +41,17 @@ async def create_listing(items, apiKey: str):
     if response.status_code != 200:
         raise Exception(response.text)
     return response.json()
+
+
+async def search_items(name, apiKey):
+    """
+    Search for items on Waxpeer
+    """
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"https://api.waxpeer.com/v1/search-items-by-name?api={apiKey}&names={name}",
+            headers={"accept": "application/json", "Content-Type": "application/json"},
+        )
+    if response.status_code != 200:
+        raise Exception(response.text)
+    return response.json()
