@@ -1,4 +1,4 @@
-export const dummyBotStreak = [
+export const dummyBotStats = [
     {
         value: 320,
         day: "2024-06-29",

@@ -10,7 +10,7 @@ import toast from "react-hot-toast"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-import { dummyBotStreak, dummyGameWiseInventoryValue } from "@/constants/dummy"
+import { dummyBotStats, dummyGameWiseInventoryValue } from "@/constants/dummy"
 import { apps } from "@/constants/steam"
 
 import { formatItems } from "@/utils/price-empire"
@@ -60,6 +60,12 @@ export default function Statistics({
 }) {
     const [inventory, setInventory] = useState<Item[]>([])
     const [demoInventory, setDemoInventory] = useState<Item[]>([])
+    const [botStats, setBotStats] = useState<
+        {
+            day: string
+            value: number
+        }[]
+    >([])
     // fetch inventory
     useEffect(() => {
         fetch("/api/inventory")
@@ -70,6 +76,16 @@ export default function Statistics({
             })
             .catch(() => {
                 toast.error("Failed to fetch inventory")
+            })
+            .finally(() => {})
+        fetch("/api/logs/stats")
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data) return
+                setBotStats(data)
+            })
+            .catch(() => {
+                toast.error("Failed to fetch bot stats")
             })
             .finally(() => {})
         fetch("/demo/inventory.json")
@@ -161,7 +177,7 @@ export default function Statistics({
                         </div>
                     </div>
                     <ResponsiveCalendar
-                        data={dummyBotStreak}
+                        data={showDemo ? dummyBotStats : botStats}
                         from="2024-02-01"
                         to="2024-07-12"
                         emptyColor="#1a1919"
@@ -186,7 +202,7 @@ export default function Statistics({
                                 <div className="bg-neutral-800 p-1 rounded-lg">
                                     <h2 className="text-xs font-semibold text-neutral-400">{e.day}</h2>
                                     <p className="text-neutral-200 font-extrabold font-bricolage">
-                                        <span className="text-xs">Bot updated price</span> {e.value}{" "}
+                                        <span className="text-xs">Bot ran</span> {e.value}{" "}
                                         <span className="text-xs">times</span>
                                     </p>
                                 </div>
