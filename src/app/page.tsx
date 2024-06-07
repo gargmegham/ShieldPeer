@@ -114,12 +114,12 @@ export default function Dashboard() {
                 </Card>
             ) : listings.length === 0 && showDemo ? (
                 <div className="space-y-8">
-                    <Statistics showDemo={true} />
+                    <Statistics showDemo={true} listings={demoListings} />
                     <Listings listings={demoListings} setting={setting} />
                 </div>
             ) : (
                 <div className="space-y-8">
-                    <Statistics setting={setting} user={user} />
+                    <Statistics setting={setting} user={user} listings={listings} />
                     <Listings listings={listings} setting={setting} />
                 </div>
             )}

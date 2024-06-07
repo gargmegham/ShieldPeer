@@ -15,7 +15,7 @@ import { apps } from "@/constants/steam"
 
 import { formatItems } from "@/utils/price-empire"
 
-import type { Item, Setting } from "@/types/database"
+import type { Item, Listing, Setting } from "@/types/database"
 import { Inventory } from "@/types/price-empire"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
@@ -39,14 +39,24 @@ const crunchGameWiseInventoryValue = (inventory: Item[]) => {
     })
 }
 
+const lastUpdated = (listings: Listing[]) => {
+    return listings.reduce((acc, listing) => {
+        const updated_at = new Date(listing.updated_at).getTime()
+        if (acc < updated_at) acc = updated_at
+        return acc
+    }, 0)
+}
+
 export default function Statistics({
     showDemo,
     user,
     setting,
+    listings,
 }: {
     showDemo?: boolean
     setting?: Setting
     user?: Inventory["user"]
+    listings: Listing[]
 }) {
     const [inventory, setInventory] = useState<Item[]>([])
     const [demoInventory, setDemoInventory] = useState<Item[]>([])
@@ -132,17 +142,21 @@ export default function Statistics({
                         <div className="flex gap-2">
                             <div className="text-neutral-400">Actively Listed:</div>
                             <div className="font-extrabold text-neutral-200 font-bricolage">
-                                {showDemo
-                                    ? demoInventory.filter((item) => item.is_active).length
-                                    : inventory.filter((item) => item.is_active).length}
+                                {listings.filter((listing) => listing.item.is_active).length}
                             </div>
                         </div>
                         <div className="flex gap-2">
                             <div className="text-neutral-400">Last Updated:</div>
                             <div className="font-extrabold text-neutral-200 font-bricolage">
-                                {showDemo
-                                    ? new Date(demoInventory[0]?.updated_at).toLocaleDateString()
-                                    : new Date(inventory[0]?.updated_at).toLocaleDateString()}
+                                {new Date(lastUpdated(listings)).toLocaleString("en-US", {
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                    second: "numeric",
+                                })}
+                                <span className="text-xs ml-1 font-semibold text-neutral-400">UTC</span>
                             </div>
                         </div>
                     </div>
