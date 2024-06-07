@@ -1,14 +1,11 @@
 "use client"
 
-import Link from "next/link"
-
 import React, { useEffect, useState } from "react"
 
 import toast from "react-hot-toast"
 import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Loader from "@/components/ui/Loader"
@@ -106,16 +103,6 @@ export default function Dashboard() {
                 ]}
                 logoLink="/"
             />
-            <Link
-                className="fixed bottom-10 left-10 z-20"
-                target="_blank"
-                href={`https://steamcommunity.com/profiles/${setting.steam_id}/?utm_source=ShieldPeer`}
-            >
-                <Avatar className="size-16 border border-rose-100/30 shadow shadow-primary">
-                    <AvatarImage src={`https://avatars.akamai.steamstatic.com/${user?.image}_full.jpg`} />
-                    <AvatarFallback className="text-amber-300">{user?.name ? user?.name[0] : "N/A"}</AvatarFallback>
-                </Avatar>
-            </Link>
             {listings.length === 0 && !showDemo ? (
                 <Card className="w-[350px]">
                     <CardContent className="pt-6 space-y-4">
@@ -132,7 +119,7 @@ export default function Dashboard() {
                 </div>
             ) : (
                 <div className="space-y-8">
-                    <Statistics setting={setting} />
+                    <Statistics setting={setting} user={user} />
                     <Listings listings={listings} setting={setting} />
                 </div>
             )}
