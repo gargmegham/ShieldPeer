@@ -226,7 +226,7 @@ export default function Inventory() {
                                     href={`/settings/item/${item.id ?? item.asset_id}`}
                                 >
                                     <MdSettings className="size-4 text-amber-500/90" />
-                                    Settings
+                                    Details
                                     <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
                                 </Link>
                             </div>

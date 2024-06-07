@@ -20,18 +20,18 @@ import Navbar from "@/components/ui/navbar"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 import { cn } from "@/utils/cn"
-import { formatItems } from "@/utils/price-empire"
 
-import type { Item, Setting } from "@/types/database"
-import type { Inventory, Item as PriceEmpireInventoryItem } from "@/types/price-empire"
+import type { Listing, Setting } from "@/types/database"
+import type { Inventory } from "@/types/price-empire"
 
 export default function Dashboard() {
-    const [inventory, setInventory] = useState<Item[]>([])
-    const [demoInventory, setDemoInventory] = useState<PriceEmpireInventoryItem[]>([])
+    const [listings, setListings] = useState<Listing[]>([])
+    const [demoListings, setDemoListings] = useState<Listing[]>([])
     const [loading, setLoading] = useState(true)
-    const [showDemoInventory, setShowDemoInventory] = useState(false)
+    const [showDemo, setShowDemo] = useState(false)
     const [setting, setSetting] = useState<Setting>({} as Setting)
     const [user, setUser] = useState<Inventory["user"]>({} as Inventory["user"])
+    // fetch settings
     useEffect(() => {
         fetch("/api/settings")
             .then((res) => res.json())
@@ -43,6 +43,7 @@ export default function Dashboard() {
                 toast.error("Failed to fetch settings")
             })
     }, [])
+    // Fetch user steam profile
     useEffect(() => {
         fetch("/api/steam")
             .then((res) => res.json())
@@ -54,37 +55,29 @@ export default function Dashboard() {
                 toast.error("Failed to fetch settings")
             })
     }, [])
+    // Fetch listings
     useEffect(() => {
         fetch("/api/listings")
             .then((res) => res.json())
             .then((data) => {
                 if (!data) return
+                setListings(data)
             })
             .catch(() => {
                 toast.error("Failed to fetch listings")
             })
-    }, [])
-    useEffect(() => {
-        fetch("/api/inventory")
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setInventory(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch inventory")
-            })
             .finally(() => {
                 setLoading(false)
             })
-        fetch("/demo/inventory.json")
+        fetch("/demo/listings.json")
             .then((res) => res.json())
             .then((data) => {
                 if (!data) return
-                setDemoInventory(data)
+                setDemoListings(data)
+                setLoading(false)
             })
             .catch(() => {
-                toast.error("Failed to fetch demo inventory")
+                toast.error("Failed to fetch demo listings")
             })
     }, [])
 
@@ -93,9 +86,9 @@ export default function Dashboard() {
     ) : (
         <main
             className={cn(
-                inventory.length === 0 && !showDemoInventory && "flex justify-center items-center",
-                inventory.length === 0 && showDemoInventory && "py-[16vh] relative flex justify-center px-8 md:px-20",
-                inventory.length > 0 && "py-[16vh] relative flex justify-center px-8 md:px-20"
+                listings.length === 0 && !showDemo && "flex justify-center items-center",
+                listings.length === 0 && showDemo && "py-[16vh] relative flex justify-center px-8 md:px-20",
+                listings.length > 0 && "py-[16vh] relative flex justify-center px-8 md:px-20"
             )}
             id="dashboard"
         >
@@ -125,36 +118,26 @@ export default function Dashboard() {
                     <AvatarFallback className="text-amber-300">{user?.name ? user?.name[0] : "N/A"}</AvatarFallback>
                 </Avatar>
             </Link>
-            {inventory.length === 0 && !showDemoInventory && (
+            {listings.length === 0 && !showDemo && (
                 <Card className="w-[350px]">
                     <CardContent className="pt-6 space-y-4">
-                        <div>No items in your inventory. Would you like to see some demo items instead?</div>
+                        <div>No items in your listings. Would you like to see some demo listings instead?</div>
                         <div className="flex items-center justify-end">
-                            <Button onClick={() => setShowDemoInventory(true)}>Yes</Button>
+                            <Button onClick={() => setShowDemo(true)}>Yes</Button>
                         </div>
                     </CardContent>
                 </Card>
             )}
             <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {(inventory.length === 0 && showDemoInventory
-                    ? formatItems(
-                          demoInventory,
-                          {
-                              price_empire_source: "buff",
-                              user_id: "demo_63728uhkjhgT^R%^RTD",
-                          } as Setting,
-                          true
-                      )
-                    : inventory
-                )
+                {(listings.length === 0 && showDemo ? demoListings : listings)
                     .sort((a, b) => (a.price > b.price ? -1 : 1))
-                    .map((item) => (
-                        <Card key={item.asset_id} className="relative py-6 max-h-[450px]">
+                    .map((listing) => (
+                        <Card key={listing.item.asset_id} className="relative py-6 max-h-[480px]">
                             <div className="px-6 flex items-center text-xs justify-between">
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger>
-                                            {item.is_active ? (
+                                            {listing.item.is_active ? (
                                                 <div className="flex items-center gap-2">
                                                     <CgMediaLive className="text-green-300 animate-pulse" />
                                                     Active
@@ -168,7 +151,7 @@ export default function Dashboard() {
                                         </TooltipTrigger>
                                         <TooltipContent>
                                             <p>
-                                                {item.is_active
+                                                {listing.item.is_active
                                                     ? "Item is currently maintained by the bot"
                                                     : "Item will not be listed by the bot"}
                                             </p>
@@ -179,7 +162,7 @@ export default function Dashboard() {
                                     <Tooltip>
                                         <TooltipTrigger>
                                             <div className="rounded-full border border-yellow-600/30 p-1">
-                                                <SiGunicorn color={item.rarity_color} className="size-4" />
+                                                <SiGunicorn color={listing.item.rarity_color} className="size-4" />
                                             </div>
                                         </TooltipTrigger>
                                         <TooltipContent>
@@ -191,8 +174,8 @@ export default function Dashboard() {
                             <CardContent className="pt-2 pb-4">
                                 <div className="flex justify-center items-center">
                                     <Image
-                                        src={`https://community.cloudflare.steamstatic.com/economy/image/${item.image}`}
-                                        alt={item.name ?? item.market_hash_name}
+                                        src={`https://community.cloudflare.steamstatic.com/economy/image/${listing.item.image}`}
+                                        alt={listing.item.name ?? listing.item.market_hash_name}
                                         className="bg-neutral-800 rounded-lg p-2"
                                         loading="lazy"
                                         width={245}
@@ -202,20 +185,31 @@ export default function Dashboard() {
                             </CardContent>
                             <CardHeader className="relative py-0">
                                 <CardTitle className="truncate pr-4 text-sm text-neutral-300">
-                                    {item?.name ?? item.market_hash_name}
+                                    {listing.item?.name ?? listing.item.market_hash_name}
                                 </CardTitle>
-                                <CardDescription>{item?.exterior ?? "N/A"}</CardDescription>
+                                <CardDescription>{listing.item?.exterior ?? "N/A"}</CardDescription>
                             </CardHeader>
-                            <div className="px-6 mt-2 space-y-1">
+                            <div className="px-6 mt-2 space-y-2">
+                                <div className="flex gap-2">
+                                    <div className="text-neutral-400 underline decoration-wavy">Listed At</div>
+                                    <div className="font-extrabold text-lime-300 font-bricolage">
+                                        {listing.price
+                                            ? listing.price.toLocaleString("en-US", {
+                                                  style: "currency",
+                                                  currency: "USD",
+                                              })
+                                            : "N/A"}
+                                    </div>
+                                </div>
                                 {setting.price_empire_source && (
-                                    <div className="flex gap-2">
-                                        <div className="text-neutral-500 underline decoration-wavy">
+                                    <div className="flex gap-2 text-sm">
+                                        <div className="text-neutral-500">
                                             {setting.price_empire_source[0].toLocaleUpperCase()}
                                             {setting.price_empire_source.slice(1)}
                                         </div>
                                         <div className="font-extrabold text-neutral-200 font-bricolage">
-                                            {item.price
-                                                ? item.price.toLocaleString("en-US", {
+                                            {listing.item.price
+                                                ? listing.item.price.toLocaleString("en-US", {
                                                       style: "currency",
                                                       currency: "USD",
                                                   })
@@ -226,17 +220,17 @@ export default function Dashboard() {
                                 <div className="flex gap-2 text-sm">
                                     <div className="text-neutral-500">Float</div>
                                     <div className="font-extrabold text-neutral-200">
-                                        {item?.float?.toFixed(5) ?? "N/A"}
+                                        {listing.item?.float?.toFixed(5) ?? "N/A"}
                                     </div>
                                 </div>
                             </div>
                             <div className="px-6 mt-4 w-full">
                                 <Link
                                     className="w-full gap-2 relative flex items-center justify-center py-2 bg-zinc-900 rounded-xl border"
-                                    href={`/settings/item/${item.id ?? item.asset_id}`}
+                                    href={`/settings/item/${listing.item_id ?? listing.item.asset_id}`}
                                 >
                                     <MdSettings className="size-4 text-amber-500/90" />
-                                    Settings
+                                    Details
                                     <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
                                 </Link>
                             </div>

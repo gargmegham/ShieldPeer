@@ -1,0 +1,284 @@
+[
+    {
+        "created_at": "2024-06-07T09:50:18.538Z",
+        "updated_at": "2024-06-07T09:50:18.538Z",
+        "price": 912383,
+        "item": {
+            "tradelock": false,
+            "name": "★ Karambit",
+            "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2PLacDBA5ciJlY20heL2KoTcl3lT5MB4kOzFyoD8j1yg5UNkaz_xIdfEd1A5aQ3U-lPskunphJHptZvPwSM26CUht3_UmUe3gEpSLrs4ZlidBgY",
+            "app_id": 730,
+            "quality": "covert",
+            "family": "★ Karambit",
+            "category": "Knife",
+            "marketHashName": "★ Karambit | Doppler (Factory New) - Ruby",
+            "price": 919383,
+            "cheapest": 919383,
+            "liquidity": "0.692039322349880300160000",
+            "type": null,
+            "paintSeed": 363,
+            "weaponId": 507,
+            "float": 0.017309682443737984,
+            "is_active": false,
+            "asset_id": "32292024874",
+            "d": "16442228862804237911",
+            "prices": {
+                "buff": 919383,
+                "waxpeer": 0,
+                "csgoempire": 880185
+            },
+            "pattern": null,
+            "rarity_color": "#EB4B4B",
+            "exterior": "Factory New",
+            "inspectLink": "",
+            "stickers": []
+        }
+    },
+    {
+        "price": 356455,
+        "created_at": "2024-06-07T09:50:18.538Z",
+        "updated_at": "2024-06-07T09:50:18.538Z",
+        "item": {
+            "tradelock": false,
+            "name": "★ Butterfly Knife",
+            "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0ebcZThQ6tCvq4GGqPX4Mrjahm5Q-slOh-jT94DwgU6xryw-DDWqc97RbA9vN1GD8gO2ybq7hsK9tZ_By3ZqsiJw7X3elxzj1xpPb7c506GZSVmAR_selHmOwYo",
+            "app_id": 730,
+            "quality": "covert",
+            "family": "★ Butterfly Knife",
+            "category": "Knife",
+            "marketHashName": "★ Butterfly Knife | Doppler (Factory New) - Black Pearl",
+            "price": 576329,
+            "cheapest": 576329,
+            "liquidity": "0.673433720843476555930000",
+            "type": null,
+            "paintSeed": 392,
+            "weaponId": 515,
+            "is_active": true,
+            "float": 0.020651940256357193,
+            "asset_id": "29234259906",
+            "d": "7667636745630182579",
+            "prices": {
+                "buff": 576329,
+                "waxpeer": 0,
+                "csgoempire": 556455
+            },
+            "pattern": null,
+            "rarity_color": "#EB4B4B",
+            "exterior": "Factory New",
+            "inspectLink": "",
+            "stickers": []
+        }
+    },
+    {
+        "price": 532607,
+        "created_at": "2024-06-07T09:50:18.538Z",
+        "updated_at": "2024-06-07T09:50:18.538Z",
+        "item": {
+            "tradelock": false,
+            "name": "★ Karambit",
+            "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2PLacDBA5ciJlY20lfv1MLDBk2pD5Pp8i_vD-Yn8klGwlB81NDG3OtWTJAdsNVCG-Vjvwrvsh8Dv6szBznVivSMnt3eOlx22hhhNbu1o0PaACQLJyiL9rI8",
+            "app_id": 730,
+            "quality": "covert",
+            "is_active": true,
+            "family": "★ Karambit",
+            "category": "Knife",
+            "marketHashName": "★ Karambit | Doppler (Factory New) - Black Pearl",
+            "price": 562607,
+            "cheapest": 562607,
+            "liquidity": "0.574490738117371451120000",
+            "type": null,
+            "paintSeed": 19,
+            "weaponId": 507,
+            "float": 0.031850121915340424,
+            "asset_id": "29235623967",
+            "d": "14736525800551086323",
+            "prices": {
+                "buff": 562607,
+                "waxpeer": 0,
+                "csgoempire": 534727
+            },
+            "pattern": null,
+            "rarity_color": "#EB4B4B",
+            "exterior": "Factory New",
+            "inspectLink": "",
+            "stickers": []
+        }
+    },
+    {
+        "price": 531684,
+        "created_at": "2024-06-07T09:50:18.538Z",
+        "updated_at": "2024-06-07T09:50:18.538Z",
+        "item": {
+            "tradelock": false,
+            "name": "★ Talon Knife",
+            "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfxPrMfipP7dezhr-KmsjmJrnIqWZQ-sd9j-Db8IjKhF2zowdyNj37cYaQcQ8_NF7Zr1Dqwb270cPv6Z_Izydj7CkjtHrelkThhxwaP_sv26JqHcKn6w",
+            "app_id": 730,
+            "quality": "covert",
+            "family": "★ Talon Knife",
+            "category": "Knife",
+            "marketHashName": "★ Talon Knife | Doppler (Factory New) - Ruby",
+            "price": 548885,
+            "cheapest": 548885,
+            "liquidity": "0.721099389671789172600000",
+            "is_active": true,
+            "type": null,
+            "paintSeed": 865,
+            "weaponId": 523,
+            "float": 0.015595508739352226,
+            "asset_id": "29616215518",
+            "d": "5542392883830595287",
+            "prices": {
+                "buff": 548885,
+                "waxpeer": 0,
+                "csgoempire": 521684
+            },
+            "pattern": null,
+            "rarity_color": "#EB4B4B",
+            "exterior": "Factory New",
+            "inspectLink": "",
+            "stickers": []
+        }
+    },
+    {
+        "price": 510296,
+        "created_at": "2024-06-07T09:50:18.538Z",
+        "updated_at": "2024-06-07T09:50:18.538Z",
+        "item": {
+            "tradelock": false,
+            "name": "AWP",
+            "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17P7NdTRH-t26q4SZlvD7PYTQgXtu4MBwnPCPrI73jgLh-xY5ZDygJIGVd1Q6NVjRqVO8k-a5gMW4upzBwSEwuSl3t2GdwUKlZg2OYg",
+            "app_id": 730,
+            "quality": "covert",
+            "family": "AWP",
+            "category": "Sniper Rifle",
+            "marketHashName": "AWP | Dragon Lore (Battle-Scarred)",
+            "price": 425345,
+            "cheapest": 425345,
+            "liquidity": "0.69865098804380021910",
+            "type": "Covert Sniper Rifle",
+            "paintSeed": 705,
+            "weaponId": 9,
+            "is_active": true,
+            "float": 0.5725678205490112,
+            "asset_id": "31296144276",
+            "d": "4632003526716207239",
+            "prices": {
+                "buff": 425386,
+                "waxpeer": 510296,
+                "csgoempire": 416163
+            },
+            "pattern": null,
+            "rarity_color": "#EB4B4B",
+            "exterior": "Battle-Scarred",
+            "inspectLink": "",
+            "stickers": [
+                {
+                    "slot": 0,
+                    "price": 534,
+                    "wear": null,
+                    "marketHashName": "Sticker | torzsi (Gold) | Rio 2022",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulRPRUOCF7b_mNzaVGJgKhZNpbOaLAhs18zEcC9F6ZKwxoGKxqOkN7iDlThS7JAm2rzCpdX0jAfk-EU9YjryJteWdAI-NQvR5BHglk1AuGaK"
+                },
+                {
+                    "slot": 1,
+                    "price": 534,
+                    "wear": null,
+                    "marketHashName": "Sticker | torzsi (Gold) | Rio 2022",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulRPRUOCF7b_mNzaVGJgKhZNpbOaLAhs18zEcC9F6ZKwxoGKxqOkN7iDlThS7JAm2rzCpdX0jAfk-EU9YjryJteWdAI-NQvR5BHglk1AuGaK"
+                },
+                {
+                    "slot": 2,
+                    "price": 534,
+                    "wear": null,
+                    "marketHashName": "Sticker | torzsi (Gold) | Rio 2022",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulRPRUOCF7b_mNzaVGJgKhZNpbOaLAhs18zEcC9F6ZKwxoGKxqOkN7iDlThS7JAm2rzCpdX0jAfk-EU9YjryJteWdAI-NQvR5BHglk1AuGaK"
+                },
+                {
+                    "slot": 3,
+                    "price": 534,
+                    "wear": null,
+                    "marketHashName": "Sticker | torzsi (Gold) | Rio 2022",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulRPRUOCF7b_mNzaVGJgKhZNpbOaLAhs18zEcC9F6ZKwxoGKxqOkN7iDlThS7JAm2rzCpdX0jAfk-EU9YjryJteWdAI-NQvR5BHglk1AuGaK"
+                }
+            ]
+        }
+    },
+    {
+        "price": 364101,
+        "created_at": "2024-06-07T09:50:18.538Z",
+        "updated_at": "2024-06-07T09:50:18.538Z",
+        "item": {
+            "tradelock": false,
+            "name": "★ Ursus Knife",
+            "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfxuHbZC597dGJh4Gbh__9Ib7um2pD6sl0g_PE8bP5gVO8v11tZD3yItfHcAE-ZQnR8lK5xL-6hZK_7pTMzHs26HQmsHzemxO20h5LcKUx0sWcYFnz",
+            "app_id": 730,
+            "quality": "covert",
+            "family": "★ Ursus Knife",
+            "category": "Knife",
+            "marketHashName": "★ Ursus Knife | Doppler (Factory New) - Sapphire",
+            "price": 378731,
+            "cheapest": 378731,
+            "is_active": true,
+            "liquidity": "0.702997967158748557680000",
+            "type": null,
+            "paintSeed": 439,
+            "weaponId": 519,
+            "float": 0.011030026711523533,
+            "asset_id": "29632362393",
+            "d": "7099445812174286297",
+            "prices": {
+                "buff": 378731,
+                "waxpeer": 0,
+                "csgoempire": 364101
+            },
+            "pattern": null,
+            "rarity_color": "#EB4B4B",
+            "exterior": "Factory New",
+            "inspectLink": "",
+            "stickers": []
+        }
+    },
+    {
+        "price": 420643,
+        "created_at": "2024-06-07T09:50:18.538Z",
+        "updated_at": "2024-06-07T09:50:18.538Z",
+        "item": {
+            "tradelock": false,
+            "name": "M4A4",
+            "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszFJTwT09S5g4yCmfDLPr7Vn35cppYo0riZp4-t3Q2x_UVpYGr6LIXHJABrYVGB_QS5k72905S_75ycm3t9-n51e4WtYjg",
+            "app_id": 730,
+            "quality": "contraband",
+            "family": "M4A4",
+            "category": "Rifle",
+            "marketHashName": "M4A4 | Howl (Field-Tested)",
+            "price": 376849,
+            "cheapest": 376849,
+            "liquidity": "0.67327293206150417236",
+            "is_active": false,
+            "type": "Covert Rifle",
+            "paintSeed": 826,
+            "weaponId": 16,
+            "float": 0.1572919487953186,
+            "asset_id": "27902860962",
+            "d": "7503040988693643462",
+            "prices": {
+                "buff": 376885,
+                "waxpeer": 420643,
+                "csgoempire": 363639
+            },
+            "pattern": null,
+            "rarity_color": "#D43C17",
+            "exterior": "Field-Tested",
+            "inspectLink": "",
+            "stickers": [
+                {
+                    "slot": 3,
+                    "price": 40943,
+                    "wear": 0.11459143459796906,
+                    "marketHashName": "Sticker | Cloud9 (Holo) | DreamHack 2014",
+                    "image": "-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXQ9QVcJY8gulRZRFuCF7X5mMzfXEhwfDtfubaqZVU2gaPLcjhHu4S0wYPZkqTyMbmAlWlSuJ103e-U892njFe1-URoMmrtZNjCSR2-cBg"
+                }
+            ]
+        }
+    }
+]
