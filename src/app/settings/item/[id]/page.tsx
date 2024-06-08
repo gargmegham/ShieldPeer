@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { AiOutlineEdit } from "react-icons/ai"
+import { BiSync } from "react-icons/bi"
 import { CgMediaLive } from "react-icons/cg"
 import { FaRegPauseCircle } from "react-icons/fa"
 import { IoSettingsOutline } from "react-icons/io5"
@@ -555,6 +556,7 @@ export default function ItemSettings() {
                                 )}
                             />
                             <Button type="submit" disabled={saving || !isEditing}>
+                                {saving && <BiSync className="animate-spin mr-2 size-4" />}
                                 Save
                             </Button>
                         </form>

@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { AiOutlineEdit } from "react-icons/ai"
+import { BiSync } from "react-icons/bi"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -157,6 +158,7 @@ export default function Secrets({ setting }: { setting: Setting }) {
                             )}
                         />
                         <Button type="submit" disabled={!isEditing || saving}>
+                            {saving && <BiSync className="animate-spin mr-2 size-4" />}
                             Save
                         </Button>
                     </form>

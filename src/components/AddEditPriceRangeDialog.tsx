@@ -5,6 +5,7 @@ import { useEffect, useState, type ReactNode } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+import { BiSync } from "react-icons/bi"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -264,6 +265,7 @@ export default function AddEditPriceRangeDialog({
                             )}
                         />
                         <Button type="submit" disabled={saving}>
+                            {saving && <BiSync className="animate-spin mr-2 size-4" />}
                             Save
                         </Button>
                     </form>
