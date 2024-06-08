@@ -11,6 +11,7 @@ ShieldPeer is a dedicated CS:GO Trading Bot designed to optimize and automate th
 -   **Security**: Ensures safe and secure trading.
 -   **Integration with WaxPeer API**: Seamless Integration with Waxpeer API to facilitate transactions.
 -   **Integration with PriceEmpire API**: Seamless Integration with PriceEmpire API to source pricing data.
+-   **Integration with Steam API**: Fetches user inventory and profile data from Steam API.
 
 Landing Page:
 ![Screenshot 2024-06-03 at 7 38 00 PM](https://github.com/gargmegham/ShieldPeer/assets/95271253/f51aa724-de87-48f0-8134-850f38edbb72)
@@ -30,7 +31,9 @@ Landing Page:
     ```bash
     yarn dev
     ```
-5. To start the bot server, follow the instructions in the `bot` directory.
+5. Bot python script available at [bot.py](/bot/bot.py)
+6. For deploying the bot, follow this [guide](/bot/ReadMe.md)
+7. Cron script for hitting server PriceEmpire API available at [cron.py](/bot/cron.py)
 
 #### Instructions for using Image URLs from PriceEmpire API
 
@@ -41,10 +44,11 @@ Landing Page:
 
 -   **Frontend**: Next.js, Tailwind CSS, ShadcnUI
 -   **Backend**: Next.js API Routes
--   **Database**: Postgre from Supabase
+-   **Database**: Postgres from Supabase
 -   **Scripts**: Python and GCP VMs
 -   **APIs**: Waxpeer API, PriceEmpire API
 -   **Deployment**: Vercel
+-   **Containerization**: Docker
 
 ### General Know How
 
