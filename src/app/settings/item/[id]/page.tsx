@@ -117,6 +117,7 @@ export default function ItemSettings() {
     }
     const deleteItem = async () => {
         try {
+            setSaving(true)
             await fetch(`/api/item/${id}`, {
                 method: "DELETE",
             })
@@ -124,6 +125,8 @@ export default function ItemSettings() {
             router.push("/inventory")
         } catch (error: any) {
             toast.error("Failed to delete item")
+        } finally {
+            setSaving(false)
         }
     }
     const toggleActiveStatus = async () => {
@@ -259,11 +262,13 @@ export default function ItemSettings() {
                     </div>
                     <div className="px-6 mt-4 w-full">
                         <Button
+                            disabled={saving}
                             onClick={toggleActiveStatus}
                             className="w-full gap-2 relative flex items-center justify-center py-2 bg-zinc-900 rounded-xl border"
                             variant="outline"
                         >
                             Toggle Active Status
+                            {saving && <BiSync className="animate-spin size-4" />}
                             <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-amber-500 to-transparent h-px" />
                         </Button>
                     </div>
@@ -578,6 +583,7 @@ export default function ItemSettings() {
                         onChange={(e) => setDeleteConfirmation(e.target.value)}
                     />
                     <Button
+                        disabled={saving}
                         onClick={() => {
                             if (deleteConfirmation === item?.name ?? item.market_hash_name) deleteItem()
                             else toast.error("Item name does not match!")
@@ -585,6 +591,7 @@ export default function ItemSettings() {
                         className="w-full !mt-4"
                         variant="destructive"
                     >
+                        {saving && <BiSync className="animate-spin mr-2 size-4" />}
                         Delete
                     </Button>
                 </CardContent>
