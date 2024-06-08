@@ -6,7 +6,7 @@ export const config = {
     matcher: [
         /*
          * Match all request paths except for the ones starting with:
-         * - home (home page)
+         * - exempted paths i.e. /home, /auth, /api/price-empire, /api/auth, /tos, /privacy-policy
          * - _next/static (static files)
          * - _next/image (image optimization files)
          * - favicon.ico (favicon file)
