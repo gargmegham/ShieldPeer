@@ -142,7 +142,7 @@ export async function priceEmpire(supabase: SupabaseClient, setting: Setting) {
             user_id: setting.user_id,
             message: "Successfully fetched inventory",
             type: "success",
-            image: "https://www.shieldpeer.in/price-empire.svg",
+            image: "/price-empire.svg",
         })
     } catch (error: any) {
         await supabase.from("Logs").insert({
@@ -150,7 +150,7 @@ export async function priceEmpire(supabase: SupabaseClient, setting: Setting) {
             name: "Price Empire",
             message: "Failed to fetch inventory",
             type: "failure",
-            image: "https://www.shieldpeer.in/price-empire.svg",
+            image: "/price-empire.svg",
             meta_data: {
                 error: error?.message ?? "Unknown error",
             },
@@ -166,7 +166,7 @@ export async function priceEmpire(supabase: SupabaseClient, setting: Setting) {
             name: "Price Empire",
             message: "Successfully fetched price history",
             type: "success",
-            image: "https://www.shieldpeer.in/price-empire.svg",
+            image: "/price-empire.svg",
         })
     } catch (err: any) {
         await supabase.from("Logs").insert({
@@ -174,7 +174,7 @@ export async function priceEmpire(supabase: SupabaseClient, setting: Setting) {
             user_id: setting.user_id,
             message: "Failed to fetch price history",
             type: "failure",
-            image: "https://www.shieldpeer.in/price-empire.svg",
+            image: "/price-empire.svg",
             meta_data: {
                 error: err?.message ?? "Unknown error",
             },

@@ -128,7 +128,7 @@ async def bot():
                             "name": "ShieldPeer",
                             "message": "No active items found",
                             "type": "caution",
-                            "image": "https://www.shieldpeer.in/logo.jpg",
+                            "image": "/logo.jpg",
                         }
                     )
                     await insert_unique_logs(supabase, other_logs_to_create)
