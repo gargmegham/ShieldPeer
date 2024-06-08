@@ -131,7 +131,18 @@ export const columns: ColumnDef<Log>[] = [
             )
         },
         cell: ({ row }) => {
-            return <div className="font-medium px-4">{new Date(row.getValue("created_at")).toLocaleDateString()}</div>
+            return (
+                <div className="font-medium px-4 text-neutral-400">
+                    {new Date(row.getValue("created_at")).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                        second: "numeric",
+                    })}
+                </div>
+            )
         },
     },
     {
