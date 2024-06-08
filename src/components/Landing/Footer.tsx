@@ -55,6 +55,12 @@ const Footer = () => {
                                 <Link href="/#pricing" className="link link-hover">
                                     Pricing
                                 </Link>
+                                <Link href="https://servcy.com/" className="link link-hover">
+                                    Servcy
+                                </Link>
+                                <Link href="https://meghamgarg.com/" className="link link-hover">
+                                    Founder
+                                </Link>
                             </div>
                         </div>
 
