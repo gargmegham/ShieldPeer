@@ -283,6 +283,13 @@ async def bot():
                             for listing in listings_to_update
                         ]
                     )
+                logs_to_create.append({
+                    "user_id": setting["user_id"],
+                    "name": "Waxpeer",
+                    "message": "Bot iteration completed",
+                    "type": "success",
+                    "image": "/waxpeer.svg",
+                })
                 if len(logs_to_create):
                     await insert_logs(supabase, logs_to_create)
                     await insert_unique_logs(supabase, other_logs_to_create)
