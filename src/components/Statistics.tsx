@@ -131,7 +131,7 @@ export default function Statistics({
         <Card className="relative">
             <Button
                 variant={"destructive"}
-                className="bg-neutral-900 flex items-center gap-x-2 absolute top-4 right-4 text-xs p-1 md:py-2 md:px-4"
+                className="bg-neutral-900 flex items-center gap-x-2 absolute top-2 right-2 md:top-4 md:right-4 text-xs py-1 px-2 md:py-2 md:px-4"
                 onClick={removeListings}
             >
                 {deleting ? (
