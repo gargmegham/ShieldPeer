@@ -52,7 +52,7 @@ export default function Auth() {
                             height={24}
                         />
                     </div>
-                    <div className="font-extrabold tracking-tight text-2xl md:text-4xl">{config.appName}</div>
+                    <div className="font-extrabold tracking-tight text-2xl md:text-4xl text-center">{config.appName}</div>
                 </Link>
                 <button
                     className="flex items-center justify-center gap-2 w-full p-2 mt-8 bg-neutral-800 rounded-md"

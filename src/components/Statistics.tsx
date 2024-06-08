@@ -131,7 +131,7 @@ export default function Statistics({
         <Card className="relative">
             <Button
                 variant={"destructive"}
-                className="bg-neutral-900 flex items-center gap-x-2 absolute top-4 right-4 text-xs"
+                className="bg-neutral-900 flex items-center gap-x-2 absolute top-4 right-4 text-xs p-1 md:py-2 md:px-4"
                 onClick={removeListings}
             >
                 {deleting ? (
@@ -139,7 +139,7 @@ export default function Statistics({
                 ) : (
                     <TrashIcon className="size-4 text-rose-500/90" />
                 )}
-                Remove All Listings
+                <span className="hidden md:block">Remove All Listings</span>
                 <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-rose-500 to-transparent h-px" />
             </Button>
             <CardHeader>
