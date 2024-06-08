@@ -1,6 +1,7 @@
 {
     "name": "shield-peer",
     "version": "0.1.0",
+    "license": "GPL-3.0",
     "repository": {
         "url": "https://github.com/gargmegham/ShieldPeer",
         "type": "git"
