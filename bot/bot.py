@@ -131,6 +131,7 @@ async def bot():
                             "image": "https://www.shieldpeer.in/logo.jpg",
                         }
                     )
+                    insert_unique_logs(supabase, other_logs_to_create)
                     continue
                 listings = await get_listings(supabase, setting["user_id"])
                 price_ranges = await get_price_ranges(supabase, setting["user_id"])
