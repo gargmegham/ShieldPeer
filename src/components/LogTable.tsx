@@ -177,7 +177,6 @@ export default function LogTable({ logs }: { logs: Log[] }) {
             <CardContent>
                 <DataTable
                     data={logs}
-                    hidePagination={true}
                     filterKey="message"
                     filterPlaceholder="Search by log message..."
                     columns={columns}

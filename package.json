@@ -1,6 +1,14 @@
 {
     "name": "shield-peer",
     "version": "0.1.0",
+    "repository": {
+        "url": "https://github.com/gargmegham/ShieldPeer",
+        "type": "git"
+    },
+    "author": {
+        "name": "Megham Garg",
+        "email": "business@meghamgarg.com"
+    },
     "private": true,
     "scripts": {
         "dev": "next dev",
