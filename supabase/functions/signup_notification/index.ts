@@ -3,6 +3,10 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 // @ts-ignore
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")
+// @ts-ignore
+const RESEND_TO_EMAIL = Deno.env.get("RESEND_TO_EMAIL")
+// @ts-ignore
+const RESEND_FROM_EMAIL = Deno.env.get("RESEND_FROM_EMAIL")
 
 interface User {
     email: string
@@ -26,8 +30,8 @@ const handler = async (_request: Request): Promise<Response> => {
             Authorization: `Bearer ${RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-            from: "Supabase-Resend <team@meghamgarg.com>",
-            to: ["meghamgarg@gmail.com"],
+            from: `Supabase-Resend <${RESEND_FROM_EMAIL}>`,
+            to: [RESEND_TO_EMAIL],
             subject: "New Signup On ShieldPeer! 🚀",
             html: `
 <div>
