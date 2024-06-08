@@ -34,7 +34,7 @@ async def cron():
         logger.error(f"An error occurred in cron:", exc_info=True)
 
 
-def main():
+if __name__ == "__main__":
     logger = get_logger("cron")
     try:
         logger.info("ShieldPeer Cron: service started")
