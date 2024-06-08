@@ -10,6 +10,7 @@ from utils.supabase import get_general_settings, get_supabase_client
 load_dotenv()
 
 SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+SERVER_PRICE_EMPIRE_API_URL = os.getenv("SERVER_PRICE_EMPIRE_API_URL")
 
 
 async def cron():
@@ -19,7 +20,7 @@ async def cron():
     client = await get_supabase_client()
     settings = await get_general_settings(client)
     for setting in settings:
-        url = "https://shieldpeer.in/api/price-empire"
+        url = SERVER_PRICE_EMPIRE_API_URL
         payload = json.dumps({"user_id": setting["user_id"]})
         headers = {"key": SUPABASE_SERVICE_KEY, "Content-Type": "application/json"}
         requests.request("POST", url, headers=headers, data=payload)
