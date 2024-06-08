@@ -26,10 +26,10 @@ load_dotenv()
 
 async def skip_due_to_last_run(supabase, setting):
     last_waxpeer_log = await get_last_waxpeer_log(supabase, setting["user_id"])
-    if not last_waxpeer_log or not last_waxpeer_log.get("created_at"):
-        return True
+    if not last_waxpeer_log:
+        return False
     last_log_time = datetime.strptime(
-        last_waxpeer_log.get("created_at"), "%Y-%m-%dT%H:%M:%S.%fZ"
+        last_waxpeer_log["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ"
     )
     return (datetime.now() - last_log_time).seconds < 60
 
