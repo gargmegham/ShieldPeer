@@ -46,6 +46,8 @@ async def create_listing(items, apiKey: str):
 async def search_items(name, apiKey):
     """
     Search for items on Waxpeer
+    *note: this will also fetch my items if any along with the competitors
+    *1000 = $1 price
     """
     async with httpx.AsyncClient() as client:
         response = await client.get(
