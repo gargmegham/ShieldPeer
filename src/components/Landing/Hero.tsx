@@ -66,7 +66,7 @@ export default function Hero() {
             <div className="absolute bottom-8 flex justify-center space-x-4 items-center">
                 <div className="text-xs font-bold font-bricolage text-zinc-500">Featured On</div>
                 <div className="flex items-center space-x-4">
-                    <Link href={"/#"}>
+                    <Link href="https://www.producthunt.com/posts/shieldpeer">
                         <Image
                             src={productHunt}
                             alt="productHunt"
@@ -75,7 +75,7 @@ export default function Hero() {
                             className="w-20 h-20 text-zinc-800"
                         />
                     </Link>
-                    <Link href={"/#"}>
+                    <Link href="https://news.ycombinator.com/item?id=40633762">
                         <Image
                             src={hackerNews}
                             alt="hackerNews"
