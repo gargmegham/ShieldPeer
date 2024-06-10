@@ -63,8 +63,9 @@ export default function Hero() {
                 </p>
                 <TestimonialsAvatars />
             </div>
-            <div className="absolute bottom-8 flex justify-center">
-                <div className="flex items-center space-x-8">
+            <div className="absolute bottom-8 flex justify-center space-x-4 items-center">
+                <div className="text-xs font-bold font-bricolage text-zinc-500">Featured On</div>
+                <div className="flex items-center space-x-4">
                     <Link href={"/#"}>
                         <Image
                             src={productHunt}
