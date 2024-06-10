@@ -4,6 +4,8 @@
 
 ShieldPeer is a dedicated CS:GO Trading Bot designed to optimize and automate the process of buying and selling game skins on Waxpeer. The bot, backed by an assurance of safety and transparency in every transaction, is highly configurable allowing it to adjust and undercut prices based on user-defined parameters.
 
+https://youtu.be/9HDPlMolBis?si=7b62b10lF3mpXStn
+
 ## Features
 
 -   **Automated Trading**: Automates the process of buying and selling CS:GO skins.
