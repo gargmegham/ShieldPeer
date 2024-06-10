@@ -6,13 +6,13 @@ export const config = {
     matcher: [
         /*
          * Match all request paths except for the ones starting with:
-         * - exempted paths i.e. /home, /auth, /api/price-empire, /api/auth, /tos, /privacy-policy
+         * - exempted paths i.e. /home, /auth, /api/price-empire, /api/auth, /tos, /privacy-policy, demo
          * - _next/static (static files)
          * - _next/image (image optimization files)
          * - favicon.ico (favicon file)
          * - .(svg|png|jpg|jpeg|gif|webp) (image files)
          */
-        "/((?!_next/static|_next/image|home|auth|api/price-empire|api/auth|tos|privacy-policy|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+        "/((?!_next/static|_next/image|home|auth|api/price-empire|api/auth|tos|demo|privacy-policy|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
     ],
 }
 

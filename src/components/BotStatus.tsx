@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { z } from "zod"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Form, FormControl, FormDescription, FormField, FormItem } from "@/components/ui/form"
 import { Switch } from "@/components/ui/switch"
 
@@ -17,25 +17,26 @@ const FormSchema = z.object({
     is_running: z.boolean(),
 })
 
-export default function BotStatus({ setting }: { setting: Setting }) {
+export default function BotStatus({ setting, isDemo }: { setting: Setting; isDemo?: boolean }) {
     const [saving, setSaving] = useState(false)
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
     function onSubmit(data: z.infer<typeof FormSchema>) {
         setSaving(true)
-        fetch("/api/settings", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then(() => toast.success("Bot status updated successfully."))
-            .catch(() => toast.error("Failed to update bot status."))
-            .finally(() => {
-                setSaving(false)
+        !isDemo &&
+            fetch("/api/settings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
             })
+                .then(() => toast.success("Bot status updated successfully."))
+                .catch(() => toast.error("Failed to update bot status."))
+                .finally(() => {
+                    setSaving(false)
+                })
     }
     useEffect(() => {
         form.reset(setting)

@@ -61,7 +61,7 @@ export default function Statistics({
     showDemo?: boolean
     setting?: Setting
     user?: Inventory["user"]
-    refreshListings: () => void
+    refreshListings?: () => void
     listings: Listing[]
 }) {
     const [inventory, setInventory] = useState<Item[]>([])
@@ -77,10 +77,11 @@ export default function Statistics({
     const removeListings = async () => {
         try {
             setDeleting(true)
-            await fetch(`/api/listings`, {
-                method: "DELETE",
-            })
-            refreshListings()
+            !showDemo &&
+                (await fetch(`/api/listings`, {
+                    method: "DELETE",
+                }))
+            refreshListings?.()
         } catch (err: any) {
             toast.error(err?.message ?? "Failed to delete item")
         } finally {
@@ -89,26 +90,28 @@ export default function Statistics({
     }
     // fetch inventory
     useEffect(() => {
-        fetch("/api/inventory")
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setInventory(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch inventory")
-            })
-            .finally(() => {})
-        fetch("/api/logs/stats")
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setBotStats(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch bot stats")
-            })
-            .finally(() => {})
+        !showDemo &&
+            fetch("/api/inventory")
+                .then((res) => res.json())
+                .then((data) => {
+                    if (!data) return
+                    setInventory(data)
+                })
+                .catch(() => {
+                    toast.error("Failed to fetch inventory")
+                })
+                .finally(() => {})
+        !showDemo &&
+            fetch("/api/logs/stats")
+                .then((res) => res.json())
+                .then((data) => {
+                    if (!data) return
+                    setBotStats(data)
+                })
+                .catch(() => {
+                    toast.error("Failed to fetch bot stats")
+                })
+                .finally(() => {})
         fetch("/demo/inventory.json")
             .then((res) => res.json())
             .then((data) => {

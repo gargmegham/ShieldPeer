@@ -16,27 +16,29 @@ import { DeletionConfirmationDialog } from "./DeletionConfirmationDialog"
 /**
  * @description PriceRanges are used for granular control over the listing parameters.
  */
-export default function PriceRanges() {
+export default function PriceRanges({ isDemo }: { isDemo?: boolean }) {
     const [priceRanges, setPriceRanges] = useState<PriceRange[]>([])
     const [open, setOpen] = useState(false)
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
     const [selectedPriceRange, setSelectedPriceRange] = useState<PriceRange | null>(null)
     const fetchPriceRanges = () => {
-        fetch("/api/price-ranges")
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setPriceRanges(data)
-            })
+        !isDemo &&
+            fetch("/api/price-ranges")
+                .then((res) => res.json())
+                .then((data) => {
+                    if (!data) return
+                    setPriceRanges(data)
+                })
     }
     const deletePriceRange = () => {
         if (!selectedPriceRange) return
-        fetch(`/api/price-ranges?id=${selectedPriceRange.id}`, {
-            method: "DELETE",
-        }).then(() => {
-            fetchPriceRanges()
-            setOpenDeleteDialog(false)
-        })
+        !isDemo &&
+            fetch(`/api/price-ranges?id=${selectedPriceRange.id}`, {
+                method: "DELETE",
+            }).then(() => {
+                fetchPriceRanges()
+                setOpenDeleteDialog(false)
+            })
     }
     useEffect(() => {
         if (!open) setSelectedPriceRange(null)
@@ -60,6 +62,7 @@ export default function PriceRanges() {
                 <AddEditPriceRangeDialog
                     open={open}
                     setOpen={setOpen}
+                    isDemo={isDemo}
                     selectedPriceRange={selectedPriceRange}
                     refreshTable={fetchPriceRanges}
                 />

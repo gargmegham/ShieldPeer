@@ -26,7 +26,7 @@ const FormSchema = z.object({
     undercut_by: z.string(),
 })
 
-export default function UndercutParameters({ setting }: { setting: Setting }) {
+export default function UndercutParameters({ setting, isDemo }: { setting: Setting; isDemo?: boolean }) {
     const [isEditing, setIsEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -36,23 +36,24 @@ export default function UndercutParameters({ setting }: { setting: Setting }) {
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
         setSaving(true)
-        fetch("/api/settings", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then(() => {
-                setIsEditing(false)
-                toast.success("Undercut parameters updated successfully.")
+        !isDemo &&
+            fetch("/api/settings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
             })
-            .catch(() => {
-                toast.error("Failed to update undercut parameters.")
-            })
-            .finally(() => {
-                setSaving(false)
-            })
+                .then(() => {
+                    setIsEditing(false)
+                    toast.success("Undercut parameters updated successfully.")
+                })
+                .catch(() => {
+                    toast.error("Failed to update undercut parameters.")
+                })
+                .finally(() => {
+                    setSaving(false)
+                })
     }
 
     useEffect(() => {

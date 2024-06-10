@@ -68,7 +68,7 @@ const TestimonialsAvatars = ({ priority }: { priority?: boolean }) => {
                 </div>
                 <div className="text-xs">
                     <span className="font-semibold">Gamers </span>
-                    love {config.appName}
+                    trust {config.appName}
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -43,10 +43,7 @@ const FormSchema = z.object({
 })
 
 export default function ItemSettings() {
-    const { id } = useParams()
     const router = useRouter()
-    const [itemSetting, setItemSetting] = useState<ItemSetting>({} as ItemSetting)
-    const [loading, setLoading] = useState(true)
     const [itemPriceHistory, setItemPriceHistory] = useState<number[]>([])
     const [isEditing, setIsEditing] = useState(false)
     const demoPriceHistory = [
@@ -71,20 +68,6 @@ export default function ItemSettings() {
             is_active: false,
         },
     })
-    const fetchSettings = async () => {
-        fetch(`/api/settings/item/${id}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setItemSetting(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch item settings")
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         if (data.listing_price_min >= data.listing_price_max) {
             toast.error("Listing price min must be less than listing price max")
@@ -92,10 +75,7 @@ export default function ItemSettings() {
         }
         setSaving(true)
         try {
-            await fetch(`/api/settings/item/${id}`, {
-                method: "POST",
-                body: JSON.stringify(data),
-            })
+            setTimeout(() => {}, 100)
             toast.success("Item settings saved")
         } catch (error: any) {
             toast.error("Failed to set item settings")
@@ -104,25 +84,12 @@ export default function ItemSettings() {
             setIsEditing(false)
         }
     }
-    const fetchItem = async () => {
-        fetch(`/api/item/${id}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setItem(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch item")
-            })
-    }
     const deleteItem = async () => {
         try {
             setSaving(true)
-            await fetch(`/api/item/${id}`, {
-                method: "DELETE",
-            })
+            setTimeout(() => {}, 100)
             toast.success("Item deleted")
-            router.push("/inventory")
+            router.push("/demo/inventory")
         } catch (error: any) {
             toast.error("Failed to delete item")
         } finally {
@@ -132,61 +99,28 @@ export default function ItemSettings() {
     const toggleActiveStatus = async () => {
         setSaving(true)
         try {
-            await fetch(`/api/item/${id}`, {
-                method: "PUT",
-                body: JSON.stringify({ is_active: !item.is_active }),
-            })
+            setTimeout(() => {}, 100)
             toast.success("Item status updated")
-            fetchItem()
         } catch (error: any) {
             toast.error("Failed to update item status")
         } finally {
             setSaving(false)
         }
     }
-    const fetchPriceHistory = async () => {
-        fetch(`/api/item/price-history`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                market_hash_name: item.market_hash_name,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setItemPriceHistory(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch price history")
-            })
-    }
-    useEffect(() => {
-        fetchItem()
-        fetchSettings()
-        fetchPriceHistory()
-    }, [])
-    useEffect(() => {
-        form.reset(itemSetting)
-    }, [itemSetting])
-    return loading ? (
-        <Loader />
-    ) : (
+    return (
         <main className="py-[16vh] relative px-8 md:px-20 space-y-4" id="item-settings">
             <Navbar
                 items={[
-                    { label: "Inventory", link: "/inventory", icon: MdOutlineInventory },
-                    { label: "Logs", link: "/logs", icon: MdOutlineDocumentScanner },
+                    { label: "Inventory", link: "/demo/inventory", icon: MdOutlineInventory },
+                    { label: "Logs", link: "/demo/logs", icon: MdOutlineDocumentScanner },
                     {
                         label: "Settings",
-                        link: "/settings",
+                        link: "/demo/settings",
                         icon: IoSettingsOutline,
                         inFocus: true,
                     },
                 ]}
-                logoLink="/"
+                logoLink="/demo"
             />
             <div className="grid gap-8 grid-cols-1 md:grid-cols-4">
                 <Card className="relative py-6 max-h-[450px]">
@@ -242,22 +176,20 @@ export default function ItemSettings() {
                     </CardContent>
                     <CardHeader className="relative py-0">
                         <CardTitle className="truncate pr-4 text-sm text-neutral-300">
-                            {item?.name ?? item.market_hash_name}
+                            AWP | Neo-Noir (Field-Tested)
                         </CardTitle>
-                        <CardDescription>{item?.exterior ?? "N/A"}</CardDescription>
+                        <CardDescription>Field-Tested</CardDescription>
                     </CardHeader>
                     <div className="px-6 mt-2 space-y-1">
                         <div className="font-extrabold text-neutral-200 font-bricolage">
-                            {item.price
-                                ? item.price.toLocaleString("en-US", {
-                                      style: "currency",
-                                      currency: "USD",
-                                  })
-                                : "N/A"}
+                            {(20000).toLocaleString("en-US", {
+                                style: "currency",
+                                currency: "USD",
+                            })}
                         </div>
                         <div className="flex gap-2 text-sm">
                             <div className="text-neutral-500">Float</div>
-                            <div className="font-extrabold text-neutral-200">{item?.float?.toFixed(5) ?? "N/A"}</div>
+                            <div className="font-extrabold text-neutral-200">0.675</div>
                         </div>
                     </div>
                     <div className="px-6 mt-4 w-full">
@@ -560,7 +492,7 @@ export default function ItemSettings() {
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" disabled={saving || !isEditing}>
+                            <Button type="submit" disabled>
                                 {saving && <BiSync className="animate-spin mr-2 size-4" />}
                                 Save
                             </Button>
@@ -583,7 +515,7 @@ export default function ItemSettings() {
                         onChange={(e) => setDeleteConfirmation(e.target.value)}
                     />
                     <Button
-                        disabled={saving}
+                        disabled
                         onClick={() => {
                             if (deleteConfirmation === item?.name ?? item.market_hash_name) deleteItem()
                             else toast.error("Item name does not match!")

@@ -57,7 +57,7 @@ export default function Logs() {
                 logs.length === 0 && showDemoLogs && "py-[16vh]",
                 logs && logs.length > 0 && "py-[16vh]"
             )}
-            id="dashboard"
+            id="logs"
         >
             <Navbar
                 items={[

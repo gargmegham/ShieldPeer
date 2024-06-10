@@ -29,11 +29,13 @@ const FormSchema = z.object({
 export default function AddEditPriceRangeDialog({
     open,
     setOpen,
+    isDemo,
     refreshTable,
     selectedPriceRange,
 }: {
     open: boolean
     setOpen: (open: boolean) => void
+    isDemo?: boolean
     refreshTable?: () => void
     selectedPriceRange: PriceRange | null
 }) {
@@ -264,7 +266,7 @@ export default function AddEditPriceRangeDialog({
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" disabled={saving}>
+                        <Button type="submit" disabled={saving || isDemo}>
                             {saving && <BiSync className="animate-spin mr-2 size-4" />}
                             Save
                         </Button>

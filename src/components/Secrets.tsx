@@ -29,39 +29,37 @@ const FormSchema = z.object({
     steam_id: z.string().min(5),
 })
 
-export default function Secrets({ setting }: { setting: Setting }) {
+export default function Secrets({ setting, isDemo }: { setting: Setting; isDemo?: boolean }) {
     const [isEditing, setIsEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         disabled: !isEditing,
     })
-
     function onSubmit(data: z.infer<typeof FormSchema>) {
         setSaving(true)
-        fetch("/api/settings", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then(() => {
-                setIsEditing(false)
-                toast.success("API keys updated successfully.")
+        !isDemo &&
+            fetch("/api/settings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
             })
-            .catch(() => {
-                toast.error("Failed to update API keys.")
-            })
-            .finally(() => {
-                setSaving(false)
-            })
+                .then(() => {
+                    setIsEditing(false)
+                    toast.success("API keys updated successfully.")
+                })
+                .catch(() => {
+                    toast.error("Failed to update API keys.")
+                })
+                .finally(() => {
+                    setSaving(false)
+                })
     }
-
     useEffect(() => {
         form.reset(setting)
     }, [setting])
-
     return (
         <Card className="w-full relative">
             <CardHeader>

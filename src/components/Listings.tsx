@@ -24,19 +24,22 @@ const Listings = ({
     listings,
     setting,
     refreshListings,
+    isDemo,
 }: {
-    setting: Setting
+    setting?: Setting
+    isDemo?: boolean
     listings: Listing[]
-    refreshListings: () => void
+    refreshListings?: () => void
 }) => {
     const [deleting, setDeleting] = useState(false)
     const removeListing = async (id: string) => {
         try {
             setDeleting(true)
-            await fetch(`/api/listings/${id}`, {
-                method: "DELETE",
-            })
-            refreshListings()
+            !isDemo &&
+                (await fetch(`/api/listings/${id}`, {
+                    method: "DELETE",
+                }))
+            refreshListings?.()
         } catch (err: any) {
             toast.error(err?.message ?? "Failed to delete item")
         } finally {
@@ -120,10 +123,10 @@ const Listings = ({
                             </div>
                             <div className="flex gap-2 text-sm">
                                 <div className="text-neutral-500">
-                                    {setting.price_empire_source
+                                    {setting?.price_empire_source
                                         ? setting.price_empire_source[0].toLocaleUpperCase()
                                         : "B"}
-                                    {setting.price_empire_source?.slice(1) ?? "uff"}
+                                    {setting?.price_empire_source?.slice(1) ?? "uff"}
                                 </div>
                                 <div className="font-extrabold text-neutral-200 font-bricolage">
                                     {/* prices are in cents */}
@@ -145,7 +148,11 @@ const Listings = ({
                         <div className="px-6 mt-4 w-full">
                             <Link
                                 className="w-full gap-2 relative flex items-center justify-center py-2 bg-zinc-900 rounded-xl border"
-                                href={`/settings/item/${listing.item_id ?? listing.item.asset_id}`}
+                                href={
+                                    isDemo
+                                        ? `/demo/settings/item/${listing.item_id ?? listing.item.asset_id}`
+                                        : `/settings/item/${listing.item_id ?? listing.item.asset_id}`
+                                }
                             >
                                 <MdSettings className="size-4 text-amber-500/90" />
                                 Details

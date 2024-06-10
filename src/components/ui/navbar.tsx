@@ -6,6 +6,7 @@ import Link from "next/link"
 import React from "react"
 
 import { AnimatePresence, motion } from "framer-motion"
+import { FaKeycdn } from "react-icons/fa6"
 import { IoMdLogIn } from "react-icons/io"
 import { MdOutlinePriceChange, MdOutlineSupport } from "react-icons/md"
 
@@ -19,6 +20,11 @@ const Navbar = ({
             label: "Pricing",
             link: "/home#pricing",
             icon: MdOutlinePriceChange,
+        },
+        {
+            label: "Demo",
+            link: "/demo",
+            icon: FaKeycdn,
         },
         {
             label: "Support",

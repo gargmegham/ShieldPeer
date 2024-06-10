@@ -20,40 +20,21 @@ import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
-import { cn } from "@/utils/cn"
 import { formatItems } from "@/utils/price-empire"
 
-import type { Item, Setting } from "@/types/database"
+import type { Setting } from "@/types/database"
 import type { Inventory, Item as PriceEmpireInventoryItem } from "@/types/price-empire"
 
 export default function Inventory() {
-    const [inventory, setInventory] = useState<Item[]>([])
     const [demoInventory, setDemoInventory] = useState<PriceEmpireInventoryItem[]>([])
     const [loading, setLoading] = useState(true)
-    const [showDemoInventory, setShowDemoInventory] = useState(false)
     const [setting, setSetting] = useState<Setting>({} as Setting)
     const [user, setUser] = useState<Inventory["user"]>({} as Inventory["user"])
     const [saving, setSaving] = useState(false)
-    const fetchInventory = async () => {
-        try {
-            const res = await fetch("/api/inventory")
-            const data = await res.json()
-            if (!data) return
-            setInventory(data)
-        } catch (error: any) {
-            toast.error("Failed to fetch inventory")
-        }
-    }
     const activateItems = async () => {
         setSaving(true)
         try {
-            await fetch(`/api/item`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            fetchInventory()
+            setTimeout(() => {}, 250)
             toast.success("Items activated successfully")
         } catch (error: any) {
             toast.error("Failed to activate items")
@@ -62,29 +43,6 @@ export default function Inventory() {
         }
     }
     useEffect(() => {
-        fetch("/api/settings")
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setSetting(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch settings")
-            })
-    }, [])
-    useEffect(() => {
-        fetch("/api/steam")
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data) return
-                setUser(data)
-            })
-            .catch(() => {
-                toast.error("Failed to fetch settings")
-            })
-    }, [])
-    useEffect(() => {
-        fetchInventory()
         fetch("/demo/inventory.json")
             .then((res) => res.json())
             .then((data) => {
@@ -101,29 +59,22 @@ export default function Inventory() {
     return loading ? (
         <Loader />
     ) : (
-        <main
-            className={cn(
-                inventory.length === 0 && !showDemoInventory && "flex justify-center items-center",
-                inventory.length === 0 && showDemoInventory && "py-[16vh] relative flex justify-center px-8 md:px-20",
-                inventory.length > 0 && "py-[16vh] relative flex justify-center px-8 md:px-20"
-            )}
-            id="inventory"
-        >
+        <main className="py-[16vh] relative flex justify-center px-8 md:px-20" id="demo-inventory">
             <Navbar
                 items={[
-                    { label: "Inventory", link: "/inventory", icon: MdOutlineInventory, inFocus: true },
+                    { label: "Inventory", link: "/demo/inventory", icon: MdOutlineInventory, inFocus: true },
                     {
                         label: "Logs",
-                        link: "/logs",
+                        link: "/demo/logs",
                         icon: MdOutlineDocumentScanner,
                     },
                     {
                         label: "Settings",
-                        link: "/settings",
+                        link: "/demo/settings",
                         icon: IoSettingsOutline,
                     },
                 ]}
-                logoLink="/"
+                logoLink="/demo"
             />
             <Link
                 className="fixed bottom-10 right-10 z-20"
@@ -135,36 +86,21 @@ export default function Inventory() {
                     <AvatarFallback className="text-amber-300">{user?.name ? user?.name[0] : "N/A"}</AvatarFallback>
                 </Avatar>
             </Link>
-            {inventory.length === 0 && !showDemoInventory && (
-                <Card className="w-[350px]">
-                    <CardContent className="pt-6 space-y-4">
-                        <div>No items in your inventory. Would you like to see some demo items instead?</div>
-                        <div className="flex items-center justify-end">
-                            <Button onClick={() => setShowDemoInventory(true)}>Yes</Button>
-                        </div>
-                    </CardContent>
-                </Card>
-            )}
-            <div className={cn(inventory.length === 0 && !showDemoInventory && "hidden", "space-y-4")}>
-                {(inventory.length > 0 || showDemoInventory) && (
-                    <div className="flex justify-end">
-                        <Button onClick={activateItems} disabled={saving}>
-                            {saving && <BiSync className="animate-spin size-4 mr-2" />}
-                            Activate All
-                        </Button>
-                    </div>
-                )}
+            <div className="space-y-4">
+                <div className="flex justify-end">
+                    <Button onClick={activateItems} disabled={saving}>
+                        {saving && <BiSync className="animate-spin size-4 mr-2" />}
+                        Activate All
+                    </Button>
+                </div>
                 <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {(inventory.length === 0 && showDemoInventory
-                        ? formatItems(
-                              demoInventory,
-                              {
-                                  price_empire_source: "buff",
-                                  user_id: "demo_63728uhkjhgT^R%^RTD",
-                              } as Setting,
-                              true
-                          )
-                        : inventory
+                    {formatItems(
+                        demoInventory,
+                        {
+                            price_empire_source: "buff",
+                            user_id: "demo_63728uhkjhgT^R%^RTD",
+                        } as Setting,
+                        true
                     )
                         .sort((a, b) => (a.price > b.price ? -1 : 1))
                         .map((item) => (
@@ -253,7 +189,7 @@ export default function Inventory() {
                                 <div className="px-6 mt-4 w-full">
                                     <Link
                                         className="w-full gap-2 relative flex items-center justify-center py-2 bg-zinc-900 rounded-xl border"
-                                        href={`/settings/item/${item.id ?? item.asset_id}`}
+                                        href={`/demo/settings/item/${item.id ?? item.asset_id}`}
                                     >
                                         <MdSettings className="size-4 text-amber-500/90" />
                                         Details
