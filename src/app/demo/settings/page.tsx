@@ -12,16 +12,7 @@ import PriceRanges from "@/components/PriceRanges"
 import Secrets from "@/components/Secrets"
 import UndercutParameters from "@/components/UndercutParameters"
 
-import config from "@/utils/config"
-import { getSEOTags } from "@/utils/seo"
-
 import type { Setting } from "@/types/database"
-
-export const metadata = getSEOTags({
-    title: `${config.appName} - Settings`,
-    description: "Manage your bot settings here.",
-    keywords: "settings, bot, parameters",
-})
 
 export default function Settings() {
     const [setting, setSetting] = useState<Setting>({} as Setting)

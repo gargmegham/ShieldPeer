@@ -12,16 +12,7 @@ import Navbar from "@/components/ui/navbar"
 import Listings from "@/components/Listings"
 import Statistics from "@/components/Statistics"
 
-import config from "@/utils/config"
-import { getSEOTags } from "@/utils/seo"
-
 import type { Listing } from "@/types/database"
-
-export const metadata = getSEOTags({
-    title: `${config.appName} - Dashboard`,
-    description: "Here you can see your listings, and account statistics.",
-    keywords: "dashboard, listings, statistics",
-})
 
 export default function Dashboard() {
     const [demoListings, setDemoListings] = useState<Listing[]>([])

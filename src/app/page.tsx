@@ -15,17 +15,9 @@ import Listings from "@/components/Listings"
 import Statistics from "@/components/Statistics"
 
 import { cn } from "@/utils/cn"
-import config from "@/utils/config"
-import { getSEOTags } from "@/utils/seo"
 
 import type { Listing, Setting } from "@/types/database"
 import type { Inventory } from "@/types/price-empire"
-
-export const metadata = getSEOTags({
-    title: `${config.appName} - Dashboard`,
-    description: "Here you can see your listings, and account statistics.",
-    keywords: "dashboard, listings, statistics",
-})
 
 export default function Dashboard() {
     const [listings, setListings] = useState<Listing[]>([])

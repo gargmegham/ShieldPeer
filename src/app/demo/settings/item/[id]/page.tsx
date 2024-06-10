@@ -27,16 +27,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Switch } from "@/components/ui/switch"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
-import config from "@/utils/config"
-import { getSEOTags } from "@/utils/seo"
-
 import type { Item } from "@/types/database"
-
-export const metadata = getSEOTags({
-    title: `${config.appName} - Item Settings`,
-    description: "Manage your item settings here.",
-    keywords: "settings, item, parameters",
-})
 
 const FormSchema = z.object({
     undercut_by_price: z.number(),
