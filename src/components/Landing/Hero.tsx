@@ -8,7 +8,9 @@ import Spotlight from "@/components/ui/spotlight"
 import TestimonialsAvatars from "@/components/Landing/TestimonialsAvatars"
 
 import integrate from "@/assets/icons/integrate.svg"
+import hackerNews from "@/assets/logo/hacker-news.svg"
 import priceEmpire from "@/assets/logo/price-empire.svg"
+import productHunt from "@/assets/logo/product-hunt.svg"
 import steam from "@/assets/logo/steam.svg"
 import waxpeer from "@/assets/logo/waxpeer.svg"
 
@@ -60,6 +62,28 @@ export default function Hero() {
                     </Link>
                 </p>
                 <TestimonialsAvatars />
+            </div>
+            <div className="absolute bottom-8 flex justify-center">
+                <div className="flex items-center space-x-8">
+                    <Link href={"/#"}>
+                        <Image
+                            src={productHunt}
+                            alt="productHunt"
+                            width={150}
+                            height={150}
+                            className="w-20 h-20 text-zinc-800"
+                        />
+                    </Link>
+                    <Link href={"/#"}>
+                        <Image
+                            src={hackerNews}
+                            alt="hackerNews"
+                            width={150}
+                            height={150}
+                            className="w-20 h-20 text-zinc-800"
+                        />
+                    </Link>
+                </div>
             </div>
         </section>
     )
