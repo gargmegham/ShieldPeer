@@ -43,14 +43,14 @@ export default function Hero() {
                     <Image src={waxpeer} alt="waxpeer" width={100} height={100} className="w-20 h-20" />
                 </p>
                 <p className="my-4 flex justify-center space-x-2">
-                    <a
+                    <Link
                         href="https://calendly.com/megham-garg/session"
                         target="_blank"
                         rel="noreferrer"
                         className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-gray-950 flex items-center justify-center"
                     >
                         <span>Schedule Demo</span>
-                    </a>
+                    </Link>
                     <Link
                         href="/auth"
                         className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-neutral-900 flex items-center justify-center"
