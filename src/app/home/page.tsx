@@ -7,6 +7,7 @@ import { GitHubLogoIcon } from "@radix-ui/react-icons"
 import Navbar from "@/components/ui/navbar"
 
 import FAQ from "@/components/Landing/FAQ"
+import FinalCTA from "@/components/Landing/FinalCTA"
 import Footer from "@/components/Landing/Footer"
 import Hero from "@/components/Landing/Hero"
 import Pricing from "@/components/Landing/Pricing"
@@ -20,6 +21,7 @@ export default function Home() {
             <Problem />
             <Pricing />
             <FAQ />
+            <FinalCTA />
             <Footer />
             <Link
                 href="https://github.com/gargmegham/ShieldPeer"
