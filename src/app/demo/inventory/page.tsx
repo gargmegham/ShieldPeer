@@ -20,10 +20,18 @@ import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
+import config from "@/utils/config"
 import { formatItems } from "@/utils/price-empire"
+import { getSEOTags } from "@/utils/seo"
 
 import type { Setting } from "@/types/database"
 import type { Inventory, Item as PriceEmpireInventoryItem } from "@/types/price-empire"
+
+export const metadata = getSEOTags({
+    title: `${config.appName} - Inventory`,
+    description: "Here you can see steam inventory along with their prices.",
+    keywords: "inventory, items, prices",
+})
 
 export default function Inventory() {
     const [demoInventory, setDemoInventory] = useState<PriceEmpireInventoryItem[]>([])

@@ -13,6 +13,14 @@ import Hero from "@/components/Landing/Hero"
 import Pricing from "@/components/Landing/Pricing"
 import Problem from "@/components/Landing/Problem"
 
+import config from "@/utils/config"
+import { getSEOTags } from "@/utils/seo"
+
+export const metadata = getSEOTags({
+    title: `${config.appName} - Optimize Selling of Steam Assets | Automated Bot for Waxpeer`,
+    description: `${config.appName}'s intelligent bot helps you sell your Steam assets swiftly on marketplaces like Waxpeer using the latest price data from PriceEmpire. Customize parameters to maximize your benefits. Get started today!`,
+})
+
 export default function Home() {
     return (
         <main id="home" className="relative">

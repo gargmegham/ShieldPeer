@@ -22,13 +22,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import LineGraph from "@/components/ui/line-graph"
-import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
-import type { Item, ItemSetting } from "@/types/database"
+import config from "@/utils/config"
+import { getSEOTags } from "@/utils/seo"
+
+import type { Item } from "@/types/database"
+
+export const metadata = getSEOTags({
+    title: `${config.appName} - Item Settings`,
+    description: "Manage your item settings here.",
+    keywords: "settings, item, parameters",
+})
 
 const FormSchema = z.object({
     undercut_by_price: z.number(),

@@ -11,7 +11,16 @@ import Navbar from "@/components/ui/navbar"
 
 import LogTable from "@/components/LogTable"
 
+import config from "@/utils/config"
+import { getSEOTags } from "@/utils/seo"
+
 import type { Log } from "@/types/database"
+
+export const metadata = getSEOTags({
+    title: `${config.appName} - Logs`,
+    description: "Here you can see your logs.",
+    keywords: "logs, history",
+})
 
 export default function Logs() {
     const [demoLogs, setDemoLogs] = useState<Log[]>([])
