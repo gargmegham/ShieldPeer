@@ -46,9 +46,9 @@ const Step = ({ emoji, text }: { emoji: string; text: string }) => {
 // - Features: "ShieldPeer is safe, fast and running continously to get you the best price for your skins."
 const Problem = () => {
     return (
-        <section className="bg-black">
+        <section className="bg-black relative">
             <div className="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
-                <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8">
+                <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-5xl tracking-tight mb-6 md:mb-8 font-bricolage">
                     80% of assets are sold by
                     <br /> top 1% of the sellers
                 </h2>
@@ -68,6 +68,9 @@ const Problem = () => {
 
                     <Step emoji="😔" text="Wasted earning potential" />
                 </div>
+            </div>
+            <div className="absolute bottom-8 text-center text-sm font-bold font-bricolage text-zinc-500 w-full">
+                But with {config.appName}, you can be part of that 1%.
             </div>
         </section>
     )

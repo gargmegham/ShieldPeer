@@ -9,8 +9,8 @@ const Pricing = () => {
         <section id="pricing" className="bg-grid-white/[0.1] bg-black">
             <div className="py-24 px-8 max-w-5xl mx-auto">
                 <div className="flex flex-col text-center w-full mb-12">
-                    <p className="font-medium text-amber-500 mb-8">Pricing</p>
-                    <h2 className="font-bold text-3xl lg:text-5xl tracking-tight">
+                    <p className="font-medium text-amber-500 mb-8 font-bricolage">Pricing</p>
+                    <h2 className="font-bricolage font-bold text-3xl lg:text-5xl tracking-tight">
                         Start selling now at lightning fast speed!
                     </h2>
                     <h3 className="mt-2 text-xs font-extrabold text-servcy-cream md:text-lg flex justify-center items-center">
