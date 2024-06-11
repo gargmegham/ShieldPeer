@@ -126,7 +126,10 @@ async def insert_unique_logs(
         else:
             last_log = last_log.data[0]
             # if the last log was more than 1 hour ago
-            if (datetime.now() - last_log["created_at"]).total_seconds() > 3600:
+            created_at = datetime.strptime(
+                last_log["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ"
+            )
+            if (datetime.now() - created_at).total_seconds() > 3600:
                 logs_to_insert.append(log)
         unique_logs.add(log["message"])
     response = await client.table("Logs").insert(logs_to_insert).execute()
