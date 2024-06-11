@@ -96,44 +96,36 @@ async def insert_logs(
     return response.data
 
 
-async def insert_unique_logs(
+async def was_logged_recently(
     client: AsyncClient,
-    logs: list,
+    user_id: str,
+    message: str,
 ):
     """
-    Insert logs into the database
-    * Only insert logs that are not already in the database for the last hour
-    @param logs: The logs to insert
+    Check if the log was logged recently
+    * If the log was logged within the last hour
+    @param log: The log to check
     @param client: The Supabase client
     """
-    unique_logs = set()
-    logs_to_insert = []
-    for log in logs:
-        if log["message"] in unique_logs:
-            continue
-        # find the last log with the same message
-        last_log = (
-            await client.table("Logs")
-            .select("*")
-            .eq("user_id", log["user_id"])
-            .eq("message", log["message"])
-            .order("created_at", desc=True)
-            .limit(1)
-            .execute()
-        )
-        if len(last_log.data) == 0:
-            logs_to_insert.append(log)
-        else:
-            last_log = last_log.data[0]
-            # if the last log was more than 1 hour ago
-            created_at = datetime.strptime(
-                last_log["created_at"], "%Y-%m-%dT%H:%M:%S.%f%z"
-            )
-            if (datetime.now(timezone.utc) - created_at).total_seconds() > 3600:
-                logs_to_insert.append(log)
-        unique_logs.add(log["message"])
-    response = await client.table("Logs").insert(logs_to_insert).execute()
-    return response.data
+    # find the last log with the same message
+    last_log = (
+        await client.table("Logs")
+        .select("*")
+        .eq("user_id", user_id)
+        .eq("message", message)
+        .order("created_at", desc=True)
+        .limit(1)
+        .execute()
+    )
+    if len(last_log.data) == 0:
+        return False
+    else:
+        last_log = last_log.data[0]
+        # if the last log was more than 1 hour ago
+        created_at = datetime.strptime(last_log["created_at"], "%Y-%m-%dT%H:%M:%S.%f%z")
+        if (datetime.now(timezone.utc) - created_at).total_seconds() > 3600:
+            return False
+    return True
 
 
 async def insert_listings(client: AsyncClient, listings: list):

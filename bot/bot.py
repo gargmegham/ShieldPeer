@@ -17,8 +17,8 @@ from utils.supabase import (
     get_supabase_client,
     insert_listings,
     insert_logs,
-    insert_unique_logs,
     update_listings,
+    was_logged_recently,
 )
 from utils.waxpeer import create_listing, edit_listing_price, search_items
 
@@ -34,7 +34,6 @@ async def bot():
         settings = await get_general_settings(supabase)
         for setting in settings:
             try:
-                other_logs_to_create = []
                 logs_to_create = []
                 if (
                     not setting["is_running"]
@@ -44,16 +43,17 @@ async def bot():
                     continue
                 active_items = await get_items(supabase, setting["user_id"])
                 if len(active_items) == 0:
-                    other_logs_to_create.append(
-                        {
-                            "user_id": setting["user_id"],
-                            "name": "ShieldPeer",
-                            "message": "No active items found",
-                            "type": "caution",
-                            "image": "/logo.jpg",
-                        }
-                    )
-                    await insert_unique_logs(supabase, other_logs_to_create)
+                    log = {
+                        "user_id": setting["user_id"],
+                        "name": "ShieldPeer",
+                        "message": "No active items found",
+                        "type": "caution",
+                        "image": "/logo.jpg",
+                    }
+                    if not await was_logged_recently(
+                        supabase, setting["user_id"], log["message"]
+                    ):
+                        await insert_logs(supabase, [log])
                     continue
                 listings = await get_listings(supabase, setting["user_id"])
                 price_ranges = await get_price_ranges(supabase, setting["user_id"])
@@ -68,15 +68,17 @@ async def bot():
                             price_ranges, item["price"] / 100
                         )
                         if valid_price_range is None:
-                            other_logs_to_create.append(
-                                {
-                                    "user_id": setting["user_id"],
-                                    "name": item["market_hash_name"],
-                                    "image": f"https://community.cloudflare.steamstatic.com/economy/image/{item['image']}",
-                                    "message": f"No valid price range found for item ::: {item['asset_id']}",
-                                    "type": "caution",
-                                }
-                            )
+                            log = {
+                                "user_id": setting["user_id"],
+                                "name": item["market_hash_name"],
+                                "image": f"https://community.cloudflare.steamstatic.com/economy/image/{item['image']}",
+                                "message": f"No valid price range found for item ::: {item['asset_id']}",
+                                "type": "caution",
+                            }
+                            if not await was_logged_recently(
+                                supabase, setting["user_id"], log["message"]
+                            ):
+                                logs_to_create.append(log)
                             continue
                         item_settings = {
                             **valid_price_range,
@@ -218,7 +220,6 @@ async def bot():
                 )
                 if len(logs_to_create):
                     await insert_logs(supabase, logs_to_create)
-                    await insert_unique_logs(supabase, other_logs_to_create)
             except KeyError:
                 logger.error(f"KeyError occurred in bot:", exc_info=True)
                 continue
