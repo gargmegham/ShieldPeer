@@ -1,4 +1,6 @@
-"use client"
+import { getSEOTags } from "@/utils/seo"
+
+export const metadata = getSEOTags()
 
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
     return (
