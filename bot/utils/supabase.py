@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 from supabase._async.client import AsyncClient, create_client
@@ -129,7 +129,7 @@ async def insert_unique_logs(
             created_at = datetime.strptime(
                 last_log["created_at"], "%Y-%m-%dT%H:%M:%S.%f%z"
             )
-            if (datetime.now() - created_at).total_seconds() > 3600:
+            if (datetime.now(timezone.utc) - created_at).total_seconds() > 3600:
                 logs_to_insert.append(log)
         unique_logs.add(log["message"])
     response = await client.table("Logs").insert(logs_to_insert).execute()
