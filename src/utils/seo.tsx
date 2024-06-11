@@ -22,7 +22,7 @@ export const getSEOTags = ({
         // up to 160 characters (how does your app help the user?)
         description: description || config.appDescription,
         // some keywords separated by commas. by default it will be your app name
-        keywords: keywords || [config.appName],
+        keywords: keywords || [config.keywords],
         applicationName: config.appName,
         // set a base URL prefix for other fields that require a fully qualified URL (.e.g og:image: og:image: 'https://yourdomain.com/share.png' => '/share.png')
         metadataBase: new URL(

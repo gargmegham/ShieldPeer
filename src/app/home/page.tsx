@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 
 import { GitHubLogoIcon } from "@radix-ui/react-icons"
@@ -12,6 +10,12 @@ import Footer from "@/components/Landing/Footer"
 import Hero from "@/components/Landing/Hero"
 import Pricing from "@/components/Landing/Pricing"
 import Problem from "@/components/Landing/Problem"
+
+import { getSEOTags } from "@/utils/seo"
+
+export const metadata = getSEOTags({
+    canonicalUrlRelative: "/home",
+})
 
 export default function Home() {
     return (

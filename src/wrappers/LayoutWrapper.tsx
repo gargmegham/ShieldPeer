@@ -61,6 +61,8 @@ const CrispChat = (): null => {
 // 2. Toaster: Show Success/Error messages anywhere from the app with toast()
 // 3. Tooltip: Show tooltips if any JSX elements has these 2 attributes: data-tooltip-id="tooltip" data-tooltip-content=""
 // 4. CrispChat: Set Crisp customer chat support (see above)
+// 5. Clarity: Clarity for recording user interactions
+// 6. Google Analytics: Google Analytics
 const LayoutWrapper = ({ children }: { children: ReactNode }) => {
     return (
         <>

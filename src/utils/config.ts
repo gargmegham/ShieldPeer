@@ -5,6 +5,8 @@ const config = {
     appDescription:
         "ShieldPeer's secure, and intelligent bot helps you sell your Steam assets swiftly on marketplaces like Waxpeer using the latest price data from PriceEmpire. Customize parameters to maximize your benefits. Get started today!",
     domainName: "www.shieldpeer.in",
+    keywords:
+        "ShieldPeer, Steam, Waxpeer, PriceEmpire, CS:GO, CS2, Skins Marketplace, Steam Skins, Counter Strike Global Offensive, CSGO, CSGO Skins, CSGO Marketplace, CSGO Skins Marketplace, CSGO Trading, CSGO Trade, CSGO Trade Skins",
     crisp: {
         // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
         id: "30e2a2f2-6d09-4207-bac4-561ae9ebd38e",
@@ -24,8 +26,7 @@ const config = {
         forwardRepliesTo: "business@meghamgarg.com",
     },
     colors: {
-        // REQUIRED — This color will be reflected on the whole app outside of the document (loading bar, Chrome tabs, etc..). By default it takes the primary color from your DaisyUI theme (make sure to update your the theme name after "data-theme=")
-        // OR you can just do this to use a custom color: main: "#f37055". HEX only.
+        // REQUIRED — This color will be reflected on the NextTopLoader. HEX only.
         main: "#f59e0b",
     },
     auth: {
