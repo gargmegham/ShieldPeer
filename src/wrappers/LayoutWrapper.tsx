@@ -91,6 +91,7 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
             <Tooltip id="tooltip" className="z-[60] !opacity-100 max-w-sm shadow-lg" />
             {/* Set Crisp customer chat support */}
             <CrispChat />
+            {/* Clarity for recording user interactions */}
             <Script type="text/javascript" id="clarity-microsoft">
                 {`(function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -98,6 +99,7 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY}");`}
             </Script>
+            {/* Google Analytics */}
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA ?? ""} />
         </>
     )
