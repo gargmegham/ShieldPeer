@@ -10,9 +10,10 @@ export const config = {
          * - _next/static (static files)
          * - _next/image (image optimization files)
          * - favicon.ico (favicon file)
+         * - robots.txt (robots file for crawlers)
          * - .(svg|png|jpg|jpeg|gif|webp) (image files)
          */
-        "/((?!_next/static|_next/image|home|auth|api/price-empire|api/auth|tos|demo|privacy-policy|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+        "/((?!_next/static|robots.txt|_next/image|home|auth|api/price-empire|api/auth|tos|demo|privacy-policy|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
     ],
 }
 
