@@ -1,10 +1,7 @@
 import math
 from datetime import datetime
 
-from utils.supabase import (
-    get_last_waxpeer_log,
-    is_item_in_my_inventory,
-)
+from utils.supabase import get_last_waxpeer_log, is_item_in_my_inventory
 
 
 async def skip_due_to_last_run(supabase, setting):
@@ -29,11 +26,11 @@ async def filter_valid_competitors(
     @return: list of valid competitors, new price in cents
     """
     valid_competitors = []
-    undercut_by_price = setting["undercut_by_price"]
-    undercut_by_percentage = setting["undercut_by_percentage"]
+    undercut_by_price = setting["undercut_by_price"] * 100  # convert to cents
+    undercut_by_percentage = setting["undercut_by_percentage"]  # this is a percentage
     undercut_by = setting["undercut_by"]
-    listing_price_min = setting["listing_price_min"]
-    listing_price_max = setting["listing_price_max"]
+    listing_price_min = setting["listing_price_min"]  # this is a percentage
+    listing_price_max = setting["listing_price_max"]  # this is a percentage
     always_undercut_by_percentage_if_listing_price_is_greater_than = setting[
         "always_undercut_by_percentage_if_listing_price_is_greater_than"
     ]
@@ -57,8 +54,8 @@ async def filter_valid_competitors(
                 competitor_price - (competitor_price * undercut_by_percentage / 100)
             )
         if (
-            price >= listing_price_min
-            and price < listing_price_max
+            price >= ((listing_price_min / 100) * base_price)
+            and price < ((listing_price_max / 100) * base_price)
             and not await is_item_in_my_inventory(setting["user_id"], result["item_id"])
         ):
             if not new_price or price < new_price:

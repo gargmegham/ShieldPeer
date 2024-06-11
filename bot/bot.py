@@ -2,6 +2,12 @@ import asyncio
 import math
 
 from utils.logger import get_logger
+from utils.logic import (
+    filter_price_range,
+    filter_valid_competitors,
+    is_item_already_listed,
+    skip_due_to_last_run,
+)
 from utils.supabase import (
     get_general_settings,
     get_item_settings,
@@ -15,12 +21,6 @@ from utils.supabase import (
     update_listings,
 )
 from utils.waxpeer import create_listing, edit_listing_price, search_items
-from utils.logic import (
-    filter_price_range,
-    filter_valid_competitors,
-    is_item_already_listed,
-    skip_due_to_last_run,
-)
 
 
 async def bot():
@@ -65,7 +65,7 @@ async def bot():
                     )
                     if item_settings is None:
                         valid_price_range = await filter_price_range(
-                            price_ranges, item["price"]
+                            price_ranges, item["price"] / 100
                         )
                         if valid_price_range is None:
                             other_logs_to_create.append(
@@ -96,10 +96,12 @@ async def bot():
                         when_no_one_to_undercut_list_at = item_settings[
                             "when_no_one_to_undercut_list_at"
                         ]
-                        listing_price_max = item_settings["listing_price_max"]
+                        listing_price_max = item_settings[
+                            "listing_price_max"
+                        ]  # this is a percentage
                         listing_price_if_no_one_to_undercut = item_settings[
                             "listing_price_if_no_one_to_undercut"
-                        ]
+                        ]  # this is a percentage
                         if when_no_one_to_undercut_list_at == "listing_price_max":
                             new_price = math.ceil(
                                 (listing_price_max / 100) * base_price
@@ -138,7 +140,7 @@ async def bot():
                         [
                             {
                                 "item_id": listing["asset_id"],
-                                "price": listing["price"],
+                                "price": listing["price"] * 10,
                             }
                             for listing in listings_to_create
                         ],
@@ -150,7 +152,7 @@ async def bot():
                             {
                                 "user_id": listing["user_id"],
                                 "item_id": listing["item_id"],
-                                "price": listing["price"],
+                                "price": listing["price"] / 100,
                                 "updated_at": "now()",
                             }
                             for listing in listings_to_create
@@ -162,7 +164,7 @@ async def bot():
                                 "user_id": listing["user_id"],
                                 "name": listing["name"],
                                 "image": listing["image"],
-                                "message": f"New listing created for {listing['name']} at {listing['price']}",
+                                "message": f"New listing created for {listing['name']} at {listing['price']} cents",
                                 "type": "success",
                             }
                             for listing in listings_to_create
@@ -173,7 +175,7 @@ async def bot():
                         [
                             {
                                 "item_id": listing["asset_id"],
-                                "price": listing["price"],
+                                "price": listing["price"] * 10,
                             }
                             for listing in listings_to_update
                         ],
@@ -184,7 +186,7 @@ async def bot():
                         [
                             {
                                 "id": listing["id"],
-                                "price": listing["price"],
+                                "price": listing["price"] / 100,
                                 "updated_at": "now()",
                             }
                             for listing in listings_to_update
@@ -196,7 +198,7 @@ async def bot():
                                 "user_id": listing["user_id"],
                                 "name": listing["name"],
                                 "image": listing["image"],
-                                "message": f"Price updated for {listing['name']} to {listing['price']}",
+                                "message": f"Price updated for {listing['name']} to {listing['price']} cents",
                                 "type": "success",
                                 "meta_data": {
                                     "listing_id": listing["id"],
@@ -205,13 +207,15 @@ async def bot():
                             for listing in listings_to_update
                         ]
                     )
-                logs_to_create.append({
-                    "user_id": setting["user_id"],
-                    "name": "Waxpeer",
-                    "message": "Bot iteration completed",
-                    "type": "success",
-                    "image": "/waxpeer.svg",
-                })
+                logs_to_create.append(
+                    {
+                        "user_id": setting["user_id"],
+                        "name": "Waxpeer",
+                        "message": "Bot iteration completed",
+                        "type": "success",
+                        "image": "/waxpeer.svg",
+                    }
+                )
                 if len(logs_to_create):
                     await insert_logs(supabase, logs_to_create)
                     await insert_unique_logs(supabase, other_logs_to_create)
