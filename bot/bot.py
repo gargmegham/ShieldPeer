@@ -35,10 +35,8 @@ async def bot():
         for setting in settings:
             try:
                 logs_to_create = []
-                if (
-                    not setting["is_running"]
-                    or not setting["waxpeer_key"]
-                    or await skip_due_to_last_run(supabase, setting)
+                if not setting["waxpeer_key"] or await skip_due_to_last_run(
+                    supabase, setting
                 ):
                     continue
                 active_items = await get_items(supabase, setting["user_id"])
@@ -138,69 +136,79 @@ async def bot():
                             }
                         )
                 if len(listings_to_create):
-                    await create_listing(
-                        [
-                            {
-                                "item_id": listing["asset_id"],
-                                "price": listing["price"] * 10,
-                            }
-                            for listing in listings_to_create
-                        ],
-                        setting["waxpeer_key"],
-                    )
-                    await insert_listings(
-                        supabase,
-                        [
-                            {
-                                "user_id": listing["user_id"],
-                                "item_id": listing["item_id"],
-                                "price": listing["price"] / 100,
-                                "updated_at": "now()",
-                            }
-                            for listing in listings_to_create
-                        ],
-                    )
+                    if setting["is_running"]:
+                        await create_listing(
+                            [
+                                {
+                                    "item_id": listing["asset_id"],
+                                    "price": listing["price"] * 10,
+                                }
+                                for listing in listings_to_create
+                            ],
+                            setting["waxpeer_key"],
+                        )
+                        await insert_listings(
+                            supabase,
+                            [
+                                {
+                                    "user_id": listing["user_id"],
+                                    "item_id": listing["item_id"],
+                                    "price": listing["price"] / 100,
+                                    "updated_at": "now()",
+                                }
+                                for listing in listings_to_create
+                            ],
+                        )
                     logs_to_create.extend(
                         [
                             {
                                 "user_id": listing["user_id"],
                                 "name": listing["name"],
                                 "image": listing["image"],
-                                "message": f"New listing created for {listing['name']} at {listing['price']} cents",
+                                "message": (
+                                    f"New listing created for {listing['name']} at {listing['price']} cents"
+                                    if setting["is_running"]
+                                    else f"New listing would have been created for {listing['name']} at {listing['price']} cents if the bot was running"
+                                ),
                                 "type": "success",
                             }
                             for listing in listings_to_create
                         ]
                     )
                 if len(listings_to_update):
-                    await edit_listing_price(
-                        [
-                            {
-                                "item_id": listing["asset_id"],
-                                "price": listing["price"] * 10,
-                            }
-                            for listing in listings_to_update
-                        ],
-                        setting["waxpeer_key"],
-                    )
-                    await update_listings(
-                        supabase,
-                        [
-                            {
-                                "id": listing["id"],
-                                "price": listing["price"] / 100,
-                                "updated_at": "now()",
-                            }
-                            for listing in listings_to_update
-                        ],
-                    )
+                    if setting["is_running"]:
+                        await edit_listing_price(
+                            [
+                                {
+                                    "item_id": listing["asset_id"],
+                                    "price": listing["price"] * 10,
+                                }
+                                for listing in listings_to_update
+                            ],
+                            setting["waxpeer_key"],
+                        )
+                        await update_listings(
+                            supabase,
+                            [
+                                {
+                                    "id": listing["id"],
+                                    "price": listing["price"] / 100,
+                                    "updated_at": "now()",
+                                }
+                                for listing in listings_to_update
+                            ],
+                        )
                     logs_to_create.extend(
                         [
                             {
                                 "user_id": listing["user_id"],
                                 "name": listing["name"],
                                 "image": listing["image"],
-                                "message": f"Price updated for {listing['name']} to {listing['price']} cents",
+                                "message": (
+                                    f"Price updated for {listing['name']} to {listing['price']} cents"
+                                    if setting["is_running"]
+                                    else f"Price would have been updated for {listing['name']} to {listing['price']} cents if the bot was running"
+                                ),
                                 "type": "success",
                                 "meta_data": {
                                     "listing_id": listing["id"],
