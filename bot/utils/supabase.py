@@ -127,7 +127,7 @@ async def insert_unique_logs(
             last_log = last_log.data[0]
             # if the last log was more than 1 hour ago
             created_at = datetime.strptime(
-                last_log["created_at"], "%Y-%m-%dT%H:%M:%S.%fZ"
+                last_log["created_at"], "%Y-%m-%dT%H:%M:%S.%f%z"
             )
             if (datetime.now() - created_at).total_seconds() > 3600:
                 logs_to_insert.append(log)
