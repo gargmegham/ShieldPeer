@@ -1,6 +1,10 @@
+import config from "@/utils/config"
 import { getSEOTags } from "@/utils/seo"
 
-export const metadata = getSEOTags()
+export const metadata = getSEOTags({
+    title: `${config.appName} - Demo`,
+    keywords: `${config.keywords}, ShieldPeer demo`,
+})
 
 export default function DemoLayout({ children }: { children: React.ReactNode }) {
     return (
