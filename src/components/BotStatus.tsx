@@ -53,7 +53,9 @@ export default function BotStatus({ setting, isDemo }: { setting: Setting; isDem
                                 render={({ field }) => (
                                     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                                         <div className="space-y-0.5">
-                                            <FormDescription>Enable/disable the listing bot.</FormDescription>
+                                            <FormDescription>
+                                                If disabled, your items won't be listed on the market. Instead we'll emulate the bot and show you the logs for testing purposes.
+                                            </FormDescription>
                                         </div>
                                         <FormControl>
                                             <Switch
