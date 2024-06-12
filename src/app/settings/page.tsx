@@ -50,13 +50,9 @@ export default function Settings() {
                 ]}
                 logoLink="/"
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-4">
-                    <Secrets setting={setting} />
-                    <BotStatus setting={setting} />
-                </div>
-                <UndercutParameters setting={setting} />
-            </div>
+            <BotStatus setting={setting} />
+            <Secrets setting={setting} />
+            <UndercutParameters setting={setting} />
             <PriceRanges />
         </main>
     )

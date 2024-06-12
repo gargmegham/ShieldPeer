@@ -10,6 +10,8 @@ export interface Setting {
     price_empire_key?: string
     waxpeer_key?: string
     steam_id?: string
+    steam_key?: string
+    steam_trade_url?: string
 }
 
 export interface PriceRange {

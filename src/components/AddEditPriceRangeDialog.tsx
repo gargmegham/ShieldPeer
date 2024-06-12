@@ -266,10 +266,12 @@ export default function AddEditPriceRangeDialog({
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" disabled={saving || isDemo}>
-                            {saving && <BiSync className="animate-spin mr-2 size-4" />}
-                            Save
-                        </Button>
+                        <div className="flex justify-end self-end">
+                            <Button type="submit" disabled={saving || isDemo}>
+                                {saving && <BiSync className="animate-spin mr-2 size-4" />}
+                                Save
+                            </Button>
+                        </div>
                     </form>
                 </Form>
             </DialogContent>

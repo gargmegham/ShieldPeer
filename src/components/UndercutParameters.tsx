@@ -178,10 +178,12 @@ export default function UndercutParameters({ setting, isDemo }: { setting: Setti
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" disabled={!isEditing || saving}>
-                            {saving && <BiSync className="animate-spin mr-2 size-4" />}
-                            Save
-                        </Button>
+                        <div className="flex justify-end self-end">
+                            <Button type="submit" disabled={!isEditing || saving}>
+                                {saving && <BiSync className="animate-spin mr-2 size-4" />}
+                                Save
+                            </Button>
+                        </div>
                     </form>
                 </Form>
             </CardContent>

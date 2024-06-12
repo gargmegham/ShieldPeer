@@ -90,6 +90,7 @@ export default function ItemSettings() {
             toast.error("Listing price min must be less than listing price max")
             return
         }
+        setSaving(true)
         try {
             await fetch(`/api/settings/item/${id}`, {
                 method: "POST",
@@ -441,8 +442,6 @@ export default function ItemSettings() {
                                         </FormItem>
                                     )}
                                 />
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="when_no_one_to_undercut_list_at"
@@ -535,34 +534,41 @@ export default function ItemSettings() {
                                     </FormItem>
                                 )}
                             />
-                            <FormField
-                                control={form.control}
-                                name="is_active"
-                                render={({ field }) => (
-                                    <FormItem className="flex items-center gap-4">
-                                        <div>
-                                            <FormLabel>Enable/Disable Settings</FormLabel>
-                                            <FormDescription>
-                                                If Enabled these settings will be used instead of the global settings.
-                                            </FormDescription>
-                                        </div>
-                                        <FormControl>
-                                            <Switch
-                                                disabled={saving || !isEditing}
-                                                checked={field.value}
-                                                onCheckedChange={(e) => {
-                                                    field.onChange(e)
-                                                }}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <Button type="submit" disabled={saving || !isEditing}>
-                                {saving && <BiSync className="animate-spin mr-2 size-4" />}
-                                Save
-                            </Button>
+                            <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+                                <FormField
+                                    control={form.control}
+                                    name="is_active"
+                                    render={({ field }) => (
+                                        <FormItem className="flex items-center gap-4">
+                                            <div>
+                                                <FormLabel>Enable/Disable Settings</FormLabel>
+                                                <FormDescription>
+                                                    If Enabled these settings will be used instead of the global
+                                                    settings.
+                                                </FormDescription>
+                                            </div>
+                                            <div className="flex justify-end self-end">
+                                                <FormControl>
+                                                    <Switch
+                                                        disabled={saving || !isEditing}
+                                                        checked={field.value}
+                                                        onCheckedChange={(e) => {
+                                                            field.onChange(e)
+                                                        }}
+                                                    />
+                                                </FormControl>
+                                            </div>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <div className="flex justify-end self-end">
+                                    <Button type="submit" disabled>
+                                        {saving && <BiSync className="animate-spin mr-2 size-4" />}
+                                        Save
+                                    </Button>
+                                </div>
+                            </div>
                         </form>
                     </Form>
                 </CardContent>

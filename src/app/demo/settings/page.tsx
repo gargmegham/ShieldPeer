@@ -31,13 +31,9 @@ export default function Settings() {
                 ]}
                 logoLink="/demo"
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-4">
-                    <Secrets setting={setting} isDemo={true} />
-                    <BotStatus setting={setting} isDemo={true} />
-                </div>
-                <UndercutParameters setting={setting} isDemo={true} />
-            </div>
+            <BotStatus setting={setting} isDemo={true} />
+            <Secrets setting={setting} isDemo={true} />
+            <UndercutParameters setting={setting} isDemo={true} />
             <PriceRanges isDemo />
         </main>
     )

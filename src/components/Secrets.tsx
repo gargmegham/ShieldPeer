@@ -25,7 +25,9 @@ import type { Setting } from "@/types/database"
 
 const FormSchema = z.object({
     price_empire_key: z.string().min(5),
+    steam_key: z.string().min(5),
     waxpeer_key: z.string().min(5),
+    steam_trade_url: z.string().min(5),
     steam_id: z.string().min(5),
 })
 
@@ -77,88 +79,152 @@ export default function Secrets({ setting, isDemo }: { setting: Setting; isDemo?
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
-                        <FormField
-                            control={form.control}
-                            name="price_empire_key"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <div className="flex items-center space-x-2">
-                                        <Image
-                                            src={PriceEmpire}
-                                            alt="PriceEmpire"
-                                            className="size-8 border rounded-full border-gray-200/20"
-                                            width={32}
-                                            height={32}
-                                        />
-                                        <div>
-                                            <FormLabel>PriceEmpire</FormLabel>
-                                            <FormDescription>
-                                                You can find your PriceEmpire API Key{" "}
-                                                <Link href="https://pricempire.com/api" className="text-amber-400">
-                                                    here
-                                                </Link>
-                                            </FormDescription>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <FormField
+                                control={form.control}
+                                name="price_empire_key"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <div className="flex items-center space-x-2">
+                                            <Image
+                                                src={PriceEmpire}
+                                                alt="PriceEmpire"
+                                                className="size-8 border rounded-full border-gray-200/20"
+                                                width={32}
+                                                height={32}
+                                            />
+                                            <div>
+                                                <FormLabel>PriceEmpire</FormLabel>
+                                                <FormDescription>
+                                                    You can find your PriceEmpire API key{" "}
+                                                    <Link href="https://pricempire.com/api" className="text-amber-400">
+                                                        here
+                                                    </Link>
+                                                </FormDescription>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <FormControl>
-                                        <Input placeholder="8dqw30*****" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="waxpeer_key"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <div className="flex items-center space-x-2">
-                                        <Image src={Waxpeer} alt="Waxpeer" className="size-8" width={32} height={32} />
-                                        <div>
-                                            <FormLabel>Waxpeer</FormLabel>
-                                            <FormDescription>
-                                                You can find your Waxpeer API Key{" "}
-                                                <Link
-                                                    href="https://waxpeer.com/profile/user"
-                                                    className="text-amber-400"
-                                                >
-                                                    here
-                                                </Link>
-                                            </FormDescription>
+                                        <FormControl>
+                                            <Input placeholder="8dqw30*****" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="waxpeer_key"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <div className="flex items-center space-x-2">
+                                            <Image
+                                                src={Waxpeer}
+                                                alt="Waxpeer"
+                                                className="size-8"
+                                                width={32}
+                                                height={32}
+                                            />
+                                            <div>
+                                                <FormLabel>Waxpeer</FormLabel>
+                                                <FormDescription>
+                                                    You can find your Waxpeer API key{" "}
+                                                    <Link
+                                                        href="https://waxpeer.com/profile/user"
+                                                        className="text-amber-400"
+                                                    >
+                                                        here
+                                                    </Link>
+                                                </FormDescription>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <FormControl>
-                                        <Input placeholder="31hkw30*****" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="steam_id"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <div className="flex items-center space-x-2">
-                                        <Image src={Steam} alt="Steam" className="size-8" width={32} height={32} />
-                                        <div>
-                                            <FormLabel>Steam Id</FormLabel>
-                                            <FormDescription>
-                                                You can find your Steam ID by clicking on your profile on Steam website.
-                                            </FormDescription>
+                                        <FormControl>
+                                            <Input placeholder="31hkw30*****" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="steam_id"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <div className="flex items-center space-x-2">
+                                            <Image src={Steam} alt="Steam" className="size-8" width={32} height={32} />
+                                            <div>
+                                                <FormLabel>Steam Id</FormLabel>
+                                                <FormDescription>
+                                                    You can find your Steam ID on Steam website.
+                                                </FormDescription>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <FormControl>
-                                        <Input placeholder="31hkw30*****" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Button type="submit" disabled={!isEditing || saving}>
-                            {saving && <BiSync className="animate-spin mr-2 size-4" />}
-                            Save
-                        </Button>
+                                        <FormControl>
+                                            <Input placeholder="31hkw30*****" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="steam_key"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <div className="flex items-center space-x-2">
+                                            <Image src={Steam} alt="Steam" className="size-8" width={32} height={32} />
+                                            <div>
+                                                <FormLabel>Steam API key (optional)</FormLabel>
+                                                <FormDescription>
+                                                    You can find your Steam API key{" "}
+                                                    <Link
+                                                        href="https://steamcommunity.com/dev/apikey"
+                                                        className="text-amber-400"
+                                                    >
+                                                        here
+                                                    </Link>
+                                                </FormDescription>
+                                            </div>
+                                        </div>
+                                        <FormControl>
+                                            <Input placeholder="31hkw30*****" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="steam_trade_url"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <div className="flex items-center space-x-2">
+                                            <Image src={Steam} alt="Steam" className="size-8" width={32} height={32} />
+                                            <div>
+                                                <FormLabel>Steam trade link (optional)</FormLabel>
+                                                <FormDescription>
+                                                    You can find your Steam trade link{" "}
+                                                    <Link
+                                                        href="https://steamcommunity.com/id/shield-peer/tradeoffers/privacy#trade_offer_access_url"
+                                                        className="text-amber-400"
+                                                    >
+                                                        here
+                                                    </Link>
+                                                </FormDescription>
+                                            </div>
+                                        </div>
+                                        <FormControl>
+                                            <Input placeholder="31hkw30*****" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <div className="flex justify-end self-end">
+                                <Button type="submit" disabled={!isEditing || saving}>
+                                    {saving && <BiSync className="animate-spin mr-2 size-4" />}
+                                    Save
+                                </Button>
+                            </div>
+                        </div>
                     </form>
                 </Form>
             </CardContent>
