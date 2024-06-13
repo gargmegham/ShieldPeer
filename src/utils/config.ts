@@ -35,6 +35,14 @@ const config = {
         // REQUIRED — the path you want to redirect users after successfull login (i.e. /dashboard, /private). This is normally a private page for users to manage their accounts. It's used in apiClient (/utils/api.js) upon 401 errors from our API & in ButtonSignin.js
         callbackUrl: "/",
     },
+    socials: {
+        twitter: "https://twitter.com/shieldpeer",
+        linkedin: "https://www.linkedin.com/company/shield-peer",
+        instagram: "https://www.instagram.com/shieldpeer",
+        github: "https://www.github.com/gargmegham/ShieldPeer",
+        telegram: "https://t.me/shieldpeer",
+        youtube: "https://www.youtube.com/@shieldpeer",
+    },
 } as ConfigProps
 
 export default config

@@ -6,6 +6,15 @@ export interface ConfigProps {
         id?: string
         onlyShowOnRoutes?: string[]
     }
+    socials: {
+        twitter?: string
+        linkedin?: string
+        facebook?: string
+        instagram?: string
+        youtube?: string
+        github?: string
+        telegram?: string
+    }
     mailgun: {
         subdomain: string
         fromNoReply: string
