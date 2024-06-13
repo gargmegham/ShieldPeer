@@ -24,9 +24,9 @@ import Waxpeer from "@/assets/logo/waxpeer.svg"
 import type { Setting } from "@/types/database"
 
 const FormSchema = z.object({
-    price_empire_key: z.string().min(5),
-    waxpeer_key: z.string().min(5),
-    steam_id: z.string().min(5),
+    price_empire_key: z.string(),
+    waxpeer_key: z.string(),
+    steam_id: z.string(),
     steam_trade_url: z.string().optional().or(z.literal("")),
     steam_key: z.string().optional().or(z.literal("")),
 })
@@ -37,6 +37,13 @@ export default function Secrets({ setting, isDemo }: { setting: Setting; isDemo?
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         disabled: !isEditing,
+        defaultValues: {
+            price_empire_key: "",
+            steam_id: "",
+            steam_key: "",
+            steam_trade_url: "",
+            waxpeer_key: "",
+        },
     })
     function onSubmit(data: z.infer<typeof FormSchema>) {
         setSaving(true)

@@ -21,14 +21,14 @@ import { Switch } from "@/components/ui/switch"
 import type { ItemSetting } from "@/types/database"
 
 const FormSchema = z.object({
-    undercut_by_price: z.number(),
-    undercut_by_percentage: z.number(),
-    undercut_by: z.string(),
-    listing_price_min: z.number(),
-    listing_price_max: z.number(),
-    listing_price_if_no_one_to_undercut: z.number(),
-    when_no_one_to_undercut_list_at: z.string(),
-    always_undercut_by_percentage_if_listing_price_is_greater_than: z.number(),
+    undercut_by_price: z.number().positive(),
+    undercut_by_percentage: z.number().positive(),
+    undercut_by: z.enum(["price", "percentage"]),
+    listing_price_min: z.number().positive(),
+    listing_price_max: z.number().positive(),
+    listing_price_if_no_one_to_undercut: z.number().positive(),
+    when_no_one_to_undercut_list_at: z.enum(["listing_price_max", "listing_price_if_no_one_to_undercut"]),
+    always_undercut_by_percentage_if_listing_price_is_greater_than: z.number().positive(),
     is_active: z.boolean(),
 })
 
@@ -223,7 +223,7 @@ export default function Parameters({ itemSetting, isDemo }: { itemSetting: ItemS
                                         <FormControl>
                                             <Select
                                                 {...field}
-                                                onValueChange={(value) => {
+                                                onValueChange={(value: any) => {
                                                     form.setValue("when_no_one_to_undercut_list_at", value)
                                                 }}
                                             >

@@ -20,10 +20,10 @@ import { sources } from "@/constants/sources"
 import { Setting } from "@/types/database"
 
 const FormSchema = z.object({
-    price_empire_source: z.string(),
-    undercut_by_price: z.number(),
-    undercut_by_percentage: z.number(),
-    undercut_by: z.string(),
+    price_empire_source: z.string().min(1),
+    undercut_by_price: z.number().positive(),
+    undercut_by_percentage: z.number().positive(),
+    undercut_by: z.enum(["price", "percentage"]),
 })
 
 export default function UndercutParameters({ setting, isDemo }: { setting: Setting; isDemo?: boolean }) {
@@ -32,8 +32,13 @@ export default function UndercutParameters({ setting, isDemo }: { setting: Setti
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         disabled: !isEditing,
+        defaultValues: {
+            price_empire_source: "buff",
+            undercut_by: "price",
+            undercut_by_price: 0.01,
+            undercut_by_percentage: 1,
+        },
     })
-
     function onSubmit(data: z.infer<typeof FormSchema>) {
         setSaving(true)
         !isDemo &&
@@ -55,11 +60,9 @@ export default function UndercutParameters({ setting, isDemo }: { setting: Setti
                     setSaving(false)
                 })
     }
-
     useEffect(() => {
         form.reset(setting)
     }, [setting])
-
     return (
         <Card className="w-full relative">
             <CardHeader>

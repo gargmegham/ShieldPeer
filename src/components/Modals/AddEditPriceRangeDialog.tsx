@@ -17,13 +17,13 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { PriceRange } from "@/types/database"
 
 const FormSchema = z.object({
-    source_price_min: z.number(),
-    source_price_max: z.number(),
-    listing_price_min: z.number(),
-    listing_price_max: z.number(),
-    listing_price_if_no_one_to_undercut: z.number(),
-    when_no_one_to_undercut_list_at: z.string(),
-    always_undercut_by_percentage_if_listing_price_is_greater_than: z.number(),
+    source_price_min: z.number().positive(),
+    source_price_max: z.number().positive(),
+    listing_price_min: z.number().positive(),
+    listing_price_max: z.number().positive(),
+    listing_price_if_no_one_to_undercut: z.number().positive(),
+    when_no_one_to_undercut_list_at: z.enum(["listing_price_max", "listing_price_if_no_one_to_undercut"]),
+    always_undercut_by_percentage_if_listing_price_is_greater_than: z.number().positive(),
 })
 
 export default function AddEditPriceRangeDialog({
@@ -42,6 +42,15 @@ export default function AddEditPriceRangeDialog({
     const [saving, setSaving] = useState(false)
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
+        defaultValues: {
+            source_price_min: 1210,
+            source_price_max: 1320,
+            listing_price_min: 110,
+            listing_price_max: 140,
+            listing_price_if_no_one_to_undercut: 122,
+            when_no_one_to_undercut_list_at: "listing_price_max",
+            always_undercut_by_percentage_if_listing_price_is_greater_than: 180,
+        },
     })
     function onSubmit(data: z.infer<typeof FormSchema>) {
         if (data.source_price_min >= data.source_price_max) {
@@ -187,7 +196,7 @@ export default function AddEditPriceRangeDialog({
                                         <FormControl>
                                             <Select
                                                 {...field}
-                                                onValueChange={(value) => {
+                                                onValueChange={(value: any) => {
                                                     form.setValue("when_no_one_to_undercut_list_at", value)
                                                 }}
                                             >

@@ -71,11 +71,11 @@ export interface ItemSetting {
     created_at: string
     undercut_by_price?: number
     undercut_by_percentage?: number
-    undercut_by?: string
+    undercut_by?: "price" | "percentage"
     listing_price_min?: number
     listing_price_max?: number
     listing_price_if_no_one_to_undercut?: number
-    when_no_one_to_undercut_list_at?: string
+    when_no_one_to_undercut_list_at?: "listing_price_max" | "listing_price_if_no_one_to_undercut"
     always_undercut_by_percentage_if_listing_price_is_greater_than?: number
     is_active: boolean
     item_id: Item["id"]
