@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 
 import type { Item } from "@/types/database"
 
-export default function ItemDelete({ id, item, isDemo }: { id: string; item: Item; isDemo?: boolean }) {
+export default function DanzerZone({ id, item, isDemo }: { id: string; item: Item; isDemo?: boolean }) {
     const router = useRouter()
     const [deleteConfirmation, setDeleteConfirmation] = useState("")
     const [saving, setSaving] = useState(false)

@@ -16,7 +16,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 import type { Item } from "@/types/database"
 
-export default function ItemActiveToggle({
+export default function ActiveToggle({
     id,
     item,
     fetchItem,

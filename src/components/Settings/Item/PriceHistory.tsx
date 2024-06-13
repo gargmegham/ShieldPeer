@@ -3,7 +3,7 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import LineGraph from "@/components/ui/line-graph"
 
-export default function ItemPriceHistory({ itemPriceHistory }: { itemPriceHistory: number[] }) {
+export default function PriceHistory({ itemPriceHistory }: { itemPriceHistory: number[] }) {
     return (
         <Card className="relative py-6 h-[450px] w-full col-span-1 md:col-span-3">
             <CardHeader className="pb-0">

@@ -32,7 +32,7 @@ const FormSchema = z.object({
     is_active: z.boolean(),
 })
 
-export default function ItemSettingsForm({ itemSetting, isDemo }: { itemSetting: ItemSetting; isDemo?: boolean }) {
+export default function Parameters({ itemSetting, isDemo }: { itemSetting: ItemSetting; isDemo?: boolean }) {
     const { id } = useParams()
     const [isEditing, setIsEditing] = useState(false)
     const [saving, setSaving] = useState(false)

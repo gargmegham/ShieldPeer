@@ -5,10 +5,10 @@ import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
 
 import Navbar from "@/components/ui/navbar"
 
-import ItemActiveToggle from "@/components/ItemActiveToggle"
-import ItemDelete from "@/components/ItemDelete"
-import ItemPriceHistory from "@/components/ItemPriceHistory"
-import ItemSettingsForm from "@/components/ItemSettingsForm"
+import ActiveToggle from "@/components/Settings/Item/ActiveToggle"
+import DanzerZone from "@/components/Settings/Item/DanzerZone"
+import Parameters from "@/components/Settings/Item/Parameters"
+import PriceHistory from "@/components/Settings/Item/PriceHistory"
 
 import type { Item, ItemSetting } from "@/types/database"
 
@@ -33,11 +33,11 @@ export default function ItemSettings() {
                 logoLink="/demo"
             />
             <div className="grid gap-8 grid-cols-1 md:grid-cols-4">
-                <ItemActiveToggle id={"21678"} item={{} as Item} fetchItem={() => {}} isDemo={true} />
-                <ItemPriceHistory itemPriceHistory={demoPriceHistory} />
+                <ActiveToggle id={"21678"} item={{} as Item} fetchItem={() => {}} isDemo={true} />
+                <PriceHistory itemPriceHistory={demoPriceHistory} />
             </div>
-            <ItemSettingsForm itemSetting={{} as ItemSetting} isDemo={true} />
-            <ItemDelete id={"23879"} item={{} as Item} />
+            <Parameters itemSetting={{} as ItemSetting} isDemo={true} />
+            <DanzerZone id={"23879"} item={{} as Item} />
         </main>
     )
 }

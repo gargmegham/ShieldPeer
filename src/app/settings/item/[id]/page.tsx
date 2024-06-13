@@ -11,10 +11,10 @@ import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
 import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 
-import ItemActiveToggle from "@/components/ItemActiveToggle"
-import ItemDelete from "@/components/ItemDelete"
-import ItemPriceHistory from "@/components/ItemPriceHistory"
-import ItemSettingsForm from "@/components/ItemSettingsForm"
+import ActiveToggle from "@/components/Settings/Item/ActiveToggle"
+import DanzerZone from "@/components/Settings/Item/DanzerZone"
+import Parameters from "@/components/Settings/Item/Parameters"
+import PriceHistory from "@/components/Settings/Item/PriceHistory"
 
 import type { Item, ItemSetting } from "@/types/database"
 
@@ -95,13 +95,11 @@ export default function ItemSettings() {
                 logoLink="/"
             />
             <div className="grid gap-8 grid-cols-1 md:grid-cols-4">
-                <ItemActiveToggle isDemo={false} fetchItem={fetchItem} id={id.toString()} item={item} />
-                <ItemPriceHistory
-                    itemPriceHistory={itemPriceHistory.length === 0 ? demoPriceHistory : itemPriceHistory}
-                />
+                <ActiveToggle isDemo={false} fetchItem={fetchItem} id={id.toString()} item={item} />
+                <PriceHistory itemPriceHistory={itemPriceHistory.length === 0 ? demoPriceHistory : itemPriceHistory} />
             </div>
-            <ItemSettingsForm itemSetting={itemSetting} />
-            <ItemDelete id={id.toString()} item={item} />
+            <Parameters itemSetting={itemSetting} />
+            <DanzerZone id={id.toString()} item={item} />
         </main>
     )
 }
