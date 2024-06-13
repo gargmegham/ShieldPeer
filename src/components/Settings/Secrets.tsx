@@ -25,9 +25,9 @@ import type { Setting } from "@/types/database"
 
 const FormSchema = z.object({
     price_empire_key: z.string().min(5),
-    steam_key: z.string().min(5),
+    steam_key: z.string().min(5).optional(),
     waxpeer_key: z.string().min(5),
-    steam_trade_url: z.string().min(5),
+    steam_trade_url: z.string().min(5).optional(),
     steam_id: z.string().min(5),
 })
 
