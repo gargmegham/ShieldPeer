@@ -223,7 +223,7 @@ async def bot():
                         "name": "Waxpeer",
                         "message": "Bot iteration completed",
                         "type": "success",
-                        "image": "/waxpeer.svg",
+                        "image": "/external/waxpeer.svg",
                     }
                 )
                 if len(logs_to_create):
