@@ -27,8 +27,8 @@ const FormSchema = z.object({
     price_empire_key: z.string().min(5),
     waxpeer_key: z.string().min(5),
     steam_id: z.string().min(5),
-    steam_trade_url: z.string().optional(),
-    steam_key: z.string().optional(),
+    steam_trade_url: z.string().optional().or(z.literal("")),
+    steam_key: z.string().optional().or(z.literal("")),
 })
 
 export default function Secrets({ setting, isDemo }: { setting: Setting; isDemo?: boolean }) {
