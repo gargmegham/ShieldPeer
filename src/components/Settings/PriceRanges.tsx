@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-import type { PriceRange } from "@/types/database"
+import AddEditPriceRangeDialog from "@/components/Modals/AddEditPriceRangeDialog"
+import { DeletionConfirmationDialog } from "@/components/Modals/DeletionConfirmationDialog"
 
-import AddEditPriceRangeDialog from "./AddEditPriceRangeDialog"
-import { DeletionConfirmationDialog } from "./DeletionConfirmationDialog"
+import type { PriceRange } from "@/types/database"
 
 /**
  * @description PriceRanges are used for granular control over the listing parameters.

@@ -9,10 +9,10 @@ import { MdOutlineDocumentScanner, MdOutlineInventory } from "react-icons/md"
 import Loader from "@/components/ui/Loader"
 import Navbar from "@/components/ui/navbar"
 
-import BotStatus from "@/components/BotStatus"
-import PriceRanges from "@/components/PriceRanges"
-import Secrets from "@/components/Secrets"
-import UndercutParameters from "@/components/UndercutParameters"
+import BotStatus from "@/components/Settings/BotStatus"
+import PriceRanges from "@/components/Settings/PriceRanges"
+import Secrets from "@/components/Settings/Secrets"
+import UndercutParameters from "@/components/Settings/UndercutParameters"
 
 import type { Setting } from "@/types/database"
 
