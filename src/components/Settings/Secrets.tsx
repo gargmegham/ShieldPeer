@@ -216,7 +216,7 @@ export default function Secrets({ setting, isDemo }: { setting: Setting; isDemo?
                                                 <FormDescription>
                                                     You can find your Steam trade link{" "}
                                                     <Link
-                                                        href="https://steamcommunity.com/id/shield-peer/tradeoffers/privacy#trade_offer_access_url"
+                                                        href="https://steamcommunity.com/my/tradeoffers/privacy#trade_offer_access_url"
                                                         className="text-amber-400"
                                                     >
                                                         here
