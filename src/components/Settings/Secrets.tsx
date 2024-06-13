@@ -160,7 +160,13 @@ export default function Secrets({ setting, isDemo }: { setting: Setting; isDemo?
                                             <div>
                                                 <FormLabel>Steam Id</FormLabel>
                                                 <FormDescription>
-                                                    You can find your Steam ID on Steam website.
+                                                    You can find your Steam ID{" "}
+                                                    <Link
+                                                        href="https://store.steampowered.com/account/"
+                                                        className="text-amber-400"
+                                                    >
+                                                        here
+                                                    </Link>
                                                 </FormDescription>
                                             </div>
                                         </div>
