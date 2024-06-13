@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic"
 
 // This route is called after a successful login. It exchanges the code for a session and redirects to the callback URL (see config.js).
 export async function GET(req: NextRequest) {
+    // session expires after 1 hour
     const requestUrl = new URL(req.url)
     const code = requestUrl.searchParams.get("code")
     if (code) {
