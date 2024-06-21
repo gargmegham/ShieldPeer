@@ -49,7 +49,7 @@ export default function Dashboard() {
                         icon: IoSettingsOutline,
                     },
                 ]}
-                logoLink="/demo"
+                logoLink="/home"
             />
             <div className="space-y-8">
                 <Statistics showDemo={true} listings={demoListings} />
