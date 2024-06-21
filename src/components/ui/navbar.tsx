@@ -23,7 +23,7 @@ const Navbar = ({
         },
         {
             label: "Demo",
-            link: "/home#demo",
+            link: "/demo",
             icon: FaKeycdn,
         },
         {
