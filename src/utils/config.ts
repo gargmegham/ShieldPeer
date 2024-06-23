@@ -8,13 +8,10 @@ const config = {
     keywords:
         "ShieldPeer, Steam, Waxpeer, PriceEmpire, CS:GO, CS2, Skins Marketplace, Steam Skins, Counter Strike Global Offensive, CSGO, CSGO Skins, CSGO Marketplace, CSGO Skins Marketplace, CSGO Trading, CSGO Trade, CSGO Trade Skins",
     crisp: {
-        // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
         id: process.env.NEXT_PUBLIC_CRISP_ID ?? "",
-        // Hide Crisp by default, except on route "/". Crisp is toggled with <ButtonSupport/>. If you want to show Crisp on every routes, just remove this below
         onlyShowOnRoutes: ["/", "/auth", "/settings", "/logs"],
     },
     mailgun: {
-        // subdomain to use when sending emails, if you don't have a subdomain, just remove it. Highly recommended to have one (i.e. mg.yourdomain.com or mail.yourdomain.com)
         subdomain: "mg",
         // REQUIRED — Email 'From' field to be used when sending magic login links
         fromNoReply: `ShieldPeer <noreply@mg.shieldpeer.in>`,
@@ -26,7 +23,7 @@ const config = {
         forwardRepliesTo: "business@meghamgarg.com",
     },
     colors: {
-        // REQUIRED — This color will be reflected on the NextTopLoader. HEX only.
+        // REQUIRED — Will be reflected on the NextTopLoader. HEX only.
         main: "#f59e0b",
     },
     auth: {
