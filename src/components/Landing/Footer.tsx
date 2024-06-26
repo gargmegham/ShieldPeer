@@ -73,7 +73,7 @@ const Footer = () => {
                             </div>
 
                             <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-                                {config.mailgun.supportEmail && (
+                                {config.supportEmail && (
                                     <Link
                                         href={`mailto:${config.supportEmail}`}
                                         target="_blank"
