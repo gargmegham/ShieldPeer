@@ -9,7 +9,7 @@ import { FaTelegram } from "react-icons/fa6"
 import config from "@/utils/config"
 
 // The support link is connected to the config.js file.
-// If there's no config.mailgun.supportEmail, the link won't be displayed.
+// If there's no config.supportEmail, the link won't be displayed.
 const Footer = () => {
     return (
         <footer className="bg-neutral-900">
