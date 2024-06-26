@@ -11,17 +11,7 @@ const config = {
         id: process.env.NEXT_PUBLIC_CRISP_ID ?? "",
         onlyShowOnRoutes: ["/", "/auth", "/settings", "/logs"],
     },
-    mailgun: {
-        subdomain: "mg",
-        // REQUIRED — Email 'From' field to be used when sending magic login links
-        fromNoReply: `ShieldPeer <noreply@mg.shieldpeer.in>`,
-        // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-        fromAdmin: `Megham at ShieldPeer <business@meghamgarg.com>`,
-        // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-        supportEmail: "business@meghamgarg.com",
-        // When someone replies to supportEmail sent by the app, forward it to the email below (otherwise it's lost). If you set supportEmail to empty, this will be ignored.
-        forwardRepliesTo: "business@meghamgarg.com",
-    },
+    supportEmail: "shieldpeer@gmail.com",
     colors: {
         // REQUIRED — Will be reflected on the NextTopLoader. HEX only.
         main: "#f59e0b",
