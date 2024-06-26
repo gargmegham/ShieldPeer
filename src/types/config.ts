@@ -15,13 +15,7 @@ export interface ConfigProps {
         github?: string
         telegram?: string
     }
-    mailgun: {
-        subdomain: string
-        fromNoReply: string
-        fromAdmin: string
-        supportEmail?: string
-        forwardRepliesTo?: string
-    }
+    supportEmail?: string
     colors: {
         main: string
     }
