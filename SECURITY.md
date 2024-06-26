@@ -4,7 +4,7 @@ This document outlines security procedures and vulnerabilities reporting for the
 
 At ShieldPeer, we safeguarding the security of our systems with top priority. Despite our efforts, vulnerabilities may still exist. We greatly appreciate your assistance in identifying and reporting any such vulnerabilities to help us maintain the integrity of our systems and protect our clients.
 
-To report a security vulnerability, please email us directly at hi@launchbit.in with a detailed description of the vulnerability and steps to reproduce it. Please refrain from disclosing the vulnerability publicly until we have had an opportunity to review and address it.
+To report a security vulnerability, please email us directly at meghamgarg@gmail.com with a detailed description of the vulnerability and steps to reproduce it. Please refrain from disclosing the vulnerability publicly until we have had an opportunity to review and address it.
 
 ## Out of Scope Vulnerabilities
 
