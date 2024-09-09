@@ -15,45 +15,6 @@ import { Tooltip } from "react-tooltip"
 
 import config from "@/utils/config"
 
-// This component is separated from LayoutWrapper because it needs to be wrapped with <SessionProvider> to use useSession() hook
-const CrispChat = (): null => {
-    const pathname = usePathname()
-    const supabase = createClientComponentClient()
-    const [data, setData] = useState<any>({})
-    // This is used to get the user data from Supabase Auth
-    useEffect(() => {
-        const getUser = async () => {
-            const {
-                data: { session },
-            } = await supabase.auth.getSession()
-            if (session) {
-                setData(session.user)
-            }
-        }
-        getUser()
-    }, [])
-    useEffect(() => {
-        if (config?.crisp?.id) {
-            Crisp.configure(config.crisp.id)
-            // (Optional) If onlyShowOnRoutes array is not empty in config.js file, Crisp will be hidden on the routes in the array.
-            // Use <AppButtonSupport> instead to show it (user clicks on the button to show Crisp—it cleans the UI)
-            if (config.crisp.onlyShowOnRoutes && !config.crisp.onlyShowOnRoutes?.includes(pathname)) {
-                Crisp.chat.hide()
-                Crisp.chat.onChatClosed(() => {
-                    Crisp.chat.hide()
-                })
-            }
-        }
-    }, [pathname])
-    // Add User Unique ID to Crisp to easily identify users when reaching support (optional)
-    useEffect(() => {
-        if (data?.user && config?.crisp?.id) {
-            Crisp.session.setData({ userId: data.user?.id })
-        }
-    }, [data])
-    return null
-}
-
 const LayoutWrapper = ({ children }: { children: ReactNode }) => {
     return (
         <>
@@ -82,8 +43,6 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
             />
             {/* Show tooltips if any JSX elements has these 2 attributes: data-tooltip-id="tooltip" data-tooltip-content="" */}
             <Tooltip id="tooltip" className="z-[60] !opacity-100 max-w-sm shadow-lg" />
-            {/* Set Crisp customer chat support */}
-            <CrispChat />
             {/* Clarity for recording user interactions */}
             <Script type="text/javascript" id="clarity-microsoft">
                 {`(function(c,l,a,r,i,t,y){
