@@ -33,7 +33,7 @@ const Navbar = ({
         },
         {
             label: "Get Started",
-            link: "/auth",
+            link: "/demo",
             icon: IoMdLogIn,
             inFocus: true,
         },

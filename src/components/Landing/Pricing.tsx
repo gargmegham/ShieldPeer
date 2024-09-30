@@ -101,7 +101,7 @@ const Pricing = () => {
                             </ul>
                             <div className="space-y-2">
                                 <Link
-                                    href="/auth"
+                                    href="/demo"
                                     className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-neutral-900 flex items-center justify-center"
                                 >
                                     <span>Get Started</span>

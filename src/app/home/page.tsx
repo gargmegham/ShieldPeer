@@ -8,7 +8,7 @@ import FAQ from "@/components/Landing/FAQ"
 import FinalCTA from "@/components/Landing/FinalCTA"
 import Footer from "@/components/Landing/Footer"
 import Hero from "@/components/Landing/Hero"
-import Pricing from "@/components/Landing/Pricing"
+import Note from "@/components/Landing/Note"
 import Problem from "@/components/Landing/Problem"
 
 import { getSEOTags } from "@/utils/seo"
@@ -23,7 +23,7 @@ export default function Home() {
             <Navbar />
             <Hero />
             <Problem />
-            <Pricing />
+            <Note />
             <FAQ />
             <FinalCTA />
             <Footer />

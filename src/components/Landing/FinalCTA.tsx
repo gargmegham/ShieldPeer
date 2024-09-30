@@ -15,7 +15,7 @@ export default function FinalCTA() {
             </div>
             <div className="flex justify-center">
                 <Link
-                    href="/auth"
+                    href="/demo"
                     className="border text-sm font-medium relative border-white/[0.2] text-white w-32 h-12 rounded-xl bg-amber-600 flex items-center justify-center"
                 >
                     <span>Get Started Now</span>
