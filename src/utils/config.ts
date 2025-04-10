@@ -4,7 +4,7 @@ const config = {
     appName: "ShieldPeer",
     appDescription:
         "ShieldPeer's secure, and intelligent bot helps you sell your Steam assets swiftly on marketplaces like Waxpeer using the latest price data from PriceEmpire. Customize parameters to maximize your benefits. Get started today!",
-    domainName: "www.shieldpeer.in",
+    domainName: "shieldpeer.meghamgarg.com",
     keywords:
         "ShieldPeer, Steam, Waxpeer, PriceEmpire, CS:GO, CS2, Skins Marketplace, Steam Skins, Counter Strike Global Offensive, CSGO, CSGO Skins, CSGO Marketplace, CSGO Skins Marketplace, CSGO Trading, CSGO Trade, CSGO Trade Skins",
     crisp: {
