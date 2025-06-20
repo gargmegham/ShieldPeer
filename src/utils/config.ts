@@ -11,7 +11,7 @@ const config = {
         id: process.env.NEXT_PUBLIC_CRISP_ID ?? "",
         onlyShowOnRoutes: ["/", "/auth", "/settings", "/logs"],
     },
-    supportEmail: "shieldpeer@gmail.com",
+    supportEmail: "support@launchbit.in",
     colors: {
         // REQUIRED — Will be reflected on the NextTopLoader. HEX only.
         main: "#f59e0b",
