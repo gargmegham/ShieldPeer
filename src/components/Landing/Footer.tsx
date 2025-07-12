@@ -89,8 +89,14 @@ const Footer = () => {
                                 <Link href="https://servcy.com/" className="link link-hover">
                                     Servcy
                                 </Link>
-                                <Link href="https://launchbit.in/" className="link link-hover">
+                                <Link href="https://meghamgarg.com/" className="link link-hover">
                                     Founder
+                                </Link>
+                                <Link href="https://launchbit.in/" className="link link-hover">
+                                    Agency
+                                </Link>
+                                <Link href="https://jotlify.com/" className="link link-hover">
+                                    Jotlify
                                 </Link>
                             </div>
                         </div>
