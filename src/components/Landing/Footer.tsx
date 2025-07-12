@@ -38,7 +38,7 @@ const Footer = () => {
                             Copyright © {new Date().getFullYear()} - All rights reserved
                         </p>
                         {/* socials */}
-                        <div className="mt-2 flex gap-4 justify-center md:justify-start">
+{/*                         <div className="mt-2 flex gap-4 justify-center md:justify-start">
                             {config.socials.twitter && (
                                 <Link href={config.socials.twitter} target="_blank" className="hover:text-amber-500">
                                     <AiFillTwitterCircle className="size-6" />
@@ -64,7 +64,7 @@ const Footer = () => {
                                     <FaTelegram className="size-6" />
                                 </Link>
                             )}
-                        </div>
+                        </div> */}
                     </div>
                     <div className="flex-grow flex flex-wrap justify-center -mb-10 md:mt-0 mt-10 text-center">
                         <div className="lg:w-1/3 md:w-1/2 w-full px-4">
